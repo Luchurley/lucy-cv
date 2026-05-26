@@ -79,7 +79,7 @@ function CoverWegoboard() {
   );
 }
 
-function CoverDistupted() {
+function CoverDisrupted() {
   return (
     <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <rect width="300" height="200" fill={C.ink}/>
@@ -91,7 +91,7 @@ function CoverDistupted() {
       {/* fragments lines */}
       <line x1="0" y1="100" x2="300" y2="100" stroke={C.cream} strokeWidth="0.8" strokeDasharray="4 4"/>
       <line x1="150" y1="0" x2="150" y2="200" stroke={C.cream} strokeWidth="0.8" strokeDasharray="4 4"/>
-      <text x="150" y="186" fill={C.rose} fontFamily="Bebas Neue" fontSize="18" letterSpacing="6" textAnchor="middle">DISTUPTED</text>
+      <text x="150" y="186" fill={C.rose} fontFamily="Bebas Neue" fontSize="18" letterSpacing="6" textAnchor="middle">DISRUPTED</text>
     </svg>
   );
 }
@@ -189,7 +189,7 @@ function HeroCover({ id }) {
     tec: CoverTEC,
     jaccede: CoverJaccede,
     wegoboard: CoverWegoboard,
-    distupted: CoverDistupted,
+    disrupted: CoverDisrupted,
     cora: CoverCora,
     equality: CoverEquality,
     yungo: CoverYungo,
@@ -290,7 +290,7 @@ const COVERS = {
   tec: CoverTEC,
   jaccede: CoverJaccede,
   wegoboard: CoverWegoboard,
-  distupted: CoverDistupted,
+  disrupted: CoverDisrupted,
   cora: CoverCora,
   equality: CoverEquality,
   yungo: CoverYungo,
@@ -303,7 +303,7 @@ const PROJECT_COLOR = {
   tec: '#FF0055',
   jaccede: '#00B8C4',
   wegoboard: '#FF5500',
-  distupted: '#FF0055',
+  disrupted: '#FF0055',
   cora: '#FF0055',
   equality: '#00B8C4',
   yungo: '#0033A0',

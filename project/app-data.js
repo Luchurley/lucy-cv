@@ -1,5 +1,5 @@
 // ============================================================
-// LUCY HURLEY · DATA — v2 · Recruiter-friendly tone
+// LUCY HURLEY · DATA — v3 · recruiter-friendly
 // ============================================================
 
 window.LUCY = {
@@ -11,12 +11,12 @@ window.LUCY = {
     role2: 'DIGITAL',
     role3: 'DIRECTOR',
     location: 'Wavrin (59) · Permis B',
-    nationality: '🇫🇷🇬🇧 Franco-britannique',
+    nationality: '🇫🇷🇬🇧 Franco-britannique · native',
     availability: '🟢 Open to work',
     age: '29 ans · Lille',
     languages: [
       { flag: '🇫🇷', name: 'Français', level: 'C2 · Natif' },
-      { flag: '🇬🇧', name: 'English', level: 'C2 · Bilingue' },
+      { flag: '🇬🇧', name: 'English', level: 'C2 · Natif' },
       { flag: '🇪🇸', name: 'Español', level: 'B2 · Conv.' },
     ],
   },
@@ -28,12 +28,11 @@ window.LUCY = {
     linkedinUrl: 'https://linkedin.com/in/luchurley',
   },
 
-  // ===== Recruiter-friendly manifesto =====
   manifesto: {
     short: `Sensible et lucide à la fois. Intuitive et méthodique. J'aime ce qui a du sens et ce qui livre.`,
     full: `Designer, cheffe de projet, parfois prompteuse IA — ce qui m'intéresse, c'est ce qui <strong>relie</strong>. Faire des produits qui parlent vraiment, à des gens vraiment. Le design n'est pas un habillage : c'est un langage, et il doit dire quelque chose de juste.`,
     closing: `Un équilibre entre <strong>feu et contrôle</strong>, créativité et exécution. Inbox à zéro. Livrables en avance. Respect du temps des autres.`,
-    signoff: `Un loup qui code, qui écrit, qui livre — et qui choisit avec qui il chasse.`,
+    signoff: `Un équilibre entre feu et méthode — créativité sans perdre le nord, exécution sans perdre l'âme.`,
   },
 
   // ============== PROJETS ==============
@@ -50,7 +49,7 @@ window.LUCY = {
       categories: ['ia', 'ux', 'strat'],
       contract: ['cdi'],
       cover: 'tec',
-      url: 'the-english-coach.webflow.io',
+      url: 'https://the-english-coach.webflow.io',
       challenge: `Construire un organisme de formation crédible et conforme Qualiopi, et y intégrer un agent IA conversationnel pour la pratique orale autonome — en 2021, avant que "AI assistant" ne soit un job title.`,
       process: [
         { title: 'AUDIT & STRATÉGIE', text: `Cartographie des besoins apprenants, benchmark concurrentiel, identification des points de friction dans l'apprentissage de l'oral. Plan stratégique 360°.` },
@@ -60,7 +59,7 @@ window.LUCY = {
       ],
       result: `Plateforme en production. Audits Qualiopi passés. CRM fonctionnel. Agent IA déployé. Du brief direction au reporting performance — pilotage 360° en autonomie.`,
       skills: ['Direction Artistique', 'AI Product Design', 'Prompt Engineering', 'Webflow', 'CRM Architecture', 'Qualiopi'],
-      screenshots: ['assets/projects/tec-site-1.png', 'assets/projects/tec-site-2.png', 'assets/projects/tec-interface.png'],
+      screenshots: ['assets/projects/tec-site-1.png', 'assets/projects/tec-site-2.png'],
     },
     {
       id: 'jaccede',
@@ -74,6 +73,7 @@ window.LUCY = {
       categories: ['ux'],
       contract: ['freelance'],
       cover: 'jaccede',
+      url: 'https://jaccede.com',
       challenge: `Refondre l'app mobile d'une association qui cartographie l'accessibilité des lieux pour les personnes à mobilité réduite — contributive, communautaire, et contrainte par les guidelines WCAG 2.1 AA stricts.`,
       process: [
         { title: 'RESEARCH', text: `Interviews PMR, audit a11y de l'existant, mapping des parcours utilisateurs critiques. Lecture éthnographique des usages réels.` },
@@ -83,7 +83,7 @@ window.LUCY = {
       ],
       result: `Design system inclusif livré, prototypes haute fidélité validés. Sujet qui m'a marquée durablement : l'accessibilité, ce n'est pas un module à cocher, c'est une grammaire de pensée.`,
       skills: ['UX Research', 'A11y WCAG 2.1', 'Mobile-first', 'Design System', 'Usability Testing'],
-      screenshots: ['assets/projects/jaccede-home.png', 'assets/projects/jaccede-1.png', 'assets/projects/jaccede-2.png', 'assets/projects/jaccede-3.png'],
+      screenshots: ['assets/projects/jaccede-home.png', 'assets/projects/jaccede-map.jpg', 'assets/projects/jaccede-form.jpg', 'assets/projects/jaccede-desktop.jpg'],
     },
     {
       id: 'adhoc',
@@ -97,7 +97,7 @@ window.LUCY = {
       categories: ['strat'],
       contract: ['freelance'],
       cover: 'adhoc',
-      url: 'adhocmedia.fr',
+      url: 'https://www.adhocmedia.fr/',
       challenge: `Orchestrer la mise en ligne du site institutionnel adhocmedia.fr : coordination des intervenants (dev, design, contenu, direction), respect des deadlines, cohérence éditoriale et qualité de la livraison.`,
       process: [
         { title: 'KICKOFF', text: `Cadrage du périmètre avec la direction. Audit de l'existant. Identification des dépendances et risques projet.` },
@@ -121,17 +121,17 @@ window.LUCY = {
       categories: ['ux', 'da'],
       contract: ['freelance'],
       cover: 'wegoboard',
-      url: 'wegoboard.com',
+      url: 'https://wegoboard.com',
       challenge: `Concevoir l'expérience d'un e-commerce de mobilité électrique premium : pédagogie produit forte (autonomie, puissance, sécurité), pages techniques scannables, tunnel d'achat fluide.`,
       process: [
-        { title: 'AUDIT', text: `Audit concurrentiel (decathlon, dott, lime), benchmark UX des fiches produits techniques. Identification des points de friction dans la décision d'achat scooter.` },
+        { title: 'AUDIT', text: `Audit concurrentiel (Decathlon, Dott, Lime), benchmark UX des fiches produits techniques. Identification des points de friction dans la décision d'achat.` },
         { title: 'UX', text: `Architecture d'info, page d'accueil pédagogique, comparateur produits, fiches détaillées avec specs techniques accessibles aux non-initiés.` },
         { title: 'DA', text: `Identité visuelle dynamique, photographie produit dirigée, iconographie technique cohérente, mise en avant des partenariats médias (TF1, M6, RMC).` },
         { title: 'CONVERSION', text: `Optimisation du tunnel d'achat, intégration des aides à la décision (calculateur d'autonomie, comparateur), CTA contextuels.` },
       ],
       result: `Refonte livrée, parcours d'achat fluidifié, image de marque premium. Le projet m'a fait travailler à l'intersection technique × pédagogie × esthétique.`,
       skills: ['UX e-commerce', 'Direction Artistique', 'Fiches produits techniques', 'Conversion'],
-      screenshots: ['assets/projects/wegoboard-mobility.png', 'assets/projects/wegoboard-products.png'],
+      screenshots: ['assets/projects/wegoboard-mobility.png', 'assets/projects/wegoboard-products.png', 'assets/projects/wegoboard-wireframe.jpg', 'assets/projects/wegoboard-full.png'],
     },
     {
       id: 'squidgame',
@@ -154,7 +154,7 @@ window.LUCY = {
       ],
       result: `Site vitrine + tunnel d'abonnement livrés. Projet qui a poussé loin le couplage entre direction artistique forte et UX rigoureuse. Aimé travailler la tension entre dark fun et clarté commerciale.`,
       skills: ['Direction Artistique', 'UX vitrine', 'Motion design', 'Univers de marque'],
-      screenshots: ['assets/projects/wegoboard-vitrine.png', 'assets/projects/products.png', 'assets/projects/services.png'],
+      screenshots: ['assets/projects/wegoboard-vitrine.png', 'assets/projects/products.png', 'assets/projects/services.png', 'assets/projects/tec-interface.png'],
     },
     {
       id: 'equality',
@@ -163,44 +163,21 @@ window.LUCY = {
       year: '2021–2022',
       type: 'Freelance · Studiø Kaøs',
       role: 'UX/UI · Direction Artistique',
-      context: 'Plateforme communautaire · Login Discord/Twitch/Apple · Onboarding gamifié',
-      tags: ['UX/UI', 'DA', 'COMMU'],
+      context: 'App de paris e-sport · Onboarding gamifié · Login Discord/Twitch/Apple',
+      tags: ['UX/UI', 'DA', 'E-SPORT'],
       categories: ['ux', 'da'],
       contract: ['freelance'],
       cover: 'equality',
-      challenge: `Concevoir l'expérience d'une plateforme communautaire avec un parcours d'onboarding qui collecte les préférences utilisateurs sans friction — jeux favoris, équipes, joueurs.`,
+      challenge: `Concevoir l'app de paris e-sport avec un parcours d'onboarding qui collecte les préférences utilisateurs sans friction — jeux favoris, équipes, joueurs suivis — pour personnaliser l'expérience dès le premier lancement.`,
       process: [
-        { title: 'STRATÉGIE', text: `Architecture d'info centrée sur le matchmaking d'intérêts. Identification des frictions classiques sur les sign-up flows communautaires.` },
+        { title: 'STRATÉGIE', text: `Architecture d'info centrée sur le matchmaking d'intérêts. Identification des frictions classiques sur les sign-up flows communautaires e-sport.` },
         { title: 'ONBOARDING', text: `Flow en 4 étapes : login rapide (Discord/Twitch/Apple/FB) → choix de jeux → équipes favorites → joueurs suivis. Progression visible, retour arrière permis.` },
         { title: 'UI', text: `Design system dark + accents jaune/rose, carousels horizontaux pour la découverte, toggles tactiles, indicateurs de progression discrets.` },
         { title: 'TEST', text: `Usability test sur le parcours sign-up : objectif sub-90s pour finir l'onboarding. Itérations sur les copies de boutons et le tone of voice.` },
       ],
-      result: `Onboarding livré avec un taux d'abandon ramené sous la barre des concurrents observés. Le projet m'a fait travailler la psychologie de l'engagement initial.`,
-      skills: ['UX d\'onboarding', 'Mobile UI', 'Tone of Voice', 'Dark UI'],
-      screenshots: [],
-    },
-    {
-      id: 'distupted',
-      name: 'Distupted',
-      shortName: 'Distupted',
-      year: '2020–2021',
-      type: 'Fondatrice',
-      role: 'Fondatrice · Direction Artistique',
-      context: 'Marque capsule unisexe · Harnais vegan · Mode alternative · E-commerce indépendant',
-      tags: ['BRAND', 'DA', 'MODE'],
-      categories: ['da'],
-      contract: ['founder'],
-      cover: 'distupted',
-      challenge: `Créer une marque capsule unisexe vegan, sans capital, sans audience. Construire l'univers, le produit et le canal de A à Z en autonomie complète.`,
-      process: [
-        { title: 'CONCEPT', text: `Nom intentionnellement mal orthographié — "Distupted" ≠ "Disrupted". Le mot est déformé, comme la mode qu'il propose. Univers : dualité, fragments, mode alternative assumée.` },
-        { title: 'DA & PRODUITS', text: `Direction artistique complète, sourcing matériaux vegan et éthiques, shootings réels, lookbooks, identité visuelle radicale.` },
-        { title: 'E-COMMERCE', text: `Boutique en ligne, communication digitale, content social. Une boucle complète DA → produit → vente → SAV.` },
-        { title: 'LIVRAISON', text: `Production en petite série, shootings réels, lookbooks photographiés, univers visuel cohérent de bout en bout.` },
-      ],
-      result: `Projet entièrement déployé, collection sold-out. Laboratoire créatif fondateur dans mon parcours : m'a appris à porter une vision entière, sans filet, sans intermédiaire.`,
-      skills: ['Branding', 'Direction Artistique', 'Sourcing éthique', 'E-commerce', 'Production'],
-      screenshots: [],
+      result: `Onboarding livré avec un taux d'abandon ramené sous la barre des concurrents observés. Le projet m'a fait travailler la psychologie de l'engagement initial dans un univers ultra-concurrentiel.`,
+      skills: ['UX d\'onboarding', 'Mobile UI', 'Tone of Voice', 'Dark UI', 'E-sport'],
+      screenshots: ['assets/projects/equality-splash.jpg', 'assets/projects/equality-login.jpg', 'assets/projects/equality-games.jpg', 'assets/projects/equality-teams.jpg'],
     },
     {
       id: 'cora',
@@ -209,25 +186,48 @@ window.LUCY = {
       year: '2022–2023',
       type: 'Freelance · Studiø Kaøs',
       role: 'UX/UI Designer',
-      context: 'Hypermarché Cora · Plateforme recettes & courses · Web + Mobile · UX d\'achat',
+      context: 'Concours en équipe · Site Cora · Module recettes & courses · Web + Mobile',
       tags: ['UX/UI', 'GROCERY'],
       categories: ['ux'],
       contract: ['freelance'],
       cover: 'cora',
-      challenge: `Concevoir l'expérience d'un module recettes intégré à un site e-commerce d'hypermarché : transformer une intention "qu'est-ce qu'on mange ?" en panier rempli, sans friction et sans pop-up agressif.`,
+      challenge: `Concevoir l'expérience d'un module recettes intégré au site e-commerce de l'hypermarché Cora : transformer une intention "qu'est-ce qu'on mange ?" en panier rempli, sans friction et sans pop-up agressif.`,
       process: [
         { title: 'RESEARCH', text: `Audit du tunnel courses existant, interviews utilisateurs sur les freins à la planification repas, benchmark des apps recettes (Marmiton, Hellofresh).` },
         { title: 'ARCHITECTURE', text: `Mapping du parcours recette → ingrédients → panier. Hiérarchisation : recette en grande page détaillée + carnet de recettes personnel + ajout direct au panier.` },
-        { title: 'UI', text: `Fiches recettes claires : difficulté · durée · ingrédients · ustensiles · préparation pas-à-pas avec cases à cocher. Valeurs nutritionnelles, avis utilisateurs, vous aimeriez aussi.` },
+        { title: 'UI', text: `Fiches recettes claires : difficulté · durée · ingrédients · ustensiles · préparation pas-à-pas avec cases à cocher. Valeurs nutritionnelles, avis, suggestions.` },
         { title: 'CONVERSION', text: `CTA "Ajouter au panier" depuis chaque recette avec adaptation nombre de personnes. Recettes saisonnières mises en avant. Pictos de saisonnalité.` },
       ],
-      result: `Plateforme recettes livrée avec un flow recette→panier ultra-fluide. Le projet m'a fait pratiquer l'UX d'achat appliqué à un cas multi-produits.`,
+      result: `Projet livré en équipe dans le cadre d'un concours. Flow recette→panier ultra-fluide. Une expérience de collaboration créative en conditions réelles.`,
       skills: ['UX e-commerce', 'Information architecture', 'Web + Mobile', 'Conversion'],
+      screenshots: ['assets/projects/cora-detail-1.jpg', 'assets/projects/cora-detail-2.jpg'],
+    },
+    {
+      id: 'disrupted',
+      name: 'Disrupted',
+      shortName: 'Disrupted',
+      year: '2020–2021',
+      type: 'Fondatrice',
+      role: 'Fondatrice · Direction Artistique',
+      context: 'Marque capsule unisexe · Harnais vegan · Mode alternative · E-commerce indépendant',
+      tags: ['BRAND', 'DA', 'MODE'],
+      categories: ['da'],
+      contract: ['founder'],
+      cover: 'disrupted',
+      challenge: `Créer une marque capsule unisexe vegan, sans capital, sans audience. Construire l'univers, le produit et le canal de A à Z en autonomie complète.`,
+      process: [
+        { title: 'CONCEPT', text: `Nom intentionnellement ambigu — Disrupted. Le mot porte la dualité : fragmenté et disruptif à la fois. Univers : mode alternative assumée, matériaux vegan, esthétique radicale.` },
+        { title: 'DA & PRODUITS', text: `Direction artistique complète, sourcing matériaux vegan et éthiques, shootings réels, lookbooks, identité visuelle radicale.` },
+        { title: 'E-COMMERCE', text: `Boutique en ligne, communication digitale, content social. Une boucle complète DA → produit → vente → SAV.` },
+        { title: 'LIVRAISON', text: `Production en petite série, shootings réels, lookbooks photographiés, univers visuel cohérent de bout en bout.` },
+      ],
+      result: `Projet entièrement déployé, collection sold-out. Laboratoire créatif fondateur dans mon parcours : m'a appris à porter une vision entière, sans filet, sans intermédiaire.`,
+      skills: ['Branding', 'Direction Artistique', 'Sourcing éthique', 'E-commerce', 'Production'],
       screenshots: [],
     },
   ],
 
-  // ============== PARCOURS COMPLET (MOI) ==============
+  // ============== PARCOURS COMPLET ==============
   experiences: [
     {
       role: 'Contrôle Qualité & Gestion ERP',
@@ -276,17 +276,17 @@ Site Webflow construit de A à Z (the-english-coach.webflow.io), design system, 
       summary: `Produits digitaux end-to-end pour startups et secteur éducatif.`,
       body: `Benchmarking et analyse concurrentielle, wireframing lo-fi → hi-fi, design thinking, usability testing, product design, motion design, création de contenus éducatifs, UX research.
 
-Clients principaux : secteur éducatif, fintech, expérience immersive, communautés. Projets variés qui ont musclé l'agilité créative et la capacité à entrer vite dans un sujet.`,
+Clients principaux : secteur éducatif, fintech, expérience immersive, communautés e-sport. Projets variés qui ont musclé l'agilité créative et la capacité à entrer vite dans un sujet.`,
       chips: ['Wireframing', 'Design Thinking', 'Usability Testing', 'Product Design', 'Motion Design', 'UX Research'],
     },
     {
       role: 'Fondatrice · Direction Artistique',
-      company: 'Distupted',
+      company: 'Disrupted',
       period: 'Juin 2020 — Juin 2021',
       type: 'Fondatrice',
       color: 'tertiary',
       summary: `Marque capsule unisexe vegan. Univers visuel cohérent, livraison de bout en bout.`,
-      body: `Marque indépendante créée from scratch pendant le COVID. Nom intentionnellement mal orthographié — <strong>Distupted</strong> ≠ Disrupted. Direction artistique complète, sourcing matériaux vegan, shootings, lookbooks, identité visuelle radicale.
+      body: `Marque indépendante créée from scratch pendant le COVID. Direction artistique complète, sourcing matériaux vegan, shootings, lookbooks, identité visuelle radicale.
 
 Collection sold-out en intégralité. Le projet m'a appris à porter un univers de bout en bout sans intermédiaire — et à assumer une posture créative entière.`,
       chips: ['Branding', 'DA complète', 'Mode éthique', 'E-commerce', 'Shooting'],
@@ -324,8 +324,8 @@ Engagement de première ligne. Un moment qui n'a rien à voir avec le digital, m
       summary: `Ouverture du magasin Bondi Beach. 21 ans, partie seule à l'autre bout du monde.`,
       body: `Ouverture d'un magasin from scratch en Australie : merchandising, formation et management d'équipe, KPIs, reporting, fidélisation client, maintien image premium en environnement international anglophone.
 
-21 ans, partie seule. L'expérience qui a fait basculer mon anglais en bilingue et ma capacité d'adaptation à un autre niveau.`,
-      chips: ['Merchandising', 'Management', 'Retail premium', 'International', 'Anglais natif pro'],
+21 ans, partie seule. Franco-britannique de naissance, l'anglais professionnel n'a été qu'affiné par cette expérience — l'adaptation à un nouvel environnement, elle, a tout changé.`,
+      chips: ['Merchandising', 'Management', 'Retail premium', 'International', 'Sydney · Bondi Beach'],
     },
     {
       role: 'Designer Freelance',
@@ -334,7 +334,7 @@ Engagement de première ligne. Un moment qui n'a rien à voir avec le digital, m
       type: 'Freelance',
       color: 'ink',
       summary: `Premier travail de design pro — point d'origine de la carrière créative.`,
-      body: `Stratégie communication, conception visuelle, typographie, publicité, direction artistique pour clients variés. Le bascule officielle vers le design.`,
+      body: `Stratégie communication, conception visuelle, typographie, publicité, direction artistique pour clients variés. Le basculement officiel vers le design.`,
       chips: ['DA', 'Typographie', 'Publicité', 'Conception visuelle'],
     },
     {
@@ -366,8 +366,8 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
       type: 'CDD',
       color: 'ink',
       summary: `Première expérience internationale. Volume, rythme, English immersion.`,
-      body: `Le grand saut numéro 1. Volume, rythme, anglais total immersion. Première brique de l'autonomie qui m'a portée jusqu'à Bondi Beach et au-delà.`,
-      chips: ['English immersion', 'Volume', 'Service'],
+      body: `Le grand saut numéro 1. Volume, rythme, environnement anglophone total. Première brique de l'autonomie qui m'a portée jusqu'à Bondi Beach et au-delà.`,
+      chips: ['English', 'Volume', 'Service'],
     },
   ],
 
@@ -400,42 +400,47 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
 
   // ============== LORE ==============
   lore: {
-    gary: {
-      emoji: '🐺',
-      title: 'GARY · LE STRATÈGE',
-      body: `Gary n'est pas un animal de compagnie. C'est un compagnon, une extension d'identité, et la preuve qu'un lien fiable change tout.
-
-Personnalité : stratégique, il observe avant d'agir. Légèrement condescendant — il juge, il approuve rarement. Loyal mais à ses conditions. Surprenant dans ses apparitions.`,
-    },
     travels: {
       emoji: '🌊',
-      title: 'VOYAGES · TRANSFORMATION',
-      body: `Bondi Beach 🇦🇺, Suisse 🇨🇭, Thaïlande 🇹🇭. Pas du tourisme — des chapitres. Chaque déplacement a changé quelque chose dans la manière de regarder.`,
+      title: 'VOYAGES · CHAPITRES',
+      body: `Australie 🇦🇺 (Sydney · Bondi Beach), Royaume-Uni 🇬🇧 (Bournemouth · Norfolk), Suisse 🇨🇭, Thaïlande 🇹🇭, Espagne 🇪🇸, Italie 🇮🇹, Maroc 🇲🇦, Grèce 🇬🇷, Pays-Bas 🇳🇱... et la liste continue.
+
+Pas du tourisme — des chapitres. Chaque déplacement a changé quelque chose dans la manière de regarder.`,
     },
     archetype: {
       emoji: '🎬',
       title: 'INSPIRATIONS · NORD',
-      body: `Cinéma : <em>Blade Runner 2049</em> — texture, mélancolie, neon, IA, humanité.
+      body: `Cinéma : <em>Écrire pour exister</em> — une enseignante, une classe, des destins transformés par les mots. Le pouvoir de la narration au concret.
 Musique : <em>Orelsan</em> — honnêteté brute, genre-blending, France sans complexe.
 Littérature : <em>Man's Search for Meaning</em> (Frankl), <em>L'Étranger</em> (Camus).
 
-Pas un moodboard. Un nord.`,
+Curieuse de tout, j'apprends constamment — nouvelles techno, nouvelles disciplines, nouvelles cultures. Grande aventurière : saut à l'élastique, parachute, canyoning. Je dis oui avant que tu aies fini ta phrase.`,
     },
     aesthetic: {
-      emoji: '🌙',
-      title: 'UNIVERS ESTHÉTIQUES',
-      body: `Cyberpoétique · Dark Feminine · Brutalism UI · Liminal aesthetics · Futurisme mélancolique · Narration fragmentée.
+      emoji: '🎨',
+      title: 'DA · ADAPTABILITÉ',
+      body: `Chaque projet a son univers. En DA, je m'adapte — dark UI pour l'e-sport, premium & épuré pour le SaaS, bold & éditorial pour la mode. Pas un style unique imposé : une capacité à lire un brief, comprendre une audience, et construire l'esthétique juste.
 
-Une grammaire visuelle, pas un moodboard.`,
+Ce qui ne change pas : rigueur typographique, cohérence système, et l'intuition qu'un bon design se sent avant d'être lu.`,
     },
     confidential: {
       emoji: '🔓',
-      title: 'PROJET À 5 ANS',
+      title: 'PROJET SIS\'',
       body: `Construire une plateforme communautaire intelligente et profondément humaine. <strong>Pas un produit optimisé pour l'addiction algorithmique.</strong>
 
-IA conversationnelle · accompagnement émotionnel · communauté · gamification · design avancé · logique d'entraide. Une plateforme qui ait une âme.`,
+Le projet SIS' : IA conversationnelle · accompagnement · communauté · gamification · design avancé · logique d'entraide. Une plateforme qui ait une âme. Le projet est en cours.`,
     },
   },
+
+  // ============== FUN FACTS (débloqués via easter eggs) ==============
+  funFacts: [
+    { id: 'paw',        emoji: '🐾', title: 'ADRÉNALINE', text: `Saut à l'élastique, parachute, canyoning, parapente. Elle dit oui avant que tu aies fini ta phrase.` },
+    { id: 'konami',     emoji: '🐺', title: 'GARY',       text: `Gary est un Samoyède. Pas un loup. Il observe en silence et approuve rarement.` },
+    { id: 'logo',       emoji: '🇬🇧', title: 'BILINGUE',  text: `Franco-britannique de naissance. L'anglais C2 n'est pas venu d'un séjour linguistique.` },
+    { id: 'curious',    emoji: '✈️', title: 'BONDI',      text: `21 ans, partie seule ouvrir un magasin à Bondi Beach, Sydney. Sans réseau. Just did it.` },
+    { id: 'interested', emoji: '🤖', title: 'AVANT LE HYPE', text: `Agent IA conversationnel en prod en 2021. Avant le hype. Avant les job titles.` },
+    { id: 'hireme',     emoji: '🎬', title: 'CINÉMA',     text: `Film préféré : Écrire pour exister. Elle croit que les mots et le design ont le même pouvoir de transformation.` },
+  ],
 
   // ============== FUN ==============
   jokes: [
@@ -457,10 +462,10 @@ IA conversationnelle · accompagnement émotionnel · communauté · gamificatio
 
   // ============== GARY LINES ==============
   garyLines: [
-    `Il approuve votre curiosité.`,
-    `Le loup le plus stratégique de l'industrie digitale.`,
+    `Il approuve votre curiosité. Pour cette fois.`,
     `Il juge. Il ne dit rien. C'est suffisant.`,
     `Vous avez trouvé le code. Il s'en foutait de toute façon.`,
-    `Curiosité validée. Pour cette fois.`,
+    `Curiosité validée. Gary est impressionné — mais ne le dira jamais.`,
+    `Un Samoyède stratégique dans ton portfolio. Tu l'as mérité.`,
   ],
 };

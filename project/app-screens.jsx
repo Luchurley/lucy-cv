@@ -1,12 +1,11 @@
 // ============================================================
 // SCREENS — Home, Projets, Skills, Moi, Contact
-// (Detail in app-detail.jsx)
 // ============================================================
 
 const { useMemo: _useMemo } = React;
 
 // ---------- HOME ----------
-function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
+function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlockedFacts }) {
   const L = window.LUCY;
   return (
     <div className="page" data-screen-label="Home">
@@ -21,12 +20,11 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
           </p>
         </div>
         <div className="card-hero-photo">
-          <image-slot
-            id="lucy-portrait"
-            shape="rect"
-            placeholder="Glisse ta photo ici"
-            style={{ width: '100%', height: '100%' }}
-          ></image-slot>
+          <img
+            src="assets/portrait.jpg"
+            alt="Lucy Hurley"
+            className="portrait-img"
+          />
         </div>
         <button
           aria-label="Paw print easter egg"
@@ -37,7 +35,6 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
 
       <div className="spacer-md" />
 
-      {/* STAT CARDS */}
       <div className="stat cream" style={{ marginBottom: 10 }}>
         <div className="stat-label">NATIONALITÉ</div>
         <div className="stat-value">{L.identity.nationality}</div>
@@ -55,7 +52,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
 
       <div className="card">
         <div className="card-label">MANIFESTO</div>
-        <div className="bq" dangerouslySetInnerHTML={{ __html: `« ${L.manifesto.short} » <br/><br/>${L.manifesto.full}<br/><br/>${L.manifesto.closing}<br/><br/><em>${L.manifesto.signoff}</em>` }} />
+        <div className="bq" dangerouslySetInnerHTML={{ __html: `« ${L.manifesto.short} » <br/><br/>${L.manifesto.full}<br/><br/>${L.manifesto.closing}` }} />
       </div>
 
       <div className="spacer-md" />
@@ -65,9 +62,25 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
           <div className="secret">
             <div className="secret-label">🔓 NIVEAU CONFIDENTIEL</div>
             <div className="secret-quote">
-              « Blade Runner 2049 · Orelsan · Frankl · une plateforme qui aurait une âme — et pas juste les KPI d'un Notion beige. »
+              « Écrire pour exister · Orelsan · Frankl · le projet SIS' — une plateforme qui aurait une âme. »
             </div>
-            <div className="secret-hint">↑↑↓↓←→←→BA · GARY ATTENDS</div>
+            <div className="secret-hint">↑↑↓↓←→←→BA · GARY ATTEND</div>
+          </div>
+          <div className="spacer-md" />
+        </>
+      )}
+
+      {unlockedFacts && unlockedFacts.length > 0 && (
+        <>
+          <div className="section-divider"><span>FUN FACTS DÉBLOQUÉS · {unlockedFacts.length}</span></div>
+          <div className="funfacts-grid">
+            {unlockedFacts.map(f => (
+              <div key={f.id} className="funfact-card">
+                <span className="funfact-emoji">{f.emoji}</span>
+                <div className="funfact-title">{f.title}</div>
+                <div className="funfact-text">{f.text}</div>
+              </div>
+            ))}
           </div>
           <div className="spacer-md" />
         </>
@@ -102,16 +115,16 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap }) {
 function ProjetsScreen({ onOpen, gainXP }) {
   const L = window.LUCY;
   const [search, setSearch] = useState('');
-  const [filters, setFilters] = useState([]); // category keys
+  const [filters, setFilters] = useState([]);
 
   const FILTERS = [
-    { key: 'ux',     label: 'UX/UI' },
-    { key: 'da',     label: 'DA' },
-    { key: 'strat',  label: 'STRAT.' },
-    { key: 'ia',     label: 'IA' },
-    { key: 'cdi',    label: 'CDI' },
+    { key: 'ux',       label: 'UX/UI' },
+    { key: 'da',       label: 'DA' },
+    { key: 'strat',    label: 'STRAT.' },
+    { key: 'ia',       label: 'IA' },
+    { key: 'cdi',      label: 'CDI' },
     { key: 'freelance', label: 'FREELANCE' },
-    { key: 'founder',   label: 'FONDATRICE' },
+    { key: 'founder',  label: 'FONDATRICE' },
   ];
 
   const toggleFilter = (k) => {
@@ -183,7 +196,7 @@ function ProjetsScreen({ onOpen, gainXP }) {
       {visible.length === 0 ? (
         search ? (
           <EmptyState
-            title={`Gary n'a rien trouvé`}
+            title="Aucun résultat"
             sub={`pour « ${search} »`}
             actions={[{ label: 'EFFACER', primary: true, onClick: () => setSearch('') }]}
           />
@@ -191,9 +204,7 @@ function ProjetsScreen({ onOpen, gainXP }) {
           <EmptyState
             title="Aucun projet trouvé"
             sub="avec ces filtres."
-            actions={[
-              { label: 'TOUT EFFACER', primary: true, onClick: resetAll },
-            ]}
+            actions={[{ label: 'TOUT EFFACER', primary: true, onClick: resetAll }]}
           />
         )
       ) : (
@@ -303,27 +314,27 @@ function MoiScreen({ xp, openAcc, onToggleAcc, gainXP }) {
 
       <SectionDivider>MANIFESTO</SectionDivider>
       <div className="card">
-        <div className="bq" dangerouslySetInnerHTML={{ __html: `« ${L.manifesto.short} »<br/><br/>${L.manifesto.full}<br/><br/>${L.manifesto.closing}<br/><br/><em>${L.manifesto.signoff}</em>` }} />
+        <div className="bq" dangerouslySetInnerHTML={{ __html: `« ${L.manifesto.short} »<br/><br/>${L.manifesto.full}<br/><br/>${L.manifesto.closing}` }} />
       </div>
 
       <SectionDivider>PARCOURS · {L.experiences.length} EXPÉRIENCES</SectionDivider>
 
-      {L.experiences.map((xp, i) => (
+      {L.experiences.map((exp, i) => (
         <div key={i} className={'xp-accordion' + (openAcc === i ? ' is-open' : '')}>
           <button className="xp-head" onClick={() => onToggleAcc(i)} aria-expanded={openAcc === i}>
             <div className="xp-role-block">
-              <div className="xp-role">{xp.role}</div>
-              <div className="xp-co">{xp.company} <span className="period">· {xp.period}</span></div>
+              <div className="xp-role">{exp.role}</div>
+              <div className="xp-co">{exp.company} <span className="period">· {exp.period}</span></div>
             </div>
-            <span className="xp-badge">{xp.type}</span>
+            <span className="xp-badge">{exp.type}</span>
             <span className="xp-chevron">▾</span>
           </button>
           {openAcc === i && (
             <div className="xp-body">
-              <p className="body-md italic dim" style={{ marginBottom: 8 }}>{xp.summary}</p>
-              <div dangerouslySetInnerHTML={{ __html: xp.body.split('\n\n').map(p => `<p>${p}</p>`).join('') }} />
+              <p className="body-md italic dim" style={{ marginBottom: 8 }}>{exp.summary}</p>
+              <div dangerouslySetInnerHTML={{ __html: exp.body.split('\n\n').map(p => `<p>${p}</p>`).join('') }} />
               <div className="xp-chips">
-                {xp.chips.map(c => <span key={c} className="xp-chip">{c}</span>)}
+                {exp.chips.map(c => <span key={c} className="xp-chip">{c}</span>)}
               </div>
             </div>
           )}
@@ -351,12 +362,8 @@ function MoiScreen({ xp, openAcc, onToggleAcc, gainXP }) {
       ) : (
         <>
           <div className="lore-card">
-            <div className="lore-head"><span className="lore-emoji">{L.lore.gary.emoji}</span><span className="lore-title">{L.lore.gary.title}</span></div>
-            <div className="lore-body" dangerouslySetInnerHTML={{ __html: L.lore.gary.body.split('\n\n').map(p => `<p style="margin-bottom:8px">${p}</p>`).join('') }} />
-          </div>
-          <div className="lore-card">
             <div className="lore-head"><span className="lore-emoji">{L.lore.travels.emoji}</span><span className="lore-title">{L.lore.travels.title}</span></div>
-            <div className="lore-body">{L.lore.travels.body}</div>
+            <div className="lore-body" dangerouslySetInnerHTML={{ __html: L.lore.travels.body.split('\n\n').map(p => `<p style="margin-bottom:6px">${p}</p>`).join('') }} />
           </div>
           {showInterested && (
             <>
@@ -366,7 +373,7 @@ function MoiScreen({ xp, openAcc, onToggleAcc, gainXP }) {
               </div>
               <div className="lore-card">
                 <div className="lore-head"><span className="lore-emoji">{L.lore.aesthetic.emoji}</span><span className="lore-title">{L.lore.aesthetic.title}</span></div>
-                <div className="lore-body">{L.lore.aesthetic.body}</div>
+                <div className="lore-body" dangerouslySetInnerHTML={{ __html: L.lore.aesthetic.body.split('\n\n').map(p => `<p style="margin-bottom:6px">${p}</p>`).join('') }} />
               </div>
             </>
           )}
@@ -385,7 +392,7 @@ function MoiScreen({ xp, openAcc, onToggleAcc, gainXP }) {
 }
 
 // ---------- CONTACT ----------
-function ContactScreen({ xp, onContactTap }) {
+function ContactScreen({ xp, onContactTap, unlockedFacts }) {
   const L = window.LUCY;
   const tier = tierFromXP(xp);
   const isHireme = tier.key === 'hireme';
@@ -436,7 +443,7 @@ function ContactScreen({ xp, onContactTap }) {
         <div className="score-tier">{tier.label}</div>
         <div className="score-detail">
           {isHireme
-            ? `Tu as tout exploré. Curiosité validée. Gary approuve.`
+            ? `Tu as tout exploré. Curiosité validée.`
             : `Tu es ${tier.label}. ${toGo > 0 ? `+${toGo} XP pour ★ HIRE ME` : ''}`
           }
         </div>
@@ -447,6 +454,22 @@ function ContactScreen({ xp, onContactTap }) {
         )}
       </div>
 
+      {unlockedFacts && unlockedFacts.length > 0 && (
+        <>
+          <SectionDivider>FUN FACTS · {unlockedFacts.length}/{L.funFacts.length} DÉBLOQUÉS</SectionDivider>
+          <div className="funfacts-grid">
+            {unlockedFacts.map(f => (
+              <div key={f.id} className="funfact-card">
+                <span className="funfact-emoji">{f.emoji}</span>
+                <div className="funfact-title">{f.title}</div>
+                <div className="funfact-text">{f.text}</div>
+              </div>
+            ))}
+          </div>
+          <div className="spacer-md" />
+        </>
+      )}
+
       <div className="spacer-lg" />
 
       <div className="card" style={{ background: 'var(--color-paper-2)' }}>
@@ -454,9 +477,8 @@ function ContactScreen({ xp, onContactTap }) {
         <div className="bq">
           « Je veux créer une plateforme qui ait une <strong>âme</strong>,
           pas juste un produit optimisé pour l'addiction algorithmique et les KPI
-          présentés dans un Notion beige pendant qu'un CEO explique qu'il
-          'disrupt le lien humain'. »
-          <cite>— le projet à 5 ans</cite>
+          présentés dans un Notion beige. »
+          <cite>— le projet SIS'</cite>
         </div>
       </div>
     </div>

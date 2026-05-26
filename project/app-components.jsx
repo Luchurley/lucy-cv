@@ -46,13 +46,15 @@ function Header({ xp, onLogoTap, isSub, subTitle, onBack, logoGlitch }) {
         </div>
       )}
       <div className="xp-pod">
+        <div className="xp-pod-row">
+          <div className="xp-bar" data-lv={tier.key} aria-hidden="true">
+            <span style={{ width: pct + '%' }} />
+          </div>
+          <span className="xp-num">{xp}</span>
+        </div>
         <span className={'xp-level lv-' + tier.key} aria-label={'Niveau ' + tier.label}>
           {tier.label}
         </span>
-        <div className="xp-bar" data-lv={tier.key} aria-hidden="true">
-          <span style={{ width: pct + '%' }} />
-        </div>
-        <span className="xp-num">{xp}</span>
       </div>
     </header>
   );
@@ -92,8 +94,9 @@ function ToastStack({ toasts, onDismiss }) {
   return (
     <div className="toast-stage" aria-live="polite" aria-atomic="true">
       {toasts.map(t => (
-        <div key={t.id} className={'toast' + (t.tier ? ' is-levelup' : '') + (t.out ? ' is-out' : '')}>
-          {t.xp != null && <span className="xp-pill">{t.tier ? '★' : (t.xp > 0 ? '+' + t.xp + ' XP' : t.xp + ' XP')}</span>}
+        <div key={t.id} className={'toast' + (t.tier ? ' is-levelup' : '') + (t.funfact ? ' is-funfact' : '') + (t.out ? ' is-out' : '')}>
+          {t.funfact && <span className="fact-emoji">{t.emoji}</span>}
+          {!t.funfact && t.xp != null && <span className="xp-pill">{t.tier ? '★' : (t.xp > 0 ? '+' + t.xp + ' XP' : t.xp + ' XP')}</span>}
           <span>{t.label}</span>
         </div>
       ))}

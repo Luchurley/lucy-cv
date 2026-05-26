@@ -217,21 +217,35 @@ img { display: block; max-width: 100%; }
 }
 .xp-pod {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.xp-pod-row {
+  display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
 }
 .xp-level {
   font-family: var(--ff-mono);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--color-ink-dim);
+  line-height: 1;
 }
 .xp-level.lv-curious { color: var(--color-secondary); }
 .xp-level.lv-interested { color: var(--color-tertiary); }
-.xp-level.lv-hireme { color: var(--color-primary); }
+.xp-level.lv-hireme {
+  color: var(--color-primary);
+  animation: hireMePulse 2s ease-in-out infinite;
+}
+@keyframes hireMePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; letter-spacing: 2px; }
+}
 .xp-bar {
   width: 70px;
   height: 12px;
@@ -385,6 +399,13 @@ img { display: block; max-width: 100%; }
 .card-hero-photo image-slot {
   width: 100%;
   height: 100%;
+  display: block;
+}
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
 }
 .card-hero-paw {
@@ -614,6 +635,18 @@ img { display: block; max-width: 100%; }
 .toast.is-levelup .xp-pill {
   background: var(--color-ink);
   color: var(--color-primary);
+}
+.toast.is-funfact {
+  background: var(--color-secondary);
+  color: var(--color-ink);
+  max-width: 260px;
+  font-size: 11px;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+.toast.is-funfact .fact-emoji {
+  font-size: 20px;
+  flex-shrink: 0;
 }
 @keyframes slideRight {
   from { transform: translateX(120%); opacity: 0; }
@@ -1432,6 +1465,73 @@ img { display: block; max-width: 100%; }
   position: absolute; width: 1px; height: 1px; padding: 0;
   margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
   white-space: nowrap; border: 0;
+}
+
+/* ============================================================
+   FUN FACTS
+============================================================ */
+.funfacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+.funfact-card {
+  background: var(--color-card);
+  border: var(--border-base);
+  box-shadow: var(--shadow-sm);
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.funfact-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+.funfact-title {
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+.funfact-text {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+/* ============================================================
+   PROJECT URL LINK
+============================================================ */
+.proj-url-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--color-secondary);
+  border: var(--border-thin);
+  border-color: var(--color-secondary);
+  padding: 6px 12px;
+  text-decoration: none;
+  transition: var(--trans-quick);
+  box-shadow: 2px 2px 0 var(--color-secondary);
+}
+.proj-url-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-secondary);
+}
+.proj-url-val {
+  color: var(--color-ink-dim);
+  font-weight: 400;
+  font-size: 9px;
 }
 
 /* prefers reduced motion */

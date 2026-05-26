@@ -36,6 +36,19 @@ function App() {
   const [toasts, pushToast] = useToasts();
   // ---- BADGES SEEN ----
   const badgesSeenRef = $useRef(new Set());
+  // ---- FUN FACTS ----
+  const [unlockedFacts, setUnlockedFacts] = $useState([]);
+
+  // ---- unlockFact helper ----
+  const unlockFact = $useCallback((id) => {
+    const fact = window.LUCY.funFacts.find(f => f.id === id);
+    if (!fact) return;
+    setUnlockedFacts(prev => {
+      if (prev.find(f => f.id === id)) return prev;
+      setTimeout(() => pushToast({ funfact: true, emoji: fact.emoji, label: `${fact.title} — ${fact.text}` }), 200);
+      return [...prev, fact];
+    });
+  }, [pushToast]);
 
   // ---- gainXP helper ----
   const gainXP = $useCallback((amount, label) => {
@@ -43,16 +56,17 @@ function App() {
       const next = Math.max(0, prev + amount);
       // Toast with the XP gain
       pushToast({ xp: amount, label });
-      // Level-up detection
+      // Level-up detection + fact unlock
       const prevTier = tierFromXP(prev).key;
       const nextTier = tierFromXP(next).key;
       if (prevTier !== nextTier) {
         const t = tierFromXP(next);
         setTimeout(() => pushToast({ tier: true, label: `${t.label} · contenu débloqué` }), 350);
+        setTimeout(() => unlockFact(nextTier), 700);
       }
       return next;
     });
-  }, [pushToast]);
+  }, [pushToast, unlockFact]);
 
   // ---- Tab change ----
   const onNav = (id) => {
@@ -120,6 +134,7 @@ function App() {
       setLogoGlitch(true);
       setTimeout(() => setLogoGlitch(false), 800);
       gainXP(25, `Section secrète révélée`);
+      unlockFact('logo');
       logoTapsRef.current = { count: 0, last: 0 };
       // Auto-switch to home if not there to show it
       setTab('home');
@@ -134,6 +149,7 @@ function App() {
     if (!pawClicked) {
       setPawClicked(true);
       gainXP(50, `🐾 Tu as trouvé la patte`);
+      unlockFact('paw');
     }
   };
 
@@ -151,6 +167,7 @@ function App() {
       if (!seenGary) {
         badgesSeenRef.current.add('gary');
         gainXP(100, `KONAMI · Gary apparaît`);
+        unlockFact('konami');
       } else {
         pushToast({ tier: true, label: `Gary est déjà passé. Il s'en fout.` });
       }
@@ -186,6 +203,7 @@ function App() {
             onTapContact={() => onContactTap('email')}
             secretRevealed={secretRevealed}
             onPawTap={onPawTap}
+            unlockedFacts={unlockedFacts}
           />
         )}
         {tab === 'projets' && !detailId && (
@@ -211,7 +229,7 @@ function App() {
           />
         )}
         {tab === 'contact' && (
-          <ContactScreen xp={xp} onContactTap={onContactTap} />
+          <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} />
         )}
       </main>
 

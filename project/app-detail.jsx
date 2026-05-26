@@ -44,6 +44,18 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
         {project.tags.map(t => <span key={t} className="pcard-tag">{t}</span>)}
       </div>
 
+      {project.url && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="proj-url-link"
+          onClick={() => gainXP && gainXP(5, `Site visité — ${project.shortName}`)}
+        >
+          VOIR LE SITE ↗ <span className="proj-url-val">{project.url.replace('https://', '')}</span>
+        </a>
+      )}
+
       <SectionDivider>OVERVIEW</SectionDivider>
       <div className="col-2">
         <div className="meta-card">
