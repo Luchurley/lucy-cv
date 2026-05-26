@@ -1,0 +1,583 @@
+/* =====================================================
+   WIREFRAMES MOBILE v2 — Low-fi hand-drawn loose
+   Lucy Hurley Portfolio · Miami Venise
+===================================================== */
+
+:root {
+  --paper:    #FFF8F0;
+  --paper-2:  #FBF1E2;
+  --ink:      #0A0806;
+  --ink-mid:  rgba(10,8,6,0.55);
+  --ink-soft: rgba(10,8,6,0.18);
+  --ink-trace:rgba(10,8,6,0.08);
+  --rose:     #FF0055;
+  --rose-soft:rgba(255,0,85,0.10);
+  --teal:     #00B8C4;
+  --orange:   #FF5500;
+  --ff-hw:    'Caveat', 'Comic Sans MS', cursive;
+  --ff-mono:  'Space Mono', 'Courier New', monospace;
+  --ff-disp:  'Bebas Neue', 'Arial Narrow', sans-serif;
+}
+
+body {
+  font-family: var(--ff-mono);
+  background: var(--paper);
+  color: var(--ink);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== PHONE FRAME (bare wireframe — no bezel, just a contained scroll) ===== */
+.wf-phone {
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.wf-phone.tall { /* page contents may scroll */ overflow: hidden; }
+.wf-canvas {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+/* ===== TYPOGRAPHY HELPERS ===== */
+.wf-hw  { font-family: var(--ff-hw); font-size: 17px; line-height: 1.1; color: var(--ink); font-weight: 600; }
+.wf-hw-sm{ font-family: var(--ff-hw); font-size: 13px; line-height: 1.15; color: var(--ink-mid); font-weight: 500; }
+.wf-mono{ font-family: var(--ff-mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--ink); }
+.wf-mono-sm{ font-family: var(--ff-mono); font-size: 8px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 700; color: var(--ink-mid); }
+.wf-disp{ font-family: var(--ff-disp); font-size: 22px; letter-spacing: 1.5px; line-height: 1; color: var(--ink); }
+.wf-disp-lg{ font-family: var(--ff-disp); font-size: 30px; letter-spacing: 1.5px; line-height: 0.95; color: var(--ink); }
+
+/* ===== BOXES (wireframe rectangles) ===== */
+.wf-box {
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  box-sizing: border-box;
+}
+.wf-box.dashed   { border-style: dashed; }
+.wf-box.fill     { background: var(--ink); color: var(--paper); }
+.wf-box.fill-rose{ background: var(--rose); color: var(--ink); }
+.wf-box.fill-teal{ background: var(--teal); color: var(--ink); }
+.wf-box.fill-org { background: var(--orange); color: var(--paper); }
+.wf-box.fill-soft{ background: var(--paper-2); }
+.wf-box.shadow   { box-shadow: 3px 3px 0 var(--ink); }
+.wf-box.shadow-rose { box-shadow: 4px 4px 0 var(--rose); }
+.wf-row  { display: flex; align-items: center; }
+.wf-stack{ display: flex; flex-direction: column; }
+.wf-gap-1{ gap: 2px; } .wf-gap-2{ gap: 4px; } .wf-gap-3{ gap: 6px; }
+.wf-gap-4{ gap: 8px; } .wf-gap-5{ gap: 12px; } .wf-gap-6{ gap: 16px; }
+.wf-pad-2{ padding: 4px; } .wf-pad-3{ padding: 6px; } .wf-pad-4{ padding: 8px; }
+.wf-pad-5{ padding: 12px; } .wf-pad-6{ padding: 16px; }
+
+/* ===== IMAGE PLACEHOLDER (X-in-box classic) ===== */
+.wf-img {
+  border: 1.5px dashed var(--ink);
+  background:
+    linear-gradient(135deg, transparent calc(50% - 0.6px), var(--ink-soft) calc(50% - 0.5px), var(--ink-soft) calc(50% + 0.5px), transparent calc(50% + 0.6px)),
+    linear-gradient(45deg, transparent calc(50% - 0.6px), var(--ink-soft) calc(50% - 0.5px), var(--ink-soft) calc(50% + 0.5px), transparent calc(50% + 0.6px)),
+    var(--paper-2);
+  position: relative;
+}
+.wf-img.solid { border-style: solid; }
+.wf-img-label{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-align: center;
+}
+
+/* ===== TAGS / CHIPS ===== */
+.wf-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+.wf-tag.active { background: var(--rose); color: var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+.wf-tag.filled-teal { background: var(--teal); }
+.wf-tag.filled-org { background: var(--orange); color: var(--paper); }
+.wf-tag.filled-ink { background: var(--ink); color: var(--paper); }
+
+/* ===== BUTTONS ===== */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0 var(--ink);
+  line-height: 1.2;
+}
+.wf-btn.lg { padding: 9px 14px; font-size: 10px; box-shadow: 3px 3px 0 var(--ink); }
+.wf-btn.rose { background: var(--rose); }
+.wf-btn.ink  { background: var(--ink); color: var(--paper); box-shadow: none; }
+
+/* ===== ANNOTATIONS (rose handwritten callouts) ===== */
+.wf-annot {
+  position: absolute;
+  font-family: var(--ff-hw);
+  font-size: 13px;
+  line-height: 1.1;
+  color: var(--rose);
+  font-weight: 600;
+  pointer-events: none;
+  max-width: 100px;
+}
+.wf-annot.bigger { font-size: 15px; }
+.wf-annot.left { text-align: right; }
+
+/* hand-drawn arrow (drawn with SVG inline) */
+.wf-arrow {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ===== UTILITIES ===== */
+.wf-divider {
+  border-top: 1.5px dashed var(--ink);
+  margin: 6px 0;
+}
+.wf-divider.solid { border-top-style: solid; }
+.wf-divider.thick { border-top-width: 2.5px; border-top-style: solid; }
+
+.wf-safe-top, .wf-safe-bot {
+  background: repeating-linear-gradient(45deg, var(--ink-trace) 0 4px, transparent 4px 8px);
+  height: 10px;
+  border-bottom: 1px dashed var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wf-safe-bot { border-top: 1px dashed var(--ink-soft); border-bottom: none; }
+.wf-safe-label {
+  font-family: var(--ff-mono);
+  font-size: 6.5px;
+  letter-spacing: 1px;
+  color: var(--ink-mid);
+}
+
+/* ===== HEADER COMPONENT ===== */
+.wf-header {
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.wf-header .logo {
+  font-family: var(--ff-disp);
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.wf-header .logo small {
+  font-family: var(--ff-mono);
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--ink-mid);
+}
+.wf-xp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.wf-xp-bar {
+  width: 56px;
+  height: 8px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  position: relative;
+}
+.wf-xp-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+}
+.wf-xp-bar.lv-max > span { background: var(--rose); }
+.wf-xp-num {
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===== BOTTOM NAV ===== */
+.wf-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 2px solid var(--ink);
+  background: var(--paper);
+  flex-shrink: 0;
+}
+.wf-nav-tab {
+  padding: 8px 4px 10px;
+  text-align: center;
+  border-right: 1px dashed var(--ink-soft);
+  position: relative;
+}
+.wf-nav-tab:last-child { border-right: none; }
+.wf-nav-tab .icn {
+  font-size: 14px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 3px;
+  opacity: 0.4;
+}
+.wf-nav-tab .lbl {
+  font-family: var(--ff-mono);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+.wf-nav-tab.active .icn,
+.wf-nav-tab.active .lbl { opacity: 1; color: var(--ink); }
+.wf-nav-tab.active::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: var(--rose);
+}
+.wf-nav-tab .dot {
+  position: absolute;
+  top: 6px;
+  right: 18%;
+  width: 6px;
+  height: 6px;
+  background: var(--rose);
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+}
+
+/* ===== PROJECT CARD GRID ===== */
+.wf-pcard {
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 0 var(--ink);
+  overflow: hidden;
+}
+.wf-pcard .ph {
+  height: 70px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.wf-pcard .meta {
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.wf-pcard .ttl {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.wf-pcard .date {
+  font-family: var(--ff-mono);
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--ink-mid);
+}
+.wf-pcard .tg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+/* ===== SEARCHBAR ===== */
+.wf-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  padding: 5px 8px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.wf-search .icn { font-size: 11px; opacity: 0.55; }
+.wf-search .ph {
+  flex: 1;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--ink-mid);
+}
+.wf-search.focused .ph { color: var(--ink); }
+.wf-search .caret { width: 1px; height: 10px; background: var(--ink); animation: caret 1s infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.wf-search .clear {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; line-height: 1;
+}
+
+/* ===== TOAST ===== */
+/* A11Y note — XP number is an inverted ink-pill (AAA on the orange bg),
+   NOT rose text on orange (that combo is ~1.4:1, fails everything).
+   Level-up variant uses rose bg + ink text (~4.87:1, AA pass).        */
+.wf-toast {
+  background: var(--orange);
+  color: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 5px 10px 5px 5px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Inverted XP pill — ink bg + cream text. AAA on any background. */
+.wf-toast .xp {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2px 7px;
+  border: 1.5px solid var(--ink);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  display: inline-block;
+  line-height: 1.25;
+}
+/* Level-up variant — rose bg + ink text (passes AA). */
+.wf-toast.is-levelup {
+  background: var(--rose);
+  color: var(--ink);
+}
+.wf-toast.is-levelup .xp {
+  background: var(--ink);
+  color: var(--rose);
+}
+
+/* ===== MODAL ===== */
+.wf-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,8,6,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.wf-modal {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--rose);
+  padding: 16px 14px;
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* ===== STAT CARDS ===== */
+.wf-stat {
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  padding: 8px 10px;
+}
+.wf-stat.cream { background: var(--paper-2); }
+.wf-stat.teal { background: var(--teal); }
+.wf-stat.org  { background: var(--orange); color: var(--paper); }
+
+/* ===== ACCORDION (XP/expériences) ===== */
+.wf-acc {
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.wf-acc.open {
+  background: var(--paper-2);
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+/* ===== CTA STICKY ===== */
+.wf-cta-sticky {
+  background: var(--rose);
+  border-top: 2px solid var(--ink);
+  padding: 10px 12px;
+  text-align: center;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ===== EMPTY STATE ===== */
+.wf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px;
+  gap: 8px;
+}
+.wf-empty .bear { font-size: 36px; line-height: 1; }
+
+/* ===== SKELETON LOADING (animated pulse) ===== */
+.wf-skel {
+  background: var(--ink-trace);
+  animation: skelPulse 1.2s ease-in-out infinite;
+}
+@keyframes skelPulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.8; }
+}
+
+/* ===== FLOW STORYBOARD ARROWS ===== */
+.flow-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.flow-arrow-line {
+  height: 2px;
+  background: var(--rose);
+  flex: 1;
+}
+.flow-arrow-head {
+  width: 0;
+  height: 0;
+  border-left: 8px solid var(--rose);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.flow-arrow-label {
+  position: absolute;
+  font-family: var(--ff-hw);
+  font-size: 14px;
+  color: var(--rose);
+  background: var(--paper);
+  padding: 0 4px;
+  top: -10px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ===== ARTBOARD INFO HEADER (over each artboard in canvas) ===== */
+.wf-info {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  pointer-events: none;
+}
+
+/* ===== ANNOTATION CALLOUT LIST (sidebar style for some screens) ===== */
+.wf-callouts {
+  position: absolute;
+  right: -160px;
+  top: 0;
+  width: 150px;
+  font-family: var(--ff-hw);
+  color: var(--rose);
+  font-size: 13px;
+  line-height: 1.2;
+}
+.wf-callouts.left { right: auto; left: -160px; text-align: right; }
+.wf-callout {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.wf-callout-num {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--paper);
+}
+.wf-callout-text { padding-top: 1px; }
+
+/* Numbered dot inside the wireframe to match callout */
+.wf-numdot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose);
+  background: var(--paper);
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--rose);
+}
+
+/* For inline screen-internal numbered markers */
+.wf-marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--rose);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 700;
+  border: 1.5px solid var(--ink);
+  z-index: 3;
+}
