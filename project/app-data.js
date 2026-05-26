@@ -29,9 +29,9 @@ window.LUCY = {
   },
 
   manifesto: {
-    short: `Sensible et lucide à la fois. Intuitive et méthodique. J'aime ce qui a du sens et ce qui livre.`,
-    full: `Designer, cheffe de projet, parfois prompteuse IA — ce qui m'intéresse, c'est ce qui <strong>relie</strong>. Faire des produits qui parlent vraiment, à des gens vraiment. Le design n'est pas un habillage : c'est un langage, et il doit dire quelque chose de juste.`,
-    closing: `Un équilibre entre <strong>feu et contrôle</strong>, créativité et exécution. Inbox à zéro. Livrables en avance. Respect du temps des autres.`,
+    short: `Pas le profil qu'on case facilement dans une case — et c'est exactement ce qui m'a rendue utile partout où je suis passée.`,
+    full: `Formée, curieuse, obstinée quand il le faut. Je construis des interfaces comme je construis mes projets de vie : avec <strong>méthode, sensibilité et une vraie ligne directrice</strong>. UX/UI, direction artistique, motion, IA, gestion de projet — je conçois des expériences digitales de A à Z.`,
+    closing: `Autodidacte par nature, transversale par instinct, sincère par choix. <strong>Inbox à zéro. Livrables en avance.</strong> Respect du temps des autres.`,
     signoff: `Un équilibre entre feu et méthode — créativité sans perdre le nord, exécution sans perdre l'âme.`,
   },
 
@@ -321,11 +321,11 @@ Engagement de première ligne. Un moment qui n'a rien à voir avec le digital, m
       period: 'Juin 2018 — Mai 2019',
       type: 'CDI · International',
       color: 'tertiary',
-      summary: `Ouverture du magasin Bondi Beach. 21 ans, partie seule à l'autre bout du monde.`,
-      body: `Ouverture d'un magasin from scratch en Australie : merchandising, formation et management d'équipe, KPIs, reporting, fidélisation client, maintien image premium en environnement international anglophone.
+      summary: `Intégration de l'équipe d'ouverture du store Bondi Beach. 21 ans, partie seule à l'autre bout du monde.`,
+      body: `Membre de l'équipe d'ouverture du store Tommy Bahama à Bondi Beach, Sydney — marque premium américaine, environnement 100% anglophone, clientèle internationale. Merchandising, formation d'équipe, KPIs, reporting, fidélisation client.
 
-21 ans, partie seule. Franco-britannique de naissance, l'anglais professionnel n'a été qu'affiné par cette expérience — l'adaptation à un nouvel environnement, elle, a tout changé.`,
-      chips: ['Merchandising', 'Management', 'Retail premium', 'International', 'Sydney · Bondi Beach'],
+21 ans, partie seule à l'autre bout du monde rejoindre une aventure collective. L'adaptation totale à un nouvel environnement, une nouvelle culture, une nouvelle équipe — c'est cette expérience qui a tout changé dans ma manière d'aborder l'inconnu.`,
+      chips: ['Merchandising', 'Management d\'équipe', 'Retail premium', 'International', 'Sydney · Bondi Beach'],
     },
     {
       role: 'Designer Freelance',
@@ -402,10 +402,10 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
   lore: {
     travels: {
       emoji: '🌊',
-      title: 'VOYAGES · CHAPITRES',
-      body: `Australie 🇦🇺 (Sydney · Bondi Beach), Royaume-Uni 🇬🇧 (Bournemouth · Norfolk), Suisse 🇨🇭, Thaïlande 🇹🇭, Espagne 🇪🇸, Italie 🇮🇹, Maroc 🇲🇦, Grèce 🇬🇷, Pays-Bas 🇳🇱... et la liste continue.
+      title: 'VOYAGES · 18 PAYS',
+      body: `🇫🇷 France · 🇬🇧 Angleterre · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Écosse · 🇯🇪 Jersey · 🇧🇪 Belgique · 🇳🇱 Pays-Bas · 🇨🇭 Suisse · 🇪🇸 Espagne · 🇮🇨 Canaries · 🇵🇹 Portugal · 🇮🇹 Italie · 🇬🇷 Grèce · 🇹🇷 Turquie · 🇺🇸 Miami · 🇱🇰 Sri Lanka · 🇹🇭 Thaïlande · 🇲🇾 Malaisie · 🇦🇺 Australie
 
-Pas du tourisme — des chapitres. Chaque déplacement a changé quelque chose dans la manière de regarder.`,
++ à venir ✈️ — Pas du tourisme. Des chapitres.`,
     },
     archetype: {
       emoji: '🎬',
@@ -426,20 +426,22 @@ Ce qui ne change pas : rigueur typographique, cohérence système, et l'intuitio
     confidential: {
       emoji: '🔓',
       title: 'PROJET SIS\'',
-      body: `Construire une plateforme communautaire intelligente et profondément humaine. <strong>Pas un produit optimisé pour l'addiction algorithmique.</strong>
+      body: `Une super-application <strong>à impact social réel</strong>, construite de A à Z — solo, budget < 5 000€, marché de 36M de femmes francophones.
 
-Le projet SIS' : IA conversationnelle · accompagnement · communauté · gamification · design avancé · logique d'entraide. Une plateforme qui ait une âme. Le projet est en cours.`,
+SIS' répond à un problème structurel identifié sur le terrain : des ressources qui existent, mais éparpillées, inaccessibles, non centralisées. <strong>L'app qui manquait.</strong>
+
+FemTech · UX inclusif · WCAG AAA · IA conversationnelle · 6 modules · France · Belgique · Suisse · DOM-TOM. Lancement en cours.`,
     },
   },
 
   // ============== FUN FACTS (débloqués via easter eggs) ==============
   funFacts: [
-    { id: 'paw',        emoji: '🐾', title: 'ADRÉNALINE', text: `Saut à l'élastique, parachute, canyoning, parapente. Elle dit oui avant que tu aies fini ta phrase.` },
-    { id: 'konami',     emoji: '🐺', title: 'GARY',       text: `Gary est un Samoyède. Pas un loup. Il observe en silence et approuve rarement.` },
-    { id: 'logo',       emoji: '🇬🇧', title: 'BILINGUE',  text: `Franco-britannique de naissance. L'anglais C2 n'est pas venu d'un séjour linguistique.` },
-    { id: 'curious',    emoji: '✈️', title: 'BONDI',      text: `21 ans, partie seule ouvrir un magasin à Bondi Beach, Sydney. Sans réseau. Just did it.` },
-    { id: 'interested', emoji: '🤖', title: 'AVANT LE HYPE', text: `Agent IA conversationnel en prod en 2021. Avant le hype. Avant les job titles.` },
-    { id: 'hireme',     emoji: '🎬', title: 'CINÉMA',     text: `Film préféré : Écrire pour exister. Elle croit que les mots et le design ont le même pouvoir de transformation.` },
+    { id: 'paw',        emoji: '🚲', title: 'GARY EN CHARRETTE',      text: `Se déplace en vélo électrique avec une charrette pour Gary. L'éthique appliquée au quotidien.` },
+    { id: 'konami',     emoji: '🐺', title: 'GARY',                   text: `Gary est un Samoyède. Il a sa propre charrette-vélo. Il approuve rarement. Il juge en permanence.` },
+    { id: 'logo',       emoji: '🏠', title: 'ARCHITECTE D\'INTÉRIEUR', text: `A conçu seule les plans 2D & 3D de sa rénovation maison. Apprendre vite, c'est sa méthode.` },
+    { id: 'curious',    emoji: '🤖', title: 'AGENT BUILDER',           text: `Participe à des concours IA et construit des agents chez Cantina — au-delà de son activité principale.` },
+    { id: 'interested', emoji: '🌀', title: 'GRANDE AVENTURIÈRE',      text: `Dit oui à tout — sport, voyage, défi technique, nouveau langage. Si c'est nouveau, ça l'intéresse.` },
+    { id: 'hireme',     emoji: '📖', title: 'AUTODIDACTE',             text: `Curieuse de nature. Apprend, se cultive, comprend. Les idées qui élargissent le champ l'attirent autant que les bons designs.` },
   ],
 
   // ============== FUN ==============
