@@ -3,7 +3,7 @@
 // ============================================================
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
-   GaryModal, useKonami, HomeScreen, ProjetsScreen, ProjetDetail,
+   GaryModal, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
    SkillsScreen, MoiScreen, ContactScreen, tierFromXP */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
@@ -22,6 +22,8 @@ function App() {
   const [pawClicked, setPawClicked] = $useState(false);
   const logoTapsRef = $useRef({ count: 0, last: 0 });
   const [logoGlitch, setLogoGlitch] = $useState(false);
+  // ---- KONAMI PROGRESS ----
+  const [konamiProgress, setKonamiProgress] = $useState(0);
   // ---- VISITED SCREENS (to grant XP once per visit) ----
   const visitedRef = $useRef(new Set());
   // ---- SKILL TAP STATES ----
@@ -135,8 +137,12 @@ function App() {
     }
   };
 
+  // ---- Konami progress callback (stable ref) ----
+  const onKonamiProgress = $useCallback((p) => setKonamiProgress(p), []);
+
   // ---- Konami ----
-  useKonami(() => {
+  useKonami($useCallback(() => {
+    setKonamiProgress(0);
     if (!garyOpen) {
       const line = window.LUCY.garyLines[Math.floor(Math.random() * window.LUCY.garyLines.length)];
       setGaryLine(line);
@@ -149,7 +155,7 @@ function App() {
         pushToast({ tier: true, label: `Gary est déjà passé. Il s'en fout.` });
       }
     }
-  });
+  }, [garyOpen, gainXP, pushToast]), onKonamiProgress);
 
   // ---- Contact tap ----
   const onContactTap = (kind) => {
@@ -218,6 +224,8 @@ function App() {
       <BottomNav active={tab} onNav={onNav} newBadge={newBadge} />
 
       <ToastStack toasts={toasts} />
+
+      <KonamiProgress progress={konamiProgress} />
 
       {garyOpen && <GaryModal onClose={() => setGaryOpen(false)} line={garyLine} />}
     </>

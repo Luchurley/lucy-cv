@@ -67,7 +67,7 @@ ul { list-style: none; }
 img { display: block; max-width: 100%; }
 
 /* ============================================================
-   STAGE BACKGROUND — noise lives here, BEHIND the phone
+   STAGE BACKGROUND — plain cream behind the phone on desktop
 ============================================================ */
 .stage {
   min-height: 100vh;
@@ -75,30 +75,27 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: stretch;
   justify-content: center;
-  background: var(--color-bg);
+  background: #ede7de; /* warm neutral — contrasts with cream phone */
 }
 @media (min-width: 760px) {
   .stage {
     padding: 28px 0;
-    background-color: var(--color-bg);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-      url("assets/bg-noise.png"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 240px 240px, 520px auto, 400px 400px;
-    background-repeat: repeat, repeat, repeat;
-    background-blend-mode: multiply, multiply, multiply;
   }
 }
 
 /* ============================================================
    APP CONTAINER — phone-on-desktop framing
+   Noise lives here, on the #FFF8F0 Crépi Vénitien background
 ============================================================ */
 .phone {
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image: url("assets/bg-noise.png");
+  background-size: 520px auto;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1381,6 +1378,50 @@ img { display: block; max-width: 100%; }
 }
 .btn-empty:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-md); }
 .btn-empty.is-primary { background: var(--color-primary); }
+
+/* ============================================================
+   KONAMI PROGRESS INDICATOR
+============================================================ */
+.konami-progress {
+  position: absolute;
+  bottom: 72px;
+  left: 12px;
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-ink);
+  color: var(--color-bg);
+  border: var(--border-base);
+  box-shadow: var(--shadow-md);
+  padding: 7px 12px 7px 10px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: slideRight 0.25s ease both;
+  pointer-events: none;
+}
+.konami-seq {
+  color: var(--color-primary);
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+.konami-count {
+  color: var(--color-tertiary);
+  letter-spacing: 0.5px;
+}
+.konami-bar {
+  width: 48px;
+  height: 6px;
+  background: rgba(255,248,240,0.2);
+  border: 1px solid rgba(255,248,240,0.3);
+}
+.konami-bar > div {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.15s ease;
+}
 
 /* ============================================================
    UTILS

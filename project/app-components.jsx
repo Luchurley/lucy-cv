@@ -141,7 +141,7 @@ function GaryModal({ onClose, line }) {
 }
 
 // ---------- KONAMI ----------
-function useKonami(onSuccess) {
+function useKonami(onSuccess, onProgress) {
   const buf = useRef([]);
   const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
   useEffect(() => {
@@ -150,12 +150,37 @@ function useKonami(onSuccess) {
       if (buf.current.length > SEQ.length) buf.current.shift();
       if (buf.current.join(',') === SEQ.join(',')) {
         buf.current = [];
+        if (onProgress) onProgress(0);
         onSuccess();
+      } else if (onProgress) {
+        // Find longest suffix of buffer that is a prefix of SEQ
+        let maxPrefix = 0;
+        const b = buf.current;
+        for (let i = Math.max(0, b.length - SEQ.length); i < b.length; i++) {
+          const sub = b.slice(i);
+          let count = 0;
+          while (count < sub.length && sub[count] === SEQ[count]) count++;
+          if (count === sub.length && count > maxPrefix) maxPrefix = count;
+        }
+        onProgress(maxPrefix);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onSuccess]);
+  }, [onSuccess, onProgress]);
+}
+
+// ---------- KONAMI PROGRESS OVERLAY ----------
+function KonamiProgress({ progress }) {
+  if (progress < 3) return null;
+  const pct = Math.round((progress / 10) * 100);
+  return (
+    <div className="konami-progress" aria-live="polite" aria-label={`Code Konami : ${progress} sur 10`}>
+      <span className="konami-seq">↑↑↓↓←→←→</span>
+      <span className="konami-count">{progress}/10</span>
+      <div className="konami-bar"><div style={{ width: pct + '%' }} /></div>
+    </div>
+  );
 }
 
 // ---------- SECTION DIVIDER ----------
@@ -185,5 +210,5 @@ function EmptyState({ emoji = '🐺', title, sub, actions = [] }) {
 
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, useKonami,
-  SectionDivider, EmptyState, tierFromXP, xpProgress,
+  SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
 });
