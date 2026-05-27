@@ -420,11 +420,15 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
     archetype: {
       emoji: '🎬',
       title: 'INSPIRATIONS · NORD',
-      body: `Cinéma : <em>Écrire pour exister</em> — une enseignante, une classe, des destins transformés par les mots. Le pouvoir de la narration au concret.
-Musique : <em>Orelsan</em> — honnêteté brute, genre-blending, France sans complexe.
-Littérature : <em>Man's Search for Meaning</em> (Frankl), <em>L'Étranger</em> (Camus).
+      body: `<strong>Studio Ghibli</strong> comme référence centrale — des univers où le vivant, la complexité humaine et la poésie du réel coexistent sans simplification. Une attention particulière aux récits sensibles, aux mondes en tension et aux personnages profondément incarnés.
 
-Curieuse de tout, j'apprends constamment — nouvelles techno, nouvelles disciplines, nouvelles cultures. Grande aventurière : saut à l'élastique, parachute, canyoning. Je dis oui avant que tu aies fini ta phrase.`,
+<strong>Culture du réel et du documentaire</strong> (ARTE, enquêtes, Hugo Clément) — intérêt fort pour les systèmes sociaux, les dynamiques humaines et ce qui se joue derrière les apparences.
+
+<strong>Pensée et littérature</strong> (Zola, Camus, Frankl) — attrait pour des récits lucides, structurés, qui interrogent le sens, les déterminismes et la condition humaine.
+
+<strong>Univers artistiques à forte intensité émotionnelle</strong> (Orelsan, Delilah Bon, Die Antwoord) — entre narration sociale, introspection et expression brute.
+
+Lecture du monde à la fois sensible et analytique, guidée par le vivant, la vérité et une direction artistique adaptative centrée sur le sens.`,
     },
     aesthetic: {
       emoji: '🎨',
