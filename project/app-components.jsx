@@ -133,7 +133,7 @@ function GaryModal({ onClose, line }) {
   return (
     <div className="overlay" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <img src="assets/gary/gary-run.png" alt="Gary" className="modal-gary-img" />
+        <img src="assets/gary/gary-lucy.png" alt="Lucy & Gary" className="modal-gary-img" />
         <div className="modal-title">GARY MODE</div>
         <div className="modal-quote">« {line} »</div>
         <div className="modal-badge">+100 XP EARNED 🎮</div>
