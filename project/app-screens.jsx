@@ -33,6 +33,12 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
         >🐾</button>
       </div>
 
+      <div className="xp-hint-bar">
+        <span className="xp-hint-dot">●</span>
+        explore · clique · découvre · <strong>+XP à chaque action</strong>
+        <span className="xp-hint-dot">●</span>
+      </div>
+
       <div className="spacer-md" />
 
       <div className="stat cream" style={{ marginBottom: 10 }}>
@@ -62,7 +68,9 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
           <div className="secret">
             <div className="secret-label">🔓 NIVEAU CONFIDENTIEL</div>
             <div className="secret-quote">
-              « Écrire pour exister · Orelsan · Frankl · le projet SIS' — une plateforme qui aurait une âme. »
+              Un espace où se croisent culture, introspection et design narratif.
+              Inspirations : écrire pour exister, la psychologie des trajectoires humaines,
+              et des projets digitaux pensés comme des organismes vivants.
             </div>
             <div className="secret-hint">↑↑↓↓←→←→BA · GARY ATTEND</div>
           </div>
@@ -392,11 +400,26 @@ function MoiScreen({ xp, openAcc, onToggleAcc, gainXP }) {
 }
 
 // ---------- CONTACT ----------
-function ContactScreen({ xp, onContactTap, unlockedFacts }) {
+const CONTACT_PAW_POS = [
+  { top: '12px', right: '18px' },
+  { bottom: '14px', right: '28px' },
+  { top: '55%', right: '8px' },
+  { bottom: '8px', left: '20px' },
+  { top: '30%', right: '52px' },
+];
+
+function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
   const L = window.LUCY;
   const tier = tierFromXP(xp);
   const isHireme = tier.key === 'hireme';
   const toGo = isHireme ? 0 : (190 - xp);
+  const [foundPaws, setFoundPaws] = React.useState(new Set());
+
+  const tapContactPaw = (i) => {
+    if (foundPaws.has(i)) return;
+    setFoundPaws(prev => new Set([...prev, i]));
+    if (onPawTap) onPawTap();
+  };
 
   return (
     <div className="page" data-screen-label="Contact">
@@ -404,6 +427,17 @@ function ContactScreen({ xp, onContactTap, unlockedFacts }) {
       <div className="page-subline">tap = action native · email · tel · LinkedIn</div>
 
       <div className="contact-hero">
+        <div className="contact-paws">
+          {CONTACT_PAW_POS.map((pos, i) => (
+            <button
+              key={i}
+              className={'contact-paw-btn' + (foundPaws.has(i) ? ' is-found' : '')}
+              style={pos}
+              onClick={() => tapContactPaw(i)}
+              aria-label="Patte cachée"
+            >🐾</button>
+          ))}
+        </div>
         <div className="display-md" style={{ position: 'relative' }}>TRAVAILLONS<br/>ENSEMBLE</div>
         <div className="contact-links">
           <a href={'mailto:' + L.contact.email} className="contact-link" onClick={() => onContactTap('email')}>

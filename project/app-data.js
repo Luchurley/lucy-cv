@@ -9,7 +9,7 @@ window.LUCY = {
     tagline: 'UX · UI · DA · IA',
     role1: 'CREATIVE',
     role2: 'DIGITAL',
-    role3: 'DIRECTOR',
+    role3: 'ARCHITECT',
     location: 'Wavrin (59) · Permis B',
     nationality: '🇫🇷🇬🇧 Franco-britannique · native',
     availability: '🟢 Open to work',
@@ -50,15 +50,15 @@ window.LUCY = {
       contract: ['cdi'],
       cover: 'tec',
       url: 'https://the-english-coach.webflow.io',
-      challenge: `Construire un organisme de formation crédible et conforme Qualiopi, et y intégrer un agent IA conversationnel pour la pratique orale autonome — en 2021, avant que "AI assistant" ne soit un job title.`,
+      challenge: `Construire un organisme de formation crédible et conforme Qualiopi, y intégrer un agent IA conversationnel — en 2021 — et concevoir l'ensemble des systèmes digitaux qui font tourner l'organisation.`,
       process: [
         { title: 'AUDIT & STRATÉGIE', text: `Cartographie des besoins apprenants, benchmark concurrentiel, identification des points de friction dans l'apprentissage de l'oral. Plan stratégique 360°.` },
         { title: 'BRANDING & SITE', text: `Identité complète, design system, supports de communication. Site Webflow construit de A à Z (the-english-coach.webflow.io).` },
         { title: 'IA CONVERSATIONNELLE', text: `Conception et déploiement d'un compagnon IA pour la pratique orale 24h/24. Prompt design, conversation UX, fallbacks pédagogiques. En production en 2021.` },
-        { title: 'CRM & QUALIOPI', text: `Architecture CRM apprenants, dashboards KPIs, conformité Qualiopi (audits passés), montage CPF / OPCO / Datadock.` },
+        { title: 'SYSTÈMES & AUTOMATISATION', text: `Configuration et optimisation du LMS, ERP et APIs diverses. Objectif : automatisation des flux, optimisation des fonctionnalités globales, amélioration des parcours produits et utilisateurs. Architecture CRM apprenants, dashboards KPIs, conformité Qualiopi, montage CPF / OPCO.` },
       ],
-      result: `Plateforme en production. Audits Qualiopi passés. CRM fonctionnel. Agent IA déployé. Du brief direction au reporting performance — pilotage 360° en autonomie.`,
-      skills: ['Direction Artistique', 'AI Product Design', 'Prompt Engineering', 'Webflow', 'CRM Architecture', 'Qualiopi'],
+      result: `Plateforme en production. Audits Qualiopi passés. LMS, ERP et IA déployés. Design de systèmes digitaux complexes, de A à Z, en autonomie totale.`,
+      skills: ['Direction Artistique', 'AI Product Design', 'Prompt Engineering', 'LMS · ERP · APIs', 'CRM Architecture', 'Qualiopi'],
       screenshots: ['assets/projects/tec-site-1.png', 'assets/projects/tec-site-2.png'],
     },
     {
@@ -98,15 +98,15 @@ window.LUCY = {
       contract: ['freelance'],
       cover: 'adhoc',
       url: 'https://www.adhocmedia.fr/',
-      challenge: `Orchestrer la mise en ligne du site institutionnel adhocmedia.fr : coordination des intervenants (dev, design, contenu, direction), respect des deadlines, cohérence éditoriale et qualité de la livraison.`,
+      challenge: `Suite à une sollicitation directe, contribution à la mise en place d'un site vitrine et d'un écosystème multisite privé/public — avec intégration d'une solution web-to-print développée avec Doowup et Darius.`,
       process: [
-        { title: 'KICKOFF', text: `Cadrage du périmètre avec la direction. Audit de l'existant. Identification des dépendances et risques projet.` },
-        { title: 'COORDINATION', text: `Pilotage des prestataires (dev, contenus, illustrations), suivi quotidien des livrables, déblocages des points durs en temps réel.` },
-        { title: 'QUALITÉ', text: `Recettes successives, validation UX, vérification responsive et accessibilité, contrôle des contenus avant push.` },
-        { title: 'MISE EN LIGNE', text: `Coordination du déploiement, vérification post-prod, briefing équipe interne sur les workflows de mise à jour.` },
+        { title: 'ÉCOSYSTÈME DIGITAL', text: `Coordination du déploiement des plateformes web, intégration de solutions digitales avec partenaires externes (Doowup, Darius), amélioration de la visibilité en ligne.` },
+        { title: 'WEB-TO-PRINT', text: `Intégration d'une solution web-to-print sur mesure. Pont entre les outils de production print et les interfaces web — pour des capacités de services personnalisés.` },
+        { title: 'QUALITÉ & LIVRAISON', text: `Recettes successives, validation UX, coordination des intervenants, vérification post-prod, amélioration de l'expérience client en ligne.` },
+        { title: 'PRÉSENCE DIGITALE', text: `Optimisation des capacités de services personnalisés, amélioration de la présence digitale globale, cohérence éditoriale sur l'ensemble des supports.` },
       ],
-      result: `Site institutionnel livré dans les temps, équipe formée à la maintenance. Coordination 360° qui m'a appris à orchestrer des stakeholders aux objectifs très différents — créatifs, techniques, business.`,
-      skills: ['Coordination Projet', 'Pilotage Multi-Acteurs', 'Recette UX', 'Mise en Production'],
+      result: `Écosystème multisite livré, solution web-to-print intégrée. Coordination 360° entre partenaires techniques, direction et équipes internes.`,
+      skills: ['Gestion de projet', 'Web-to-print', 'Pilotage Multi-Acteurs', 'Intégration digitale', 'Mise en Production'],
       screenshots: [],
     },
     {
@@ -224,6 +224,12 @@ window.LUCY = {
       result: `Projet entièrement déployé, collection sold-out. Laboratoire créatif fondateur dans mon parcours : m'a appris à porter une vision entière, sans filet, sans intermédiaire.`,
       skills: ['Branding', 'Direction Artistique', 'Sourcing éthique', 'E-commerce', 'Production'],
       screenshots: [],
+      videos: [
+        'assets/disrupted/disrupted-1.mp4',
+        'assets/disrupted/disrupted-2.mp4',
+        'assets/disrupted/disrupted-3.mp4',
+        'assets/disrupted/disrupted-4.mp4',
+      ],
     },
   ],
 
@@ -248,10 +254,10 @@ window.LUCY = {
       type: 'Freelance',
       color: 'tertiary',
       summary: `Coordination de la mise en ligne du site institutionnel adhocmedia.fr + refonte e-commerce Wegoboard.`,
-      body: `Orchestration de la mise en ligne de <strong>adhocmedia.fr</strong> : pilotage des prestataires (dev, design, contenu), recettes successives, mise en production. Coordination 360° dans un milieu événementiel et musical exigeant en réactivité.
+      body: `Suite à une sollicitation directe, contribution à la mise en place du site vitrine <strong>adhocmedia.fr</strong> et d'un écosystème multisite privé/public. Intégration d'une solution web-to-print avec partenaires externes (Doowup, Darius).
 
-En parallèle : pilotage de la refonte e-commerce <strong>Wegoboard</strong> (mobilité électrique) — UX/UI, DA, tunnel d'achat, fiches produits techniques.`,
-      chips: ['Gestion de projet', 'UX/UI', 'E-commerce', 'Coordination', 'Mise en production'],
+Coordination du déploiement des plateformes, intégration de solutions digitales, amélioration de la visibilité en ligne et de l'expérience client.`,
+      chips: ['Gestion de projet', 'Web-to-print', 'Coordination', 'Intégration digitale', 'Mise en production'],
     },
     {
       role: 'Head of Digital · Coordinatrice Pédagogique',
@@ -276,7 +282,9 @@ Site Webflow construit de A à Z (the-english-coach.webflow.io), design system, 
       summary: `Produits digitaux end-to-end pour startups et secteur éducatif.`,
       body: `Benchmarking et analyse concurrentielle, wireframing lo-fi → hi-fi, design thinking, usability testing, product design, motion design, création de contenus éducatifs, UX research.
 
-Clients principaux : secteur éducatif, fintech, expérience immersive, communautés e-sport. Projets variés qui ont musclé l'agilité créative et la capacité à entrer vite dans un sujet.`,
+Clients principaux : secteur éducatif, fintech, expérience immersive, communautés e-sport. Projets variés qui ont musclé l'agilité créative et la capacité à entrer vite dans un sujet.
+
+Parmi les projets marquants : <strong>conception et structuration d'un jeu grandeur nature</strong> type murder mystery / escape game — idéation, gameplay, narration et architecture des règles.`,
       chips: ['Wireframing', 'Design Thinking', 'Usability Testing', 'Product Design', 'Motion Design', 'UX Research'],
     },
     {
@@ -297,11 +305,11 @@ Collection sold-out en intégralité. Le projet m'a appris à porter un univers 
       period: '2020',
       type: 'CDD · Crise',
       color: 'secondary',
-      summary: `Gestion d'appels sanitaires en première ligne pendant la pandémie.`,
-      body: `Gestion des appels COVID (information, prise de rendez-vous), accompagnement de personnes en détresse, dans un contexte de crise nationale.
+      summary: `Confrontation aux réalités concrètes et aux problématiques complexes. Pragmatisme face à la crise.`,
+      body: `Capacité à se confronter aux réalités concrètes et aux problématiques complexes, avec une orientation forte vers la recherche de solutions pragmatiques.
 
-Engagement de première ligne. Un moment qui n'a rien à voir avec le digital, mais qui dit quelque chose du caractère.`,
-      chips: ['Service public', 'Gestion de crise', 'Empathie active'],
+Ce passage illustre une motivation profonde : l'UX et le design comme outils de résolution de problèmes réels — pas seulement esthétiques. Ce qui m'a amenée au digital, c'est l'envie de concevoir des interfaces qui répondent à de vrais besoins humains.`,
+      chips: ['Pragmatisme', 'Résolution de problèmes', 'Empathie appliquée'],
     },
     {
       role: 'Responsable de Stand · Premium',
@@ -317,15 +325,17 @@ Engagement de première ligne. Un moment qui n'a rien à voir avec le digital, m
     },
     {
       role: 'Responsable Merchandising · Tommy Bahama',
-      company: 'Tommy Bahama · Bondi Beach 🌊 Sydney',
+      company: 'Tommy Bahama · Sydney 🌊 Australie',
       period: 'Juin 2018 — Mai 2019',
-      type: 'CDI · International',
+      type: 'CDI',
       color: 'tertiary',
-      summary: `Intégration de l'équipe d'ouverture du store Bondi Beach. 21 ans, partie seule à l'autre bout du monde.`,
-      body: `Membre de l'équipe d'ouverture du store Tommy Bahama à Bondi Beach, Sydney — marque premium américaine, environnement 100% anglophone, clientèle internationale. Merchandising, formation d'équipe, KPIs, reporting, fidélisation client.
+      summary: `Thaïlande puis Australie — deux étapes décisives. Merchandising sur plusieurs stores Sydney, responsabilité du store de Bondi.`,
+      body: `Après un passage marquant en Thaïlande — pays auquel je me suis fortement attachée et où j'avais envisagé de rester — je pars en Australie à 21 ans.
 
-21 ans, partie seule à l'autre bout du monde rejoindre une aventure collective. L'adaptation totale à un nouvel environnement, une nouvelle culture, une nouvelle équipe — c'est cette expérience qui a tout changé dans ma manière d'aborder l'inconnu.`,
-      chips: ['Merchandising', 'Management d\'équipe', 'Retail premium', 'International', 'Sydney · Bondi Beach'],
+Intégration dans les équipes Tommy Bahama (marque premium américaine établie) : merchandising sur plusieurs stores à Manly Beach et Sydney, déplacements ponctuels pour recommandations merchandising, responsabilité progressive du store de Bondi Beach. Environnement 100% anglophone, clientèle internationale, maintien de l'image premium de la marque.
+
+Une aventure collective dans un cadre exigeant — KPIs, reporting, formation équipe, fidélisation client.`,
+      chips: ['Merchandising', 'Management d\'équipe', 'Retail premium', 'Manly · Bondi · Sydney'],
     },
     {
       role: 'Designer Freelance',
@@ -375,7 +385,7 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
     { period: '2021–2022', title: 'Certificat UX/UI Design', school: 'Webstart · Lille', mention: 'Mention', color: 'primary' },
     { period: '2015–2018', title: 'Licence Marketing & Communication Stratégique', school: 'ESMOD International · Roubaix', mention: 'Mode + Business', color: 'tertiary' },
     { period: '2013–2015', title: 'Bac Prospection, Négociation & Suivi Clientèle', school: 'Écoles Nantaises de Commerce', mention: '', color: 'secondary' },
-    { period: '—', title: 'BEP Production Graphique & Imprimée', school: 'La Joliverie · Nantes', mention: 'Origines art graphique', color: 'ink' },
+    { period: '2011–2013', title: 'BEP Production Graphique & Imprimée', school: 'La Joliverie · Nantes', mention: 'Origines art graphique', color: 'ink' },
   ],
 
   // ============== SKILLS ==============
@@ -418,19 +428,17 @@ Curieuse de tout, j'apprends constamment — nouvelles techno, nouvelles discipl
     },
     aesthetic: {
       emoji: '🎨',
-      title: 'DA · ADAPTABILITÉ',
-      body: `Chaque projet a son univers. En DA, je m'adapte — dark UI pour l'e-sport, premium & épuré pour le SaaS, bold & éditorial pour la mode. Pas un style unique imposé : une capacité à lire un brief, comprendre une audience, et construire l'esthétique juste.
+      title: 'DIRECTION ARTISTIQUE',
+      body: `Direction artistique adaptative et contextuelle — entre réalisme brut, poésie visuelle et narration émotionnelle. Un langage visuel qui évolue avec le projet sans perdre son identité propre.
 
-Ce qui ne change pas : rigueur typographique, cohérence système, et l'intuition qu'un bon design se sent avant d'être lu.`,
+<strong>DA adaptative · narrative · émotionnelle.</strong> Chaque projet a son univers, chaque univers a sa logique. Ce qui reste constant : rigueur typographique, cohérence système, et l'intuition qu'un bon design se sent avant d'être lu.`,
     },
     confidential: {
       emoji: '🔓',
-      title: 'PROJET SIS\'',
-      body: `Une super-application <strong>à impact social réel</strong>, construite de A à Z — solo, budget < 5 000€, marché de 36M de femmes francophones.
+      title: 'PROJET PERSONNEL',
+      body: `Un projet en cours, au croisement du <strong>design d'impact</strong>, de l'accessibilité et de l'engagement pour les femmes. FemTech · UX inclusif · IA.
 
-SIS' répond à un problème structurel identifié sur le terrain : des ressources qui existent, mais éparpillées, inaccessibles, non centralisées. <strong>L'app qui manquait.</strong>
-
-FemTech · UX inclusif · WCAG AAA · IA conversationnelle · 6 modules · France · Belgique · Suisse · DOM-TOM. Lancement en cours.`,
+Une sensibilité aux problématiques sociales concrètes, et l'envie de concevoir des outils qui répondent à de vrais besoins — associatifs, humains, structurels.`,
     },
   },
 

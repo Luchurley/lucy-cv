@@ -128,6 +128,22 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
         </div>
       </div>
 
+      {project.videos && project.videos.length > 0 && (
+        <>
+          <SectionDivider>VIDÉOS</SectionDivider>
+          <div className="video-grid">
+            {project.videos.map((src, i) => (
+              <div key={i} className="video-item">
+                <video controls preload="metadata" playsInline>
+                  <source src={src} type="video/mp4" />
+                </video>
+                <div className="video-caption">DISRUPTED · FILM {String(i + 1).padStart(2, '0')}/{project.videos.length}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
       <SectionDivider>RÉSULTATS</SectionDivider>
       <div className="card" style={{ background: 'var(--color-card)' }}>
         <p className="body-lg">{project.result}</p>

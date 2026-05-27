@@ -229,7 +229,7 @@ function App() {
           />
         )}
         {tab === 'contact' && (
-          <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} />
+          <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} onPawTap={onPawTap} />
         )}
       </main>
 
