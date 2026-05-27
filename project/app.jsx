@@ -3,7 +3,7 @@
 // ============================================================
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
-   GaryModal, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
+   GaryModal, GarySticker, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
    SkillsScreen, MoiScreen, ContactScreen, tierFromXP */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
@@ -24,6 +24,14 @@ function App() {
   const [logoGlitch, setLogoGlitch] = $useState(false);
   // ---- KONAMI PROGRESS ----
   const [konamiProgress, setKonamiProgress] = $useState(0);
+  // ---- GARY STICKER ----
+  const [garySticker, setGarySticker] = $useState({ tier: null, out: false });
+
+  const showGarySticker = $useCallback((tier) => {
+    setGarySticker({ tier, out: false });
+    setTimeout(() => setGarySticker(prev => ({ ...prev, out: true })), 2500);
+    setTimeout(() => setGarySticker({ tier: null, out: false }), 2800);
+  }, []);
   // ---- VISITED SCREENS (to grant XP once per visit) ----
   const visitedRef = $useRef(new Set());
   // ---- SKILL TAP STATES ----
@@ -54,19 +62,18 @@ function App() {
   const gainXP = $useCallback((amount, label) => {
     setXP(prev => {
       const next = Math.max(0, prev + amount);
-      // Toast with the XP gain
       pushToast({ xp: amount, label });
-      // Level-up detection + fact unlock
       const prevTier = tierFromXP(prev).key;
       const nextTier = tierFromXP(next).key;
       if (prevTier !== nextTier) {
         const t = tierFromXP(next);
         setTimeout(() => pushToast({ tier: true, label: `${t.label} · contenu débloqué` }), 350);
         setTimeout(() => unlockFact(nextTier), 700);
+        setTimeout(() => showGarySticker(nextTier), 600);
       }
       return next;
     });
-  }, [pushToast, unlockFact]);
+  }, [pushToast, unlockFact, showGarySticker]);
 
   // ---- Tab change ----
   const onNav = (id) => {
@@ -246,6 +253,8 @@ function App() {
       <KonamiProgress progress={konamiProgress} />
 
       {garyOpen && <GaryModal onClose={() => setGaryOpen(false)} line={garyLine} />}
+
+      <GarySticker tier={garySticker.tier} out={garySticker.out} />
     </>
   );
 }

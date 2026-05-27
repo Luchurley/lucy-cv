@@ -133,12 +133,34 @@ function GaryModal({ onClose, line }) {
   return (
     <div className="overlay" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-emoji">🐺</div>
+        <img src="assets/gary/gary-run.png" alt="Gary" className="modal-gary-img" />
         <div className="modal-title">GARY MODE</div>
         <div className="modal-quote">« {line} »</div>
         <div className="modal-badge">+100 XP EARNED 🎮</div>
         <span className="modal-hint">↑↑↓↓←→←→BA · click pour fermer</span>
       </div>
+    </div>
+  );
+}
+
+// ---------- GARY STICKER (tier celebration) ----------
+const GARY_STICKER_SRC = {
+  curious:    'assets/gary/gary-pup.png',
+  interested: 'assets/gary/gary-mud.png',
+  hireme:     'assets/gary/gary-run.png',
+};
+const GARY_STICKER_LABEL = {
+  curious:    'CURIOUS !',
+  interested: 'INTERESTED !',
+  hireme:     '★ HIRE ME ★',
+};
+
+function GarySticker({ tier, out }) {
+  if (!tier || !GARY_STICKER_SRC[tier]) return null;
+  return (
+    <div className={'gary-sticker' + (out ? ' is-out' : '') + (tier === 'hireme' ? ' is-hireme' : '')}>
+      <img src={GARY_STICKER_SRC[tier]} alt={'Gary · ' + tier} />
+      <div className="gary-sticker-label">{GARY_STICKER_LABEL[tier]}</div>
     </div>
   );
 }
@@ -212,6 +234,6 @@ function EmptyState({ emoji = '🐺', title, sub, actions = [] }) {
 }
 
 Object.assign(window, {
-  Header, BottomNav, ToastStack, useToasts, GaryModal, useKonami,
+  Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
 });

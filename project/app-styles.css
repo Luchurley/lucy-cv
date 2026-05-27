@@ -712,10 +712,12 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: no-preference) {
   .modal { animation: fadeUp 0.3s ease both; }
 }
-.modal-emoji {
-  font-size: 76px;
-  line-height: 1;
-  filter: drop-shadow(2px 2px 0 rgba(10,8,6,0.2));
+.modal-gary-img {
+  width: 110px;
+  height: auto;
+  filter: drop-shadow(3px 3px 0 rgba(10,8,6,0.25));
+  display: block;
+  margin: 0 auto;
 }
 .modal-title {
   font-family: var(--ff-display);
@@ -1448,6 +1450,57 @@ img { display: block; max-width: 100%; }
 }
 .btn-empty:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-md); }
 .btn-empty.is-primary { background: var(--color-primary); }
+
+/* ============================================================
+   GARY STICKER — tier celebration
+============================================================ */
+.gary-sticker {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 190;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  animation: garyIn 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.gary-sticker.is-out {
+  animation: garyOut 0.3s ease-in forwards;
+}
+.gary-sticker img {
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+}
+.gary-sticker.is-hireme img { width: 120px; }
+.gary-sticker-label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 3px 9px;
+  border: 2px solid var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-ink);
+  white-space: nowrap;
+}
+.gary-sticker.is-hireme .gary-sticker-label {
+  background: var(--color-tertiary);
+}
+@keyframes garyIn {
+  from { transform: translateX(-50%) translateY(140px) scale(0.4); opacity: 0; }
+  65%  { transform: translateX(-50%) translateY(-12px) scale(1.1); opacity: 1; }
+  to   { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+}
+@keyframes garyOut {
+  from { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateX(-50%) translateY(140px) scale(0.4); opacity: 0; }
+}
 
 /* ============================================================
    KONAMI PROGRESS INDICATOR
