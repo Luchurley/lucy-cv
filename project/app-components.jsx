@@ -168,17 +168,18 @@ function GarySticker({ tier, out }) {
 // ---------- KONAMI ----------
 function useKonami(onSuccess, onProgress) {
   const buf = useRef([]);
+  const touchRef = useRef(null);
   const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+
   useEffect(() => {
-    const onKey = (e) => {
-      buf.current.push(e.code);
+    const feed = (code) => {
+      buf.current.push(code);
       if (buf.current.length > SEQ.length) buf.current.shift();
       if (buf.current.join(',') === SEQ.join(',')) {
         buf.current = [];
         if (onProgress) onProgress(0);
         onSuccess();
       } else if (onProgress) {
-        // Find longest suffix of buffer that is a prefix of SEQ
         let maxPrefix = 0;
         const b = buf.current;
         for (let i = Math.max(0, b.length - SEQ.length); i < b.length; i++) {
@@ -190,8 +191,33 @@ function useKonami(onSuccess, onProgress) {
         onProgress(maxPrefix);
       }
     };
+
+    const onKey = (e) => feed(e.code);
+
+    const onTouchStart = (e) => {
+      touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+
+    const onTouchEnd = (e) => {
+      if (!touchRef.current) return;
+      const dx = e.changedTouches[0].clientX - touchRef.current.x;
+      const dy = e.changedTouches[0].clientY - touchRef.current.y;
+      touchRef.current = null;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 35) return;
+      const code = Math.abs(dx) > Math.abs(dy)
+        ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
+        : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
+      feed(code);
+    };
+
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
   }, [onSuccess, onProgress]);
 }
 
