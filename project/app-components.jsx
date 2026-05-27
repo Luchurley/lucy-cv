@@ -137,7 +137,7 @@ function GaryModal({ onClose, line }) {
         <div className="modal-title">GARY MODE</div>
         <div className="modal-quote">« {line} »</div>
         <div className="modal-badge">+100 XP EARNED 🎮</div>
-        <span className="modal-hint">↑↑↓↓←→←→BA · click pour fermer</span>
+        <span className="modal-hint">↑↑↓↓←→←→↑↓ · click pour fermer</span>
       </div>
     </div>
   );
@@ -168,7 +168,7 @@ function GarySticker({ tier, out }) {
 // ---------- KONAMI ----------
 function useKonami(onSuccess, onProgress) {
   const buf = useRef([]);
-  const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+  const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
   useEffect(() => {
     const onKey = (e) => {
       buf.current.push(e.code);
@@ -201,7 +201,7 @@ function KonamiProgress({ progress }) {
   const pct = Math.round((progress / 10) * 100);
   return (
     <div className="konami-progress" aria-live="polite" aria-label={`Code Konami : ${progress} sur 10`}>
-      <span className="konami-seq">↑↑↓↓←→←→</span>
+      <span className="konami-seq">↑↑↓↓←→←→↑↓</span>
       <span className="konami-count">{progress}/10</span>
       <div className="konami-bar"><div style={{ width: pct + '%' }} /></div>
     </div>

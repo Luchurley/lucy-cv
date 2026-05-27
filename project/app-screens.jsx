@@ -72,7 +72,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
               Inspirations : écrire pour exister, la psychologie des trajectoires humaines,
               et des projets digitaux pensés comme des organismes vivants.
             </div>
-            <div className="secret-hint">↑↑↓↓←→←→BA · GARY ATTEND</div>
+            <div className="secret-hint">↑↑↓↓←→←→↑↓ · GARY ATTEND</div>
           </div>
           <div className="spacer-md" />
         </>
