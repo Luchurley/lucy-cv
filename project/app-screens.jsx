@@ -16,7 +16,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
             {L.identity.role2}<br/>{L.identity.role3}
           </div>
           <p className="body-md italic" style={{ marginTop: 14, lineHeight: 1.65 }}>
-            {L.identity.tagline} — design qui ne ment pas, projets qui livrent.
+            {L.identity.tagline} — Du fond, de la forme, et des résultats.
           </p>
         </div>
         <div className="card-hero-photo">
