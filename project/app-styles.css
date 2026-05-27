@@ -93,9 +93,10 @@ img { display: block; max-width: 100%; }
   min-height: 100vh;
   background-color: var(--color-bg);
   background-image: url("assets/bg-noise.png");
-  background-size: 520px auto;
+  background-size: 320px auto;
   background-repeat: repeat;
-  background-blend-mode: multiply;
+  background-blend-mode: overlay;
+  --noise-opacity: 1;
   position: relative;
   overflow: hidden;
   display: flex;
