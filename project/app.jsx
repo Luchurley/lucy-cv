@@ -264,6 +264,26 @@ function App() {
   );
 }
 
+// Error boundary
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { err: null }; }
+  static getDerivedStateFromError(e) { return { err: e }; }
+  render() {
+    if (this.state.err) {
+      return (
+        <div style={{ padding: 24, fontFamily: 'monospace', fontSize: 13, color: '#cc0000' }}>
+          <strong>Erreur de rendu</strong><br />
+          {this.state.err.message}<br />
+          <pre style={{ marginTop: 8, fontSize: 11, whiteSpace: 'pre-wrap' }}>
+            {this.state.err.stack?.split('\n').slice(0,6).join('\n')}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Mount
 const root = ReactDOM.createRoot(document.getElementById('app'));
-root.render(<App />);
+root.render(<ErrorBoundary><App /></ErrorBoundary>);
