@@ -361,8 +361,80 @@ function ProjectDetailTabs({ labels, missionComplete, gainXP }) {
   );
 }
 
+// ---------- AGENT ROW IA (compact, flip → video) ----------
+function AgentRowIA({ agent, idx, gainXP, seenRef }) {
+  const [flipped, setFlipped] = React.useState(false);
+  const vidRef = React.useRef(null);
+
+  const toggle = () => {
+    setFlipped(f => {
+      const next = !f;
+      if (next) {
+        if (gainXP && seenRef && seenRef.current) {
+          const k = 'ia:' + agent.id;
+          if (!seenRef.current.has(k)) {
+            seenRef.current.add(k);
+            gainXP(5, `Agent découvert — ${agent.name}`);
+          }
+        }
+        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
+      } else {
+        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
+      }
+      return next;
+    });
+  };
+
+  return (
+    <div className={'ia-row' + (flipped ? ' is-flipped' : '')} onClick={toggle}>
+      <div className="ia-row-inner">
+        <div className="ia-row-front">
+          <div className="ia-row-photo">
+            {agent.photo
+              ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+              : <div className="ia-row-photo-ph">{agent.name[0]}</div>
+            }
+          </div>
+          <div className="ia-row-body">
+            <div className="ia-row-num">CARTE N°{String(idx).padStart(2,'0')}</div>
+            <div className="ia-row-name">{agent.name}</div>
+            <div className="ia-row-sub">{agent.age} · {agent.domain}</div>
+            <div className="ia-row-role">{agent.role}</div>
+          </div>
+          <div className="ia-row-flip">↻</div>
+        </div>
+        <div className="ia-row-back">
+          {agent.video
+            ? <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
+            : <div className="ia-row-back-ph"><span>▶</span><span>VIDÉO</span></div>
+          }
+          <div className="ia-row-back-label">{agent.name}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------- FLOATING IA BUTTON ----------
+function FloatingIABtn({ locked, onClick }) {
+  if (locked) {
+    return (
+      <div className="ia-fab ia-fab-locked" onClick={onClick} role="button" tabIndex={0}>
+        <span className="ia-fab-icon">🔒</span>
+        <span className="ia-fab-label">IA</span>
+      </div>
+    );
+  }
+  return (
+    <div className="ia-fab ia-fab-unlocked" onClick={onClick} role="button" tabIndex={0} aria-label="Univers IA">
+      <span className="ia-fab-icon">✦</span>
+      <span className="ia-fab-label">IA</span>
+    </div>
+  );
+}
+
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
-  AgentCard, ProjectDetailTabs,
+  AgentCard, ProjectDetailTabs, AgentRowIA, FloatingIABtn,
 });
