@@ -306,7 +306,7 @@ img { display: block; max-width: 100%; }
   position: absolute;
   bottom: 0; left: 0; right: 0;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   background: var(--color-card);
   border-top: var(--border-thick);
   z-index: 400;
@@ -347,12 +347,11 @@ img { display: block; max-width: 100%; }
 .bnav-tab.is-active svg { stroke: var(--color-primary); }
 .bnav-tab .lbl {
   font-family: var(--ff-mono);
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
-@media (max-width: 360px) { .bnav-tab .lbl { display: none; } }
 .bnav-tab .dot {
   position: absolute;
   top: 8px;

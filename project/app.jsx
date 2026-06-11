@@ -75,13 +75,8 @@ function App() {
     });
   }, [pushToast, unlockFact, showGarySticker]);
 
-  // ---- Unlock IA badge when curious fact fires ----
+  // ---- IA page unlocked when curious fun fact fires ----
   const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
-  $useEffect(() => {
-    if (iaUnlocked && !visitedRef.current.has('ia')) {
-      setNewBadge(prev => ({ ...prev, ia: true }));
-    }
-  }, [iaUnlocked]);
 
   // ---- Tab change ----
   const onNav = (id) => {

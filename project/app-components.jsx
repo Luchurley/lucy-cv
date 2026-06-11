@@ -64,7 +64,6 @@ function Header({ xp, onLogoTap, isSub, subTitle, onBack, logoGlitch }) {
 const NAV_ITEMS = [
   { id: 'home',    label: 'HOME',     icon: <><path d="M3 11l9-8 9 8"/><path d="M5 9v11h14V9"/></> },
   { id: 'projets', label: 'PROJETS',  icon: <><rect x="3" y="4" width="18" height="16"/><line x1="3" y1="9" x2="21" y2="9"/></> },
-  { id: 'ia',      label: 'IA',       icon: <><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="6" y2="17"/><line x1="12" y1="7" x2="18" y2="17"/><line x1="7" y1="18" x2="17" y2="18"/></> },
   { id: 'skills',  label: 'SKILLS',   icon: <><polygon points="12,3 14,9 21,9 15.5,13 17,20 12,16 7,20 8.5,13 3,9 10,9"/></> },
   { id: 'moi',     label: 'MOI',      icon: <><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-8 8-8s8 3 8 8"/></> },
   { id: 'contact', label: 'CONTACT',  icon: <><rect x="3" y="5" width="18" height="14"/><polyline points="3,7 12,13 21,7"/></> },
