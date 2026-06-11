@@ -39,6 +39,7 @@ window.LUCY = {
   projects: [
     {
       id: 'tec',
+      featured: true,
       name: 'The English Coach',
       shortName: 'TEC',
       year: '2021–2023',
@@ -106,6 +107,7 @@ window.LUCY = {
     },
     {
       id: 'jaccede',
+      featured: true,
       name: 'Jaccede.com',
       shortName: 'Jaccede',
       year: '2021–2022',
@@ -170,6 +172,7 @@ window.LUCY = {
     },
     {
       id: 'wegoboard',
+      featured: true,
       name: 'Wegoboard',
       shortName: 'Wegoboard',
       year: '2023–2024',
@@ -237,6 +240,7 @@ window.LUCY = {
     },
     {
       id: 'equality',
+      featured: true,
       name: 'Equality',
       shortName: 'Equality',
       year: '2021–2022',
@@ -324,6 +328,31 @@ window.LUCY = {
         'assets/disrupted/disrupted-3.mp4',
         'assets/disrupted/disrupted-4.mp4',
       ],
+    },
+    {
+      id: 'lacopain',
+      name: 'La Copain',
+      shortName: 'La Copain',
+      year: '2024',
+      type: 'Freelance · DA · Web',
+      role: 'Direction artistique · Développement Webflow',
+      context: 'Site one-page pour une marque de bière artisanale · Design immersif et identité de marque forte',
+      tags: ['DA', 'WEBFLOW', 'BRANDING'],
+      categories: ['da'],
+      contract: ['freelance'],
+      cover: null,
+      url: 'https://lacopain.fr',
+      tagline: 'One-page site bière artisanale — identité visuelle complète.',
+      brief: `La Copain est une bière artisanale avec une identité forte. Mission : one-page site Webflow qui incarne cette identité — immersif, authentique, mémorable.`,
+      challenge: `Traduire une identité de marque chaleureuse et artisanale en expérience digitale sans tomber dans les clichés du secteur brassicole.`,
+      process: [
+        { title: 'DIRECTION ARTISTIQUE', text: `Identité visuelle complète : palette, typographie, ton. Univers graphique cohérent de la marque à l'écran.` },
+        { title: 'WEBFLOW', text: `Développement one-page avec animations de scroll, interactions fluides, optimisation mobile.` },
+      ],
+      result: `Site one-page livré en production. Identité visuelle complète. Animations Webflow sur mesure.`,
+      skills: ['Direction Artistique', 'Webflow', 'Branding', 'One-page'],
+      screenshots: [],
+      isNew: true,
     },
   ],
 
