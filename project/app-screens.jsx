@@ -120,7 +120,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
 }
 
 // ---------- PROJETS LIST ----------
-function ProjetsScreen({ onOpen, gainXP }) {
+function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
   const L = window.LUCY;
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
@@ -164,6 +164,18 @@ function ProjetsScreen({ onOpen, gainXP }) {
         {(filters.length > 0 || search) && <span style={{ color: 'var(--color-primary)' }}> · filtres actifs</span>}
       </div>
 
+      <button
+        className={'ia-entry-btn' + (iaUnlocked ? ' is-unlocked' : '')}
+        onClick={onTapIA}
+        aria-label="Voir la page IA"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+          <line x1="12" y1="7" x2="6" y2="17"/><line x1="12" y1="7" x2="18" y2="17"/><line x1="7" y1="18" x2="17" y2="18"/>
+        </svg>
+        {iaUnlocked ? '✦ UNIVERS IA DÉBLOQUÉ →' : 'UNIVERS IA →'}
+      </button>
+
       <div className="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="7"/>
@@ -198,6 +210,13 @@ function ProjetsScreen({ onOpen, gainXP }) {
           </button>
         ))}
       </div>
+
+      {filters.includes('ia') && (
+        <div className="ia-filter-cta" onClick={onTapIA} role="button" tabIndex={0}>
+          <span>Explorer les 10 agents IA →</span>
+          <span className="ia-filter-cta-sub">Page dédiée · vidéos · identités</span>
+        </div>
+      )}
 
       <div className="spacer-md" />
 
@@ -573,4 +592,56 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
   );
 }
 
-Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen });
+// ---------- IA PAGE ----------
+function IAScreen({ gainXP, onTapProjets }) {
+  const L = window.LUCY;
+  const seenRef = React.useRef(new Set());
+
+  return (
+    <div className="page" data-screen-label="IA">
+      <div className="page-title-row">
+        <div className="display-lg">UNIVERS IA</div>
+      </div>
+      <div className="page-subline" style={{ marginBottom: 20 }}>
+        Créer une IA, c'est créer un personnage — chaque agent est une décision de design.
+      </div>
+
+      <div className="section-divider"><span>MES AGENTS · {L.iaAgents.length} ENTITÉS</span></div>
+      <p className="page-subline" style={{ marginBottom: 16 }}>Tap pour retourner · vidéo au verso.</p>
+
+      <div className="ia-agents-grid">
+        {L.iaAgents.map(agent => (
+          <AgentCardLarge key={agent.id} agent={agent} gainXP={gainXP} seenRef={seenRef} />
+        ))}
+      </div>
+
+      <div className="spacer-md" />
+      <div className="section-divider"><span>OUTILS IA UTILISÉS</span></div>
+      <div className="spacer-sm" />
+
+      <div className="ia-tools-main">
+        {L.promptSkills.main.map(t => (
+          <div key={t.name} className="ia-tool-card">
+            <div className="ia-tool-name">{t.name}</div>
+            <div className="ia-tool-org">{t.org}</div>
+            <div className="ia-tool-usage">{t.usage}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="chip-row" style={{ marginTop: 12 }}>
+        {L.promptSkills.secondary.map(t => (
+          <span key={t} className="chip is-secondary">{t}</span>
+        ))}
+      </div>
+
+      <div className="ia-badge-strip">
+        {L.promptSkills.badge}
+      </div>
+
+      <div className="spacer-lg" />
+    </div>
+  );
+}
+
+Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen, IAScreen });

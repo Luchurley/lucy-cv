@@ -4,7 +4,7 @@
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
    GaryModal, GarySticker, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
-   SkillsScreen, MoiScreen, ContactScreen, tierFromXP */
+   SkillsScreen, MoiScreen, ContactScreen, IAScreen, tierFromXP */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
 
@@ -75,6 +75,14 @@ function App() {
     });
   }, [pushToast, unlockFact, showGarySticker]);
 
+  // ---- Unlock IA badge when curious fact fires ----
+  const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
+  $useEffect(() => {
+    if (iaUnlocked && !visitedRef.current.has('ia')) {
+      setNewBadge(prev => ({ ...prev, ia: true }));
+    }
+  }, [iaUnlocked]);
+
   // ---- Tab change ----
   const onNav = (id) => {
     setDetailId(null);
@@ -82,7 +90,7 @@ function App() {
     // First visit grants XP
     if (!visitedRef.current.has(id)) {
       visitedRef.current.add(id);
-      const xpMap = { home: 5, projets: 15, skills: 10, moi: 15, contact: 10 };
+      const xpMap = { home: 5, projets: 15, skills: 10, moi: 15, contact: 10, ia: 20 };
       if (xpMap[id]) gainXP(xpMap[id], `Visite · ${id.toUpperCase()}`);
     }
     // Clear "new" badge on that tab
@@ -214,7 +222,7 @@ function App() {
           />
         )}
         {tab === 'projets' && !detailId && (
-          <ProjetsScreen onOpen={openProject} gainXP={gainXP} />
+          <ProjetsScreen onOpen={openProject} gainXP={gainXP} onTapIA={() => onNav('ia')} iaUnlocked={iaUnlocked} />
         )}
         {tab === 'projets' && detailId && (
           <ProjetDetail
@@ -234,6 +242,9 @@ function App() {
             onToggleAcc={toggleAcc}
             gainXP={gainXP}
           />
+        )}
+        {tab === 'ia' && (
+          <IAScreen gainXP={gainXP} onTapProjets={() => onNav('projets')} />
         )}
         {tab === 'contact' && (
           <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} onPawTap={onPawTap} />
