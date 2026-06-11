@@ -120,7 +120,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
 }
 
 // ---------- PROJETS LIST ----------
-function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
+function ProjetsScreen({ onOpen, gainXP }) {
   const L = window.LUCY;
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
@@ -199,13 +199,6 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
         ))}
       </div>
 
-      {filters.includes('ia') && (
-        <div className="ia-filter-cta" onClick={onTapIA} role="button" tabIndex={0}>
-          <span>Explorer les 10 agents IA →</span>
-          <span className="ia-filter-cta-sub">Page dédiée · vidéos · identités</span>
-        </div>
-      )}
-
       <div className="spacer-md" />
 
       {visible.length === 0 ? (
@@ -244,13 +237,6 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
               </button>
             );
           })}
-        </div>
-      )}
-
-      {iaUnlocked && (
-        <div className="ia-section-strip" onClick={onTapIA} role="button" tabIndex={0}>
-          <span className="ia-strip-label">✦ UNIVERS IA · {L.iaAgents.length} AGENTS</span>
-          <span className="ia-strip-sub">Agents IA · vidéos · outils → PAGE DÉDIÉE</span>
         </div>
       )}
 
@@ -587,56 +573,4 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
   );
 }
 
-// ---------- IA PAGE ----------
-function IAScreen({ gainXP, onTapProjets }) {
-  const L = window.LUCY;
-  const seenRef = React.useRef(new Set());
-
-  return (
-    <div className="page" data-screen-label="IA">
-      <div className="page-title-row">
-        <div className="display-lg">UNIVERS IA</div>
-      </div>
-      <div className="page-subline" style={{ marginBottom: 20 }}>
-        Créer une IA, c'est créer un personnage — chaque agent est une décision de design.
-      </div>
-
-      <div className="section-divider"><span>MES AGENTS · {L.iaAgents.length} ENTITÉS</span></div>
-      <p className="page-subline" style={{ marginBottom: 16 }}>Tap pour retourner · vidéo au verso.</p>
-
-      <div className="ia-agents-grid">
-        {L.iaAgents.map(agent => (
-          <AgentCardLarge key={agent.id} agent={agent} gainXP={gainXP} seenRef={seenRef} />
-        ))}
-      </div>
-
-      <div className="spacer-md" />
-      <div className="section-divider"><span>OUTILS IA UTILISÉS</span></div>
-      <div className="spacer-sm" />
-
-      <div className="ia-tools-main">
-        {L.promptSkills.main.map(t => (
-          <div key={t.name} className="ia-tool-card">
-            <div className="ia-tool-name">{t.name}</div>
-            <div className="ia-tool-org">{t.org}</div>
-            <div className="ia-tool-usage">{t.usage}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="chip-row" style={{ marginTop: 12 }}>
-        {L.promptSkills.secondary.map(t => (
-          <span key={t} className="chip is-secondary">{t}</span>
-        ))}
-      </div>
-
-      <div className="ia-badge-strip">
-        {L.promptSkills.badge}
-      </div>
-
-      <div className="spacer-lg" />
-    </div>
-  );
-}
-
-Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen, IAScreen });
+Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen });

@@ -4,7 +4,7 @@
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
    GaryModal, GarySticker, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
-   SkillsScreen, MoiScreen, ContactScreen, IAScreen, tierFromXP */
+   SkillsScreen, MoiScreen, ContactScreen, tierFromXP */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
 
@@ -75,9 +75,6 @@ function App() {
     });
   }, [pushToast, unlockFact, showGarySticker]);
 
-  // ---- IA page unlocked when curious fun fact fires ----
-  const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
-
   // ---- Tab change ----
   const onNav = (id) => {
     setDetailId(null);
@@ -85,7 +82,7 @@ function App() {
     // First visit grants XP
     if (!visitedRef.current.has(id)) {
       visitedRef.current.add(id);
-      const xpMap = { home: 5, projets: 15, skills: 10, moi: 15, contact: 10, ia: 20 };
+      const xpMap = { home: 5, projets: 15, skills: 10, moi: 15, contact: 10 };
       if (xpMap[id]) gainXP(xpMap[id], `Visite · ${id.toUpperCase()}`);
     }
     // Clear "new" badge on that tab
@@ -217,7 +214,7 @@ function App() {
           />
         )}
         {tab === 'projets' && !detailId && (
-          <ProjetsScreen onOpen={openProject} gainXP={gainXP} onTapIA={() => onNav('ia')} iaUnlocked={iaUnlocked} />
+          <ProjetsScreen onOpen={openProject} gainXP={gainXP} />
         )}
         {tab === 'projets' && detailId && (
           <ProjetDetail
@@ -237,9 +234,6 @@ function App() {
             onToggleAcc={toggleAcc}
             gainXP={gainXP}
           />
-        )}
-        {tab === 'ia' && (
-          <IAScreen gainXP={gainXP} onTapProjets={() => onNav('projets')} />
         )}
         {tab === 'contact' && (
           <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} onPawTap={onPawTap} />

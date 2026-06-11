@@ -261,104 +261,42 @@ function EmptyState({ emoji = '🐺', title, sub, actions = [] }) {
 
 // ---------- AGENT CARD ----------
 function AgentCard({ agent, gainXP, seenRef }) {
-  const [flipped, setFlipped] = React.useState(false);
-  const vidRef = React.useRef(null);
-
+  const [open, setOpen] = React.useState(false);
   const toggle = () => {
-    setFlipped(f => {
-      const next = !f;
-      if (next) {
-        if (gainXP && seenRef && seenRef.current) {
-          const k = 'agent:' + agent.id;
-          if (!seenRef.current.has(k)) {
-            seenRef.current.add(k);
-            gainXP(5, `Agent découvert — ${agent.name}`);
-          }
+    setOpen(o => {
+      if (!o && gainXP && seenRef && seenRef.current) {
+        const k = 'agent:' + agent.id;
+        if (!seenRef.current.has(k)) {
+          seenRef.current.add(k);
+          gainXP(5, `Agent découvert — ${agent.name}`);
         }
-        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
-      } else {
-        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
       }
-      return next;
+      return !o;
     });
   };
-
   return (
-    <div className={'agent-card' + (flipped ? ' is-flipped' : '')} onClick={toggle}>
-      <div className="agent-card-inner">
-        <div className="agent-card-front">
-          <div className="agent-photo">
-            {agent.photo
-              ? <img src={agent.photo} alt={agent.name} loading="lazy" />
-              : <div className="agent-photo-placeholder">{agent.name[0]}</div>
-            }
-          </div>
-          <div className="agent-meta">
-            <div className="agent-name">{agent.name}</div>
-            <div className="agent-age-domain">{agent.age} · {agent.domain}</div>
-            <div className="agent-tone">{agent.tone}</div>
-          </div>
-          <div className="agent-chevron">▶</div>
-        </div>
-        <div className="agent-card-back">
-          {agent.video && (
-            <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
-          )}
-          <div className="agent-back-label">{agent.name} · {agent.role}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---------- AGENT CARD LARGE (page IA) ----------
-function AgentCardLarge({ agent, gainXP, seenRef }) {
-  const [flipped, setFlipped] = React.useState(false);
-  const vidRef = React.useRef(null);
-
-  const toggle = () => {
-    setFlipped(f => {
-      const next = !f;
-      if (next) {
-        if (gainXP && seenRef && seenRef.current) {
-          const k = 'ia:' + agent.id;
-          if (!seenRef.current.has(k)) {
-            seenRef.current.add(k);
-            gainXP(5, `Agent découvert — ${agent.name}`);
-          }
+    <div className={'agent-card' + (open ? ' is-open' : '')} onClick={toggle}>
+      <div className="agent-photo">
+        {agent.photo
+          ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+          : <div className="agent-photo-placeholder">{agent.name[0]}</div>
         }
-        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
-      } else {
-        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
-      }
-      return next;
-    });
-  };
-
-  return (
-    <div className={'ia-agent-card' + (flipped ? ' is-flipped' : '')} onClick={toggle}>
-      <div className="ia-agent-inner">
-        <div className="ia-agent-front">
-          <div className="ia-agent-photo">
-            {agent.photo
-              ? <img src={agent.photo} alt={agent.name} loading="lazy" />
-              : <div className="ia-agent-photo-placeholder">{agent.name[0]}</div>
-            }
-          </div>
-          <div className="ia-agent-info">
-            <div className="ia-agent-name">{agent.name}</div>
-            <div className="ia-agent-sub">{agent.age} · {agent.domain}</div>
-            <div className="ia-agent-role">{agent.role}</div>
-          </div>
-          {agent.video && <div className="ia-agent-hint">▶ TAP</div>}
-        </div>
-        <div className="ia-agent-back">
-          {agent.video && (
-            <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
-          )}
-          <div className="ia-agent-back-label">{agent.name}</div>
-        </div>
       </div>
+      <div className="agent-meta">
+        <div className="agent-name">{agent.name}</div>
+        <div className="agent-age-domain">{agent.age} · {agent.domain}</div>
+        <div className="agent-tone">{agent.tone}</div>
+      </div>
+      <div className="agent-chevron">{open ? '▴' : '▾'}</div>
+      {open && (
+        <div className="agent-detail">
+          <div className="agent-usage">{agent.usage}</div>
+          <div className="agent-design-note">
+            <span className="body-xs dim">NOTE DE DESIGN · </span>
+            {agent.designNote}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -426,5 +364,5 @@ function ProjectDetailTabs({ labels, missionComplete, gainXP }) {
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
-  AgentCard, AgentCardLarge, ProjectDetailTabs,
+  AgentCard, ProjectDetailTabs,
 });
