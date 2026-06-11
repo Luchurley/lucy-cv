@@ -1738,6 +1738,12 @@ img { display: block; max-width: 100%; }
 .agent-detail { width: 100%; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08); margin-top: 4px; }
 .agent-usage { font-size: 12px; line-height: 1.55; margin-bottom: 8px; }
 .agent-design-note { font-size: 11px; font-style: italic; opacity: 0.55; line-height: 1.45; }
+.agent-video-wrap { margin-bottom: 12px; border: 1.5px solid var(--color-ink); overflow: hidden; }
+.agent-video { width: 100%; display: block; max-height: 280px; object-fit: cover; }
+.agent-id-card { background: var(--color-paper-2); border: 1.5px solid var(--color-ink); padding: 10px; margin-bottom: 10px; }
+.agent-id-row { display: flex; gap: 8px; padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 11px; }
+.agent-id-row:last-child { border-bottom: none; }
+.agent-id-label { font-weight: 700; font-size: 9px; letter-spacing: 0.08em; opacity: 0.45; flex-shrink: 0; width: 60px; }
 .prompt-skills { padding: 14px; border: 2px solid var(--color-ink); margin-bottom: 16px; background: var(--color-paper-2); }
 .ps-main-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
 .ps-main-tool { padding: 8px 10px; border: 1.5px solid var(--color-ink); background: var(--color-card); }

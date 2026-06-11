@@ -290,11 +290,37 @@ function AgentCard({ agent, gainXP, seenRef }) {
       <div className="agent-chevron">{open ? '▴' : '▾'}</div>
       {open && (
         <div className="agent-detail">
-          <div className="agent-usage">{agent.usage}</div>
-          <div className="agent-design-note">
-            <span className="body-xs dim">NOTE DE DESIGN · </span>
-            {agent.designNote}
+          {agent.video && (
+            <div className="agent-video-wrap">
+              <video
+                src={agent.video}
+                autoPlay
+                playsInline
+                controls
+                preload="metadata"
+                className="agent-video"
+                onClick={e => e.stopPropagation()}
+              />
+            </div>
+          )}
+          <div className="agent-id-card">
+            <div className="agent-id-row">
+              <span className="agent-id-label">RÔLE</span>
+              <span>{agent.role}</span>
+            </div>
+            <div className="agent-id-row">
+              <span className="agent-id-label">ÂGE</span>
+              <span>{agent.age}</span>
+            </div>
+            <div className="agent-id-row">
+              <span className="agent-id-label">DOMAINE</span>
+              <span>{agent.domain}</span>
+            </div>
           </div>
+          <p className="body-sm" style={{ marginBottom: 8 }}>{agent.usage}</p>
+          <p className="body-xs dim" style={{ fontStyle: 'italic' }}>
+            <strong>Note design · </strong>{agent.designNote}
+          </p>
         </div>
       )}
     </div>
