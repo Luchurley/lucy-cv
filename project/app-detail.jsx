@@ -224,6 +224,14 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
         </div>
       </div>
 
+      {project.motionVideo && (
+        <>
+          <SectionDivider>MOTION DESIGN</SectionDivider>
+          <video src={project.motionVideo} controls playsInline preload="none"
+            style={{ width: '100%', border: '2px solid var(--color-ink)', display: 'block' }} />
+        </>
+      )}
+
       {project.videos && project.videos.length > 0 && (
         <>
           <SectionDivider>VIDÉOS</SectionDivider>
@@ -253,37 +261,49 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
       {project.brianSection && (
         <>
           <SectionDivider>AGENT IA · BRIAN</SectionDivider>
+          {project.brianSection.bgGif && (
+            <div className="brian-bg-wrap" style={{ marginBottom: 12 }}>
+              <img src={project.brianSection.bgGif} alt="Univers Brian" style={{ width: '100%', height: 120, objectFit: 'cover', display: 'block' }} loading="lazy" />
+            </div>
+          )}
           <div className="brian-section">
-            <div className="brian-card">
-              <div className="brian-label">POURQUOI BRIAN ?</div>
-              <p className="body-md">{project.brianSection.naming}</p>
-            </div>
-            <div className="brian-card">
-              <div className="brian-label">ONBOARDING PERSONNALISÉ</div>
-              <p className="body-md">{project.brianSection.onboarding}</p>
-            </div>
-            <div className="brian-card">
-              <div className="brian-label">UX PERSONALITY PROFILE</div>
-              <p className="body-md">{project.brianSection.personality}</p>
-            </div>
-            <div className="brian-card accent">
-              <div className="brian-label">CORPUS ÉDITORIAL · 200+ CONTENUS</div>
-              <p className="body-md">{project.brianSection.corpus}</p>
-            </div>
-            <div className="brian-card">
-              <div className="brian-label">PROMPT ENGINEERING</div>
-              <p className="body-md">{project.brianSection.prompt}</p>
-            </div>
+            {[
+              { label: 'POURQUOI BRIAN ?', text: project.brianSection.naming },
+              { label: 'ONBOARDING PERSONNALISÉ', text: project.brianSection.onboarding },
+              { label: 'UX PERSONALITY PROFILE', text: project.brianSection.personality },
+              { label: 'CORPUS ÉDITORIAL · 200+ CONTENUS', text: project.brianSection.corpus, accent: true },
+              { label: 'PROMPT ENGINEERING', text: project.brianSection.prompt },
+            ].map((b, i) => (
+              <div key={i} className={`brian-card${b.accent ? ' accent' : ''}`}>
+                <div className="brian-label">{b.label}</div>
+                <p className="body-md">{b.text}</p>
+              </div>
+            ))}
           </div>
+          {project.brianSection.videos && project.brianSection.videos.length > 0 && (
+            <div style={{ marginTop: 14 }}>
+              <SectionDivider>DÉMO BRIAN EN PRODUCTION</SectionDivider>
+              {project.brianSection.videos.map((v, i) => (
+                <div key={i} style={{ marginBottom: 12 }}>
+                  <video src={v.src} controls playsInline preload="none"
+                    style={{ width: '100%', border: '1.5px solid var(--color-ink)', display: 'block' }} />
+                  <div className="body-xs dim" style={{ marginTop: 3 }}>{v.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          {project.brianSection.motionSrc && (
+            <div style={{ marginTop: 12 }}>
+              <SectionDivider>MOTION · BRIAN LAUNCHING</SectionDivider>
+              <video src={project.brianSection.motionSrc} autoPlay loop muted playsInline
+                style={{ width: '100%', border: '1.5px solid var(--color-ink)', display: 'block' }} />
+            </div>
+          )}
         </>
       )}
 
       {project.hasTabs && project.missionComplete && (
-        <ProjectDetailTabs
-          labels={project.tabLabels}
-          missionComplete={project.missionComplete}
-          gainXP={gainXP}
-        />
+        <ProjectDetailTabs project={project} gainXP={gainXP} />
       )}
 
       <SectionDivider>PROJETS SIMILAIRES</SectionDivider>

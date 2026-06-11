@@ -1745,3 +1745,47 @@ img { display: block; max-width: 100%; }
 .ps-tool-org { font-size: 10px; opacity: 0.45; margin-top: 2px; }
 .ps-secondary-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .ps-secondary-tool { font-size: 10px; padding: 3px 7px; border: 1px solid var(--color-ink); opacity: 0.5; font-family: var(--ff-mono); }
+
+/* ===== BRIAN ENRICHI ===== */
+.brian-bg-wrap { border: 2px solid var(--color-ink); overflow: hidden; margin-bottom: 12px; }
+.brian-card-exp { padding: 12px; border: 1.5px solid var(--color-ink); background: var(--color-paper-2); }
+
+/* ===== DETAIL TABS WRAP ===== */
+.detail-tabs-wrap { margin-top: 24px; border-top: 2px solid var(--color-ink); }
+.mc-body { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; }
+.mc-block { padding: 12px; border: 1.5px solid var(--color-ink); background: var(--color-paper-2); }
+
+/* ===== PLAYGROUND ===== */
+.pg-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.pg-card { border: 2px solid var(--color-ink); overflow: hidden; background: var(--color-paper); }
+.pg-cover { height: 120px; overflow: hidden; background: var(--color-paper-2); border-bottom: 1.5px solid var(--color-ink); }
+.pg-cover-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; opacity: 0.1; color: var(--color-ink); }
+.pg-body { padding: 12px; }
+.pg-type { margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+.pg-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+.pg-url { display: inline-block; margin-top: 8px; color: var(--color-primary); font-weight: 700; letter-spacing: 0.06em; text-decoration: none; }
+
+/* ===== AGENT CARD EXPAND (Projets screen) ===== */
+.agents-grid-exp { display: flex; flex-direction: column; gap: 8px; }
+.agent-card-exp { border: 1.5px solid var(--color-ink); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; background: var(--color-paper-2); transition: box-shadow 120ms; text-align: left; width: 100%; }
+.agent-card-exp:hover, .agent-card-exp.is-open { box-shadow: 3px 3px 0 var(--color-primary); }
+.agent-photo-exp { width: 44px; height: 44px; border: 1.5px solid var(--color-ink); overflow: hidden; flex-shrink: 0; }
+.agent-photo-exp img { width: 100%; height: 100%; object-fit: cover; }
+.agent-photo-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; background: var(--color-primary); color: #fff; }
+.agent-info { flex: 1; min-width: 0; }
+
+/* ===== PROMPT SKILLS BLOCK ===== */
+.prompt-skills-block { padding: 14px; border: 2px solid var(--color-ink); margin-bottom: 16px; }
+.ps-main { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.ps-tool { padding: 8px; border: 1.5px solid var(--color-ink); }
+.ps-tool-name { font-size: 11px; font-weight: 700; }
+.ps-secondary { display: flex; flex-wrap: wrap; gap: 5px; }
+.ps-sec-chip { padding: 3px 7px; border: 1px solid var(--color-ink); opacity: 0.5; letter-spacing: 0.04em; }
+
+/* ===== AUDIT ENRICHI ===== */
+.audit-badge.sev-s3, .audit-badge.sev-s4 { background: var(--color-primary); color: var(--color-paper); }
+.audit-badge.sev-s2 { background: var(--color-tertiary); color: var(--color-paper); }
+.audit-badge.eas-e0, .audit-badge.eas-e1 { background: var(--color-secondary); color: var(--color-paper); }
+.audit-item-pos, .audit-item-fric { padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.audit-item-pos::before { content: '✓ '; color: var(--color-secondary); }
+.audit-item-fric::before { content: '× '; color: var(--color-primary); }

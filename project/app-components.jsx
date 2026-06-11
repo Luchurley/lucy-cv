@@ -302,58 +302,55 @@ function AgentCard({ agent, gainXP, seenRef }) {
 }
 
 // ---------- PROJECT DETAIL TABS ----------
-function ProjectDetailTabs({ labels, missionComplete, gainXP }) {
-  const [activeTab, setActiveTab] = React.useState(0);
-  const switchTab = (i) => {
-    setActiveTab(i);
-    if (i === 1 && gainXP) gainXP(10, 'Mission complète explorée');
-  };
+function ProjectDetailTabs({ project, gainXP }) {
+  const [tab, setTab] = React.useState(0);
+  const mc = project.missionComplete;
   return (
-    <div className="detail-tabs">
+    <div className="detail-tabs-wrap">
       <div className="detail-tab-bar">
-        {labels.map((label, i) => (
-          <button key={i} className={'detail-tab-btn' + (activeTab === i ? ' is-active' : '')} onClick={() => switchTab(i)}>{label}</button>
+        {project.tabLabels.map((label, i) => (
+          <button
+            key={i}
+            className={'detail-tab-btn' + (tab === i ? ' is-active' : '')}
+            onClick={() => { setTab(i); if (i === 1 && gainXP) gainXP(10, 'Mission complète explorée'); }}
+          >{label}</button>
         ))}
       </div>
-      {activeTab === 1 && missionComplete && (
-        <div className="mission-complete">
-          <div className="mc-section">
+      {tab === 1 && mc && (
+        <div className="mc-body">
+          <div className="mc-block">
             <div className="mc-label">PÉRIMÈTRE STRATÉGIQUE</div>
-            {missionComplete.strategic.map((item, i) => (
-              <div key={i} className="mc-item">· {item}</div>
-            ))}
+            {mc.strategic.map((s, i) => <div key={i} className="mc-item body-sm">· {s}</div>)}
           </div>
-          <div className="mc-section">
+          <div className="mc-block">
             <div className="mc-label">OPS & AUTOMATION</div>
-            <p className="body-md" style={{ marginBottom: 4 }}>{missionComplete.ops.dendreo}</p>
-            <p className="body-md">{missionComplete.ops.zapier}</p>
-            <div className="xp-chips" style={{ marginTop: 8 }}>
-              {missionComplete.ops.tools.map(t => <span key={t} className="xp-chip">{t}</span>)}
-            </div>
+            <p className="body-sm" style={{ marginBottom: 6 }}>{mc.ops.dendreo}</p>
+            <p className="body-sm" style={{ marginBottom: 8 }}>{mc.ops.zapier}</p>
+            <div className="xp-chips">{mc.ops.tools.map(t => <span key={t} className="xp-chip">{t}</span>)}</div>
           </div>
-          <div className="mc-section">
+          <div className="mc-block">
             <div className="mc-label">GRAPHISME & PRINT</div>
-            <p className="body-md">{missionComplete.graphic.text}</p>
-            {missionComplete.graphic.items.map((item, i) => (
-              <div key={i} className="mc-item">· {item}</div>
+            <p className="body-sm" style={{ marginBottom: 6 }}>{mc.graphic.text}</p>
+            {mc.graphic.items.map((s, i) => <div key={i} className="mc-item body-sm">· {s}</div>)}
+            {mc.graphic.videos?.map((v, i) => (
+              <div key={i} style={{ marginTop: 10 }}>
+                <video src={v.src} controls playsInline preload="none" style={{ width: '100%', border: '1px solid var(--color-ink)', display: 'block' }} />
+                <div className="body-xs dim" style={{ marginTop: 3 }}>{v.label}</div>
+              </div>
             ))}
           </div>
-          <div className="mc-section">
+          <div className="mc-block">
             <div className="mc-label">MARKETING</div>
-            <p className="body-md">{missionComplete.marketing.text}</p>
-            {missionComplete.marketing.items.map((item, i) => (
-              <div key={i} className="mc-item">· {item}</div>
-            ))}
+            <p className="body-sm" style={{ marginBottom: 6 }}>{mc.marketing.text}</p>
+            {mc.marketing.items.map((s, i) => <div key={i} className="mc-item body-sm">· {s}</div>)}
             <div className="xp-chips" style={{ marginTop: 8 }}>
-              {missionComplete.marketing.platforms.map(t => <span key={t} className="xp-chip">{t}</span>)}
+              {mc.marketing.platforms.map(t => <span key={t} className="xp-chip">{t}</span>)}
             </div>
           </div>
-          <div className="mc-section">
+          <div className="mc-block">
             <div className="mc-label">MANAGEMENT</div>
-            <p className="body-md">{missionComplete.management.text}</p>
-            {missionComplete.management.items.map((item, i) => (
-              <div key={i} className="mc-item">· {item}</div>
-            ))}
+            <p className="body-sm" style={{ marginBottom: 6 }}>{mc.management.text}</p>
+            {mc.management.items.map((s, i) => <div key={i} className="mc-item body-sm">· {s}</div>)}
           </div>
         </div>
       )}
@@ -361,8 +358,113 @@ function ProjectDetailTabs({ labels, missionComplete, gainXP }) {
   );
 }
 
+// ---- AgentCardExpand (used in Projets screen) ----
+function AgentCardExpand({ agent }) {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div
+      className={'agent-card-exp' + (open ? ' is-open' : '')}
+      onClick={() => setOpen(o => !o)}
+      role="button"
+      aria-expanded={open}
+    >
+      <div className="agent-photo-exp">
+        {agent.photo
+          ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+          : <div className="agent-photo-ph">{agent.name[0]}</div>}
+      </div>
+      <div className="agent-info">
+        <div className="agent-name">{agent.name}</div>
+        <div className="body-xs dim">{agent.age} · {agent.domain}</div>
+        <div className="body-xs dim" style={{ fontStyle: 'italic' }}>{agent.tone}</div>
+      </div>
+      <div className="agent-chevron">{open ? '▴' : '▾'}</div>
+      {open && (
+        <div className="agent-detail">
+          <p className="body-sm" style={{ marginBottom: 8 }}>{agent.usage}</p>
+          <p className="body-xs dim" style={{ fontStyle: 'italic' }}>
+            <strong>Note design · </strong>{agent.designNote}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------- AGENT ROW IA (compact, flip → video) ----------
+function AgentRowIA({ agent, idx, gainXP, seenRef }) {
+  const [flipped, setFlipped] = React.useState(false);
+  const vidRef = React.useRef(null);
+
+  const toggle = () => {
+    setFlipped(f => {
+      const next = !f;
+      if (next) {
+        if (gainXP && seenRef && seenRef.current) {
+          const k = 'ia:' + agent.id;
+          if (!seenRef.current.has(k)) {
+            seenRef.current.add(k);
+            gainXP(5, `Agent découvert — ${agent.name}`);
+          }
+        }
+        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
+      } else {
+        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
+      }
+      return next;
+    });
+  };
+
+  return (
+    <div className={'ia-row' + (flipped ? ' is-flipped' : '')} onClick={toggle}>
+      <div className="ia-row-inner">
+        <div className="ia-row-front">
+          <div className="ia-row-photo">
+            {agent.photo
+              ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+              : <div className="ia-row-photo-ph">{agent.name[0]}</div>
+            }
+          </div>
+          <div className="ia-row-body">
+            <div className="ia-row-num">CARTE N°{String(idx).padStart(2,'0')}</div>
+            <div className="ia-row-name">{agent.name}</div>
+            <div className="ia-row-sub">{agent.age} · {agent.domain}</div>
+            <div className="ia-row-role">{agent.role}</div>
+          </div>
+          <div className="ia-row-flip">↻</div>
+        </div>
+        <div className="ia-row-back">
+          {agent.video
+            ? <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
+            : <div className="ia-row-back-ph"><span>▶</span><span>VIDÉO</span></div>
+          }
+          <div className="ia-row-back-label">{agent.name}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------- FLOATING IA BUTTON ----------
+function FloatingIABtn({ locked, onClick }) {
+  if (locked) {
+    return (
+      <div className="ia-fab ia-fab-locked" onClick={onClick} role="button" tabIndex={0}>
+        <span className="ia-fab-icon">🔒</span>
+        <span className="ia-fab-label">IA</span>
+      </div>
+    );
+  }
+  return (
+    <div className="ia-fab ia-fab-unlocked" onClick={onClick} role="button" tabIndex={0} aria-label="Univers IA">
+      <span className="ia-fab-icon">✦</span>
+      <span className="ia-fab-label">IA</span>
+    </div>
+  );
+}
+
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
-  AgentCard, ProjectDetailTabs,
+  AgentCard, ProjectDetailTabs, AgentCardExpand, AgentRowIA, FloatingIABtn,
 });

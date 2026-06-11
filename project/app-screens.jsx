@@ -240,55 +240,62 @@ function ProjetsScreen({ onOpen, gainXP }) {
         </div>
       )}
 
+      {/* PLAYGROUND */}
       <div className="spacer-lg" />
-      <div className="section-divider"><span>PLAYGROUND · {L.playground.length} PROJETS</span></div>
-      <div className="page-subline" style={{ marginBottom: 16 }}>Exercices de style, explorations visuelles, projets personnels.</div>
-      <div className="playground-grid">
+      <div className="section-divider"><span>PLAYGROUND · {L.playground.length}</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 14, lineHeight: 1.5 }}>
+        Exercices de style, explorations visuelles et projets personnels.
+      </div>
+      <div className="pg-grid">
         {L.playground.map(p => (
-          <div key={p.id} className="playground-card">
-            <div className={'playground-img' + (!p.cover ? ' playground-img-placeholder' : '')}>
+          <div key={p.id} className="pg-card">
+            <div className="pg-cover">
               {p.cover
-                ? <img src={p.cover} alt={p.title} loading="lazy" />
-                : <span>{p.title[0]}</span>
-              }
+                ? <img src={p.cover} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                : <div className="pg-cover-ph">{p.title.charAt(0)}</div>}
             </div>
-            <div className="playground-body">
-              <div className="playground-type">{p.type}</div>
-              <div className="playground-title">{p.title}</div>
-              <p style={{ fontSize: 12, lineHeight: 1.55 }}>{p.desc}</p>
-              <div className="playground-note">{p.note}</div>
-              <div className="pcard-tags" style={{ marginTop: 8 }}>
+            <div className="pg-body">
+              <div className="body-xs dim pg-type">{p.type}</div>
+              <div className="pg-title">{p.title}</div>
+              <p className="body-sm" style={{ marginBottom: 6 }}>{p.desc}</p>
+              <p className="body-xs dim" style={{ fontStyle: 'italic', marginBottom: 8, paddingTop: 6, borderTop: '1px solid rgba(0,0,0,0.08)' }}>{p.note}</p>
+              <div className="pcard-tags">
                 {p.tags.map(t => <span key={t} className="pcard-tag">{t}</span>)}
               </div>
+              {p.url && (
+                <a href={p.url} target="_blank" rel="noopener noreferrer"
+                  className="pg-url body-xs"
+                  onClick={e => e.stopPropagation()}>
+                  VOIR LE SITE ↗
+                </a>
+              )}
             </div>
           </div>
         ))}
       </div>
 
+      {/* UNIVERS IA */}
       <div className="spacer-lg" />
       <div className="section-divider"><span>UNIVERS IA · {L.iaAgents.length} AGENTS</span></div>
-      <div className="page-subline" style={{ marginBottom: 8 }}>Créer une IA, c'est créer un personnage. Chaque agent est une décision de design.</div>
-      <div className="cantina-badge">{L.promptSkills.badge} · Cantina</div>
-      <div className="agents-grid">
-        {L.iaAgents.map(agent => (
-          <AgentCard key={agent.id} agent={agent} gainXP={gainXP} seenRef={null} />
-        ))}
+      <p className="body-sm" style={{ marginBottom: 8 }}>
+        Créer une IA, c'est créer un personnage. Chaque agent est une décision de design — une voix, une personnalité, un univers construit prompt par prompt.
+      </p>
+      <div className="cantina-badge">{L.promptSkills.badge}</div>
+      <div className="agents-grid-exp" style={{ marginBottom: 16 }}>
+        {L.iaAgents.map(a => <AgentCardExpand key={a.id} agent={a} />)}
       </div>
-      <div className="spacer-md" />
-      <div className="prompt-skills">
-        <div className="body-xs dim" style={{ marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PROMPT SKILLS · OUTILS PRO</div>
-        <div className="ps-main-row">
-          {L.promptSkills.main.map(tool => (
-            <div key={tool.name} className="ps-main-tool">
-              <div className="ps-tool-name">{tool.name}</div>
-              <div className="ps-tool-org">{tool.org}</div>
+      <div className="prompt-skills-block">
+        <div className="body-xs dim" style={{ marginBottom: 10 }}>PROMPT SKILLS · OUTILS PRO</div>
+        <div className="ps-main">
+          {L.promptSkills.main.map(t => (
+            <div key={t.name} className="ps-tool">
+              <div className="ps-tool-name">{t.name}</div>
+              <div className="body-xs dim">{t.org}</div>
             </div>
           ))}
         </div>
-        <div className="ps-secondary-row">
-          {L.promptSkills.secondary.map(tool => (
-            <span key={tool} className="ps-secondary-tool">{tool}</span>
-          ))}
+        <div className="ps-secondary">
+          {L.promptSkills.secondary.map(t => <span key={t} className="ps-sec-chip body-xs">{t}</span>)}
         </div>
       </div>
 
