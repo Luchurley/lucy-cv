@@ -259,7 +259,110 @@ function EmptyState({ emoji = '🐺', title, sub, actions = [] }) {
   );
 }
 
+// ---------- AGENT CARD ----------
+function AgentCard({ agent, gainXP, seenRef }) {
+  const [open, setOpen] = React.useState(false);
+  const toggle = () => {
+    setOpen(o => {
+      if (!o && gainXP && seenRef && seenRef.current) {
+        const k = 'agent:' + agent.id;
+        if (!seenRef.current.has(k)) {
+          seenRef.current.add(k);
+          gainXP(5, `Agent découvert — ${agent.name}`);
+        }
+      }
+      return !o;
+    });
+  };
+  return (
+    <div className={'agent-card' + (open ? ' is-open' : '')} onClick={toggle}>
+      <div className="agent-photo">
+        {agent.photo
+          ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+          : <div className="agent-photo-placeholder">{agent.name[0]}</div>
+        }
+      </div>
+      <div className="agent-meta">
+        <div className="agent-name">{agent.name}</div>
+        <div className="agent-age-domain">{agent.age} · {agent.domain}</div>
+        <div className="agent-tone">{agent.tone}</div>
+      </div>
+      <div className="agent-chevron">{open ? '▴' : '▾'}</div>
+      {open && (
+        <div className="agent-detail">
+          <div className="agent-usage">{agent.usage}</div>
+          <div className="agent-design-note">
+            <span className="body-xs dim">NOTE DE DESIGN · </span>
+            {agent.designNote}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------- PROJECT DETAIL TABS ----------
+function ProjectDetailTabs({ labels, missionComplete, gainXP }) {
+  const [activeTab, setActiveTab] = React.useState(0);
+  const switchTab = (i) => {
+    setActiveTab(i);
+    if (i === 1 && gainXP) gainXP(10, 'Mission complète explorée');
+  };
+  return (
+    <div className="detail-tabs">
+      <div className="detail-tab-bar">
+        {labels.map((label, i) => (
+          <button key={i} className={'detail-tab-btn' + (activeTab === i ? ' is-active' : '')} onClick={() => switchTab(i)}>{label}</button>
+        ))}
+      </div>
+      {activeTab === 1 && missionComplete && (
+        <div className="mission-complete">
+          <div className="mc-section">
+            <div className="mc-label">PÉRIMÈTRE STRATÉGIQUE</div>
+            {missionComplete.strategic.map((item, i) => (
+              <div key={i} className="mc-item">· {item}</div>
+            ))}
+          </div>
+          <div className="mc-section">
+            <div className="mc-label">OPS & AUTOMATION</div>
+            <p className="body-md" style={{ marginBottom: 4 }}>{missionComplete.ops.dendreo}</p>
+            <p className="body-md">{missionComplete.ops.zapier}</p>
+            <div className="xp-chips" style={{ marginTop: 8 }}>
+              {missionComplete.ops.tools.map(t => <span key={t} className="xp-chip">{t}</span>)}
+            </div>
+          </div>
+          <div className="mc-section">
+            <div className="mc-label">GRAPHISME & PRINT</div>
+            <p className="body-md">{missionComplete.graphic.text}</p>
+            {missionComplete.graphic.items.map((item, i) => (
+              <div key={i} className="mc-item">· {item}</div>
+            ))}
+          </div>
+          <div className="mc-section">
+            <div className="mc-label">MARKETING</div>
+            <p className="body-md">{missionComplete.marketing.text}</p>
+            {missionComplete.marketing.items.map((item, i) => (
+              <div key={i} className="mc-item">· {item}</div>
+            ))}
+            <div className="xp-chips" style={{ marginTop: 8 }}>
+              {missionComplete.marketing.platforms.map(t => <span key={t} className="xp-chip">{t}</span>)}
+            </div>
+          </div>
+          <div className="mc-section">
+            <div className="mc-label">MANAGEMENT</div>
+            <p className="body-md">{missionComplete.management.text}</p>
+            {missionComplete.management.items.map((item, i) => (
+              <div key={i} className="mc-item">· {item}</div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
+  AgentCard, ProjectDetailTabs,
 });

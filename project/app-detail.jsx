@@ -84,6 +84,37 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
         </div>
       </div>
 
+      {project.tagline && (
+        <div className="proj-tagline">{project.tagline}</div>
+      )}
+
+      {project.brief && (
+        <>
+          <SectionDivider>LE BRIEF</SectionDivider>
+          <div className="card" style={{ background: 'var(--color-paper-2)' }}>
+            <p className="body-lg" style={{ whiteSpace: 'pre-line', lineHeight: 1.65 }}>{project.brief}</p>
+          </div>
+        </>
+      )}
+
+      {project.paradox && (
+        <>
+          <SectionDivider>DOUBLE CIBLE</SectionDivider>
+          <div className="card" style={{ background: 'var(--color-primary)', color: '#fff' }}>
+            <p className="body-lg" style={{ lineHeight: 1.65 }}>{project.paradox}</p>
+          </div>
+        </>
+      )}
+
+      {project.marketContext && (
+        <>
+          <SectionDivider>CONTEXTE MARCHÉ</SectionDivider>
+          <div className="card" style={{ background: 'var(--color-paper-2)' }}>
+            <p className="body-lg" style={{ lineHeight: 1.65 }}>{project.marketContext}</p>
+          </div>
+        </>
+      )}
+
       <SectionDivider>LE DÉFI</SectionDivider>
       <div className="card" style={{ background: 'var(--color-paper-2)' }}>
         <p className="body-lg">{project.challenge}</p>
@@ -99,6 +130,71 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
           </div>
         </div>
       ))}
+
+      {project.uxAudit && (
+        <>
+          <SectionDivider>UX AUDIT</SectionDivider>
+          <div className="card" style={{ background: 'var(--color-paper-2)', marginBottom: 12 }}>
+            <div className="body-xs dim" style={{ marginBottom: 6 }}>MÉTHODOLOGIE</div>
+            <p className="body-md">{project.uxAudit.methodology}</p>
+          </div>
+          <div className="audit-grid">
+            {project.uxAudit.findings.map((f, i) => (
+              <div key={i} className="audit-finding">
+                <div className="audit-scores">
+                  <span className={'audit-badge ' + f.severity.toLowerCase()}>{f.severity}</span>
+                  <span className={'audit-badge ' + f.ease.toLowerCase()}>{f.ease}</span>
+                </div>
+                <div className="audit-label">{f.label}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {project.siteAudit && (
+        <>
+          <SectionDivider>AUDIT EXISTANT</SectionDivider>
+          <div className="col-2">
+            <div className="meta-card">
+              <div className="body-xs dim" style={{ marginBottom: 8 }}>👍 CE QUI FONCTIONNE</div>
+              {project.siteAudit.positive.map((item, i) => (
+                <div key={i} className="audit-item positive">{item}</div>
+              ))}
+            </div>
+            <div className="meta-card">
+              <div className="body-xs dim" style={{ marginBottom: 8 }}>⚠️ CE QUI BLOQUE</div>
+              {project.siteAudit.friction.map((item, i) => (
+                <div key={i} className="audit-item friction">{item}</div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      {project.identity && (
+        <>
+          <SectionDivider>IDENTITÉ VISUELLE</SectionDivider>
+          <div className="card" style={{ background: 'var(--color-paper-2)', marginBottom: 12 }}>
+            <div className="body-xs dim" style={{ marginBottom: 6 }}>LE NAMING</div>
+            <p className="body-md">{project.identity.naming}</p>
+          </div>
+          <div className="card" style={{ marginBottom: 12 }}>
+            <div className="body-xs dim" style={{ marginBottom: 6 }}>LE LOGO</div>
+            <p className="body-md">{project.identity.logo}</p>
+          </div>
+          <div className="palette-grid">
+            {project.identity.palette.map((c, i) => (
+              <div key={i} className="palette-swatch">
+                <div className="palette-color" style={{ background: c.hex }} />
+                <div className="palette-name">{c.name}</div>
+                <div className="palette-hex">{c.hex}</div>
+                <div className="palette-role">{c.role}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <SectionDivider>VISUELS</SectionDivider>
       <div className="carousel">
@@ -153,6 +249,42 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
       <div className="skill-tags" style={{ marginBottom: 20 }}>
         {project.skills.map(s => <span key={s} className="skill-tag" style={{ cursor: 'default' }}>{s}</span>)}
       </div>
+
+      {project.brianSection && (
+        <>
+          <SectionDivider>AGENT IA · BRIAN</SectionDivider>
+          <div className="brian-section">
+            <div className="brian-card">
+              <div className="brian-label">POURQUOI BRIAN ?</div>
+              <p className="body-md">{project.brianSection.naming}</p>
+            </div>
+            <div className="brian-card">
+              <div className="brian-label">ONBOARDING PERSONNALISÉ</div>
+              <p className="body-md">{project.brianSection.onboarding}</p>
+            </div>
+            <div className="brian-card">
+              <div className="brian-label">UX PERSONALITY PROFILE</div>
+              <p className="body-md">{project.brianSection.personality}</p>
+            </div>
+            <div className="brian-card accent">
+              <div className="brian-label">CORPUS ÉDITORIAL · 200+ CONTENUS</div>
+              <p className="body-md">{project.brianSection.corpus}</p>
+            </div>
+            <div className="brian-card">
+              <div className="brian-label">PROMPT ENGINEERING</div>
+              <p className="body-md">{project.brianSection.prompt}</p>
+            </div>
+          </div>
+        </>
+      )}
+
+      {project.hasTabs && project.missionComplete && (
+        <ProjectDetailTabs
+          labels={project.tabLabels}
+          missionComplete={project.missionComplete}
+          gainXP={gainXP}
+        />
+      )}
 
       <SectionDivider>PROJETS SIMILAIRES</SectionDivider>
       <div className="similar-row">

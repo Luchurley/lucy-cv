@@ -239,6 +239,60 @@ function ProjetsScreen({ onOpen, gainXP }) {
           })}
         </div>
       )}
+
+      <div className="spacer-lg" />
+      <div className="section-divider"><span>PLAYGROUND · {L.playground.length} PROJETS</span></div>
+      <div className="page-subline" style={{ marginBottom: 16 }}>Exercices de style, explorations visuelles, projets personnels.</div>
+      <div className="playground-grid">
+        {L.playground.map(p => (
+          <div key={p.id} className="playground-card">
+            <div className={'playground-img' + (!p.cover ? ' playground-img-placeholder' : '')}>
+              {p.cover
+                ? <img src={p.cover} alt={p.title} loading="lazy" />
+                : <span>{p.title[0]}</span>
+              }
+            </div>
+            <div className="playground-body">
+              <div className="playground-type">{p.type}</div>
+              <div className="playground-title">{p.title}</div>
+              <p style={{ fontSize: 12, lineHeight: 1.55 }}>{p.desc}</p>
+              <div className="playground-note">{p.note}</div>
+              <div className="pcard-tags" style={{ marginTop: 8 }}>
+                {p.tags.map(t => <span key={t} className="pcard-tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="spacer-lg" />
+      <div className="section-divider"><span>UNIVERS IA · {L.iaAgents.length} AGENTS</span></div>
+      <div className="page-subline" style={{ marginBottom: 8 }}>Créer une IA, c'est créer un personnage. Chaque agent est une décision de design.</div>
+      <div className="cantina-badge">{L.promptSkills.badge} · Cantina</div>
+      <div className="agents-grid">
+        {L.iaAgents.map(agent => (
+          <AgentCard key={agent.id} agent={agent} gainXP={gainXP} seenRef={null} />
+        ))}
+      </div>
+      <div className="spacer-md" />
+      <div className="prompt-skills">
+        <div className="body-xs dim" style={{ marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>PROMPT SKILLS · OUTILS PRO</div>
+        <div className="ps-main-row">
+          {L.promptSkills.main.map(tool => (
+            <div key={tool.name} className="ps-main-tool">
+              <div className="ps-tool-name">{tool.name}</div>
+              <div className="ps-tool-org">{tool.org}</div>
+            </div>
+          ))}
+        </div>
+        <div className="ps-secondary-row">
+          {L.promptSkills.secondary.map(tool => (
+            <span key={tool} className="ps-secondary-tool">{tool}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="spacer-lg" />
     </div>
   );
 }
