@@ -4,7 +4,7 @@
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
    GaryModal, GarySticker, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
-   SkillsScreen, MoiScreen, ContactScreen, tierFromXP */
+   SkillsScreen, MoiScreen, ContactScreen, IAScreen, tierFromXP */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
 
@@ -190,6 +190,8 @@ function App() {
     }
   };
 
+  const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
+
   const isSub = tab === 'projets' && detailId;
   const subTitle = isSub ? window.LUCY.projects.find(p => p.id === detailId)?.shortName : '';
 
@@ -214,7 +216,7 @@ function App() {
           />
         )}
         {tab === 'projets' && !detailId && (
-          <ProjetsScreen onOpen={openProject} gainXP={gainXP} />
+          <ProjetsScreen onOpen={openProject} gainXP={gainXP} onTapIA={() => onNav('ia')} iaUnlocked={iaUnlocked} />
         )}
         {tab === 'projets' && detailId && (
           <ProjetDetail
@@ -237,6 +239,9 @@ function App() {
         )}
         {tab === 'contact' && (
           <ContactScreen xp={xp} onContactTap={onContactTap} unlockedFacts={unlockedFacts} onPawTap={onPawTap} />
+        )}
+        {tab === 'ia' && (
+          <IAScreen gainXP={gainXP} onBack={() => onNav('projets')} />
         )}
       </main>
 

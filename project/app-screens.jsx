@@ -120,7 +120,7 @@ function HomeScreen({ onTapProjets, onTapContact, secretRevealed, onPawTap, unlo
 }
 
 // ---------- PROJETS LIST ----------
-function ProjetsScreen({ onOpen, gainXP }) {
+function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
   const L = window.LUCY;
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
@@ -129,39 +129,39 @@ function ProjetsScreen({ onOpen, gainXP }) {
     { key: 'ux',       label: 'UX/UI' },
     { key: 'da',       label: 'DA' },
     { key: 'strat',    label: 'STRAT.' },
-    { key: 'ia',       label: 'IA' },
+    { key: 'ia',       label: '✦ IA' },
     { key: 'cdi',      label: 'CDI' },
     { key: 'freelance', label: 'FREELANCE' },
-    { key: 'founder',  label: 'FONDATRICE' },
   ];
 
   const toggleFilter = (k) => {
     setFilters(prev => prev.includes(k) ? prev.filter(x => x !== k) : [...prev, k]);
   };
   const resetAll = () => { setFilters([]); setSearch(''); };
+  const isFiltering = filters.length > 0 || search.trim();
 
-  const visible = L.projects.filter(p => {
+  const allProjects = L.projects;
+  const featured = allProjects.filter(p => p.featured);
+  const others = allProjects.filter(p => !p.featured);
+
+  const filteredAll = allProjects.filter(p => {
     if (filters.length) {
       const ok = filters.every(f => p.categories.includes(f) || p.contract.includes(f));
       if (!ok) return false;
     }
     if (search.trim()) {
       const q = search.trim().toLowerCase();
-      const haystack = [p.name, p.type, p.context, ...(p.tags||[])].join(' ').toLowerCase();
+      const haystack = [p.name, p.type, p.context, ...(p.tags || [])].join(' ').toLowerCase();
       if (!haystack.includes(q)) return false;
     }
     return true;
   });
 
   return (
-    <div className="page" data-screen-label="Projets">
+    <div className="page" data-screen-label="Projets" style={{ position: 'relative' }}>
       <div className="page-title-row">
         <div className="display-lg">PROJETS</div>
-        <span className="body-xs dim">{visible.length}/{L.projects.length}</span>
-      </div>
-      <div className="page-subline">
-        {visible.length} {visible.length > 1 ? 'projets' : 'projet'}
-        {(filters.length > 0 || search) && <span style={{ color: 'var(--color-primary)' }}> · filtres actifs</span>}
+        <span className="body-xs dim">{allProjects.length}</span>
       </div>
 
       <div className="search">
@@ -177,15 +177,12 @@ function ProjetsScreen({ onOpen, gainXP }) {
           aria-label="Rechercher un projet"
         />
         {search && (
-          <button className="search-clear" onClick={() => setSearch('')} aria-label="Effacer la recherche">×</button>
+          <button className="search-clear" onClick={() => setSearch('')} aria-label="Effacer">×</button>
         )}
       </div>
 
       <div className="chip-row" role="group" aria-label="Filtres">
-        <button
-          className={'chip' + (filters.length === 0 && !search ? ' is-active' : '')}
-          onClick={resetAll}
-        >TOUS</button>
+        <button className={'chip' + (!isFiltering ? ' is-active' : '')} onClick={resetAll}>TOUS</button>
         {FILTERS.map(f => (
           <button
             key={f.key}
@@ -201,43 +198,81 @@ function ProjetsScreen({ onOpen, gainXP }) {
 
       <div className="spacer-md" />
 
-      {visible.length === 0 ? (
-        search ? (
+      {isFiltering ? (
+        filteredAll.length === 0 ? (
           <EmptyState
             title="Aucun résultat"
-            sub={`pour « ${search} »`}
-            actions={[{ label: 'EFFACER', primary: true, onClick: () => setSearch('') }]}
-          />
-        ) : (
-          <EmptyState
-            title="Aucun projet trouvé"
-            sub="avec ces filtres."
+            sub={search ? `pour « ${search} »` : 'avec ces filtres.'}
             actions={[{ label: 'TOUT EFFACER', primary: true, onClick: resetAll }]}
           />
+        ) : (
+          <div className="proj-grid">
+            {filteredAll.map(p => {
+              const Cover = window.COVERS[p.cover];
+              return (
+                <button key={p.id} className="pcard" onClick={() => onOpen(p.id)} aria-label={`Ouvrir ${p.name}`}>
+                  {Cover ? <div className="pcard-cover"><Cover /></div> : <div className="pcard-cover pcard-cover-ph">{p.shortName}</div>}
+                  <div className="pcard-meta">
+                    <div className="pcard-title">{p.name}</div>
+                    <div className="pcard-tags">{p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}</div>
+                    <div className="pcard-date">{p.year}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         )
       ) : (
-        <div className="proj-grid">
-          {visible.map(p => {
-            const Cover = window.COVERS[p.cover];
-            return (
-              <button
-                key={p.id}
-                className="pcard"
-                onClick={() => onOpen(p.id)}
-                aria-label={`Ouvrir le projet ${p.name}`}
-              >
-                <div className="pcard-cover"><Cover /></div>
-                <div className="pcard-meta">
-                  <div className="pcard-title">{p.name}</div>
-                  <div className="pcard-tags">
-                    {p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}
+        <>
+          <div className="section-divider"><span>★ CASE STUDIES · {featured.length}</span></div>
+          <div className="body-xs dim" style={{ marginBottom: 12 }}>vitrine principale · process en profondeur</div>
+          <div className="featured-grid">
+            {featured.map(p => {
+              const Cover = window.COVERS[p.cover];
+              return (
+                <button key={p.id} className="featured-card" onClick={() => onOpen(p.id)}>
+                  <div className="featured-card-cover">
+                    {Cover ? <Cover /> : <div className="featured-card-cover-ph">{p.shortName}</div>}
+                    <span className="featured-badge">★ CASE STUDY</span>
                   </div>
-                  <div className="pcard-date">{p.year}</div>
+                  <div className="featured-card-body">
+                    <div className="featured-card-title-row">
+                      <div className="display-md">{p.name}</div>
+                      <span style={{ fontSize: 16 }}>→</span>
+                    </div>
+                    <div className="body-xs dim" style={{ lineHeight: 1.5, marginTop: 2 }}>{p.tagline}</div>
+                    <div className="featured-card-footer">
+                      <div className="pcard-tags">{p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}</div>
+                      <span className="featured-voir">VOIR L'ÉTUDE →</span>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="spacer-md" />
+          <div className="section-divider"><span>AUTRES PROJETS · {others.length}</span></div>
+          <div className="spacer-sm" />
+          <div className="proj-grid">
+            {others.map(p => {
+              const Cover = window.COVERS[p.cover];
+              return (
+                <div key={p.id} style={{ position: 'relative' }}>
+                  <button className="pcard" onClick={() => onOpen(p.id)} aria-label={`Ouvrir ${p.name}`}>
+                    {Cover ? <div className="pcard-cover"><Cover /></div> : <div className="pcard-cover pcard-cover-ph">{p.shortName}</div>}
+                    <div className="pcard-meta">
+                      <div className="pcard-title">{p.name}</div>
+                      <div className="pcard-tags">{p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}</div>
+                      <div className="pcard-date">{p.year}</div>
+                    </div>
+                  </button>
+                  {p.isNew && <span className="new-badge">✦ NOUVEAU</span>}
                 </div>
-              </button>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </>
       )}
 
       {/* PLAYGROUND */}
@@ -580,4 +615,69 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
   );
 }
 
-Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen });
+// ---------- IA PAGE ----------
+function IAScreen({ gainXP, onBack }) {
+  const L = window.LUCY;
+  const seenRef = React.useRef(new Set());
+
+  return (
+    <div className="page" data-screen-label="IA">
+      {/* HERO */}
+      <div className="ia-hero">
+        <div className="ia-hero-deco" />
+        <div className="body-xs" style={{ opacity: 0.6, position: 'relative' }}>UNIVERS IA</div>
+        <div className="ia-hero-title">AGENTS<br />IA</div>
+        <div className="ia-hero-sub">
+          10 entités incarnées + les outils IA de mon travail. Un espace autonome du portfolio.
+        </div>
+      </div>
+
+      <div className="spacer-md" />
+
+      {/* SECTION 1 */}
+      <div className="section-divider"><span>01 · MES AGENTS IA</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>section principale · grille carte d'identité · TAP = FLIP ↻ → VIDÉO</div>
+
+      <div className="ia-rows-grid">
+        {L.iaAgents.map((agent, idx) => (
+          <AgentRowIA key={agent.id} agent={agent} idx={idx + 1} gainXP={gainXP} seenRef={seenRef} />
+        ))}
+      </div>
+
+      <div className="ia-flip-hint">
+        ↻ tap → flip → vidéo de présentation
+      </div>
+
+      <div className="section-divider" style={{ margin: '16px 0' }}><span /></div>
+
+      {/* SECTION 2 */}
+      <div className="section-divider"><span>02 · OUTILS / IA UTILISÉS</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>section secondaire · version simplifiée des cards</div>
+
+      <div className="ia-tools-list">
+        {L.promptSkills.main.map(t => (
+          <div key={t.name} className="ia-tool-row">
+            <div className="ia-tool-logo">{t.name[0]}</div>
+            <div className="ia-tool-name">{t.name}</div>
+            <div className="ia-tool-chips">
+              {t.usage.split(',').slice(0, 2).map((u, i) => (
+                <span key={i} className="pcard-tag">{u.trim().split(' ')[0].toUpperCase()}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div className="ia-tool-row ia-tool-row-more">
+          <div className="ia-tool-logo ia-tool-logo-more">+</div>
+          <div className="ia-tool-name" style={{ opacity: 0.45 }}>AUTRES OUTILS · extensible</div>
+          <span style={{ fontFamily: 'var(--ff-display)', fontSize: 20, opacity: 0.35 }}>…</span>
+        </div>
+      </div>
+
+      <div className="ia-badge-line">{L.promptSkills.badge}</div>
+
+      <div className="spacer-lg" />
+    </div>
+  );
+}
+
+Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen, IAScreen });
