@@ -164,18 +164,6 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
         {(filters.length > 0 || search) && <span style={{ color: 'var(--color-primary)' }}> · filtres actifs</span>}
       </div>
 
-      <button
-        className={'ia-entry-btn' + (iaUnlocked ? ' is-unlocked' : '')}
-        onClick={onTapIA}
-        aria-label="Voir la page IA"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
-          <line x1="12" y1="7" x2="6" y2="17"/><line x1="12" y1="7" x2="18" y2="17"/><line x1="7" y1="18" x2="17" y2="18"/>
-        </svg>
-        {iaUnlocked ? '✦ UNIVERS IA DÉBLOQUÉ →' : 'UNIVERS IA →'}
-      </button>
-
       <div className="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="7"/>
@@ -256,6 +244,13 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
               </button>
             );
           })}
+        </div>
+      )}
+
+      {iaUnlocked && (
+        <div className="ia-section-strip" onClick={onTapIA} role="button" tabIndex={0}>
+          <span className="ia-strip-label">✦ UNIVERS IA · {L.iaAgents.length} AGENTS</span>
+          <span className="ia-strip-sub">Agents IA · vidéos · outils → PAGE DÉDIÉE</span>
         </div>
       )}
 
