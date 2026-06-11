@@ -275,66 +275,9 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
         </>
       )}
 
-      {/* PLAYGROUND */}
       <div className="spacer-lg" />
-      <div className="section-divider"><span>PLAYGROUND · {L.playground.length}</span></div>
-      <div className="body-xs dim" style={{ marginBottom: 14, lineHeight: 1.5 }}>
-        Exercices de style, explorations visuelles et projets personnels.
-      </div>
-      <div className="pg-grid">
-        {L.playground.map(p => (
-          <div key={p.id} className="pg-card">
-            <div className="pg-cover">
-              {p.cover
-                ? <img src={p.cover} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                : <div className="pg-cover-ph">{p.title.charAt(0)}</div>}
-            </div>
-            <div className="pg-body">
-              <div className="body-xs dim pg-type">{p.type}</div>
-              <div className="pg-title">{p.title}</div>
-              <p className="body-sm" style={{ marginBottom: 6 }}>{p.desc}</p>
-              <p className="body-xs dim" style={{ fontStyle: 'italic', marginBottom: 8, paddingTop: 6, borderTop: '1px solid rgba(0,0,0,0.08)' }}>{p.note}</p>
-              <div className="pcard-tags">
-                {p.tags.map(t => <span key={t} className="pcard-tag">{t}</span>)}
-              </div>
-              {p.url && (
-                <a href={p.url} target="_blank" rel="noopener noreferrer"
-                  className="pg-url body-xs"
-                  onClick={e => e.stopPropagation()}>
-                  VOIR LE SITE ↗
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
 
-      {/* UNIVERS IA */}
-      <div className="spacer-lg" />
-      <div className="section-divider"><span>UNIVERS IA · {L.iaAgents.length} AGENTS</span></div>
-      <p className="body-sm" style={{ marginBottom: 8 }}>
-        Créer une IA, c'est créer un personnage. Chaque agent est une décision de design — une voix, une personnalité, un univers construit prompt par prompt.
-      </p>
-      <div className="cantina-badge">{L.promptSkills.badge}</div>
-      <div className="agents-grid-exp" style={{ marginBottom: 16 }}>
-        {L.iaAgents.map(a => <AgentCardExpand key={a.id} agent={a} />)}
-      </div>
-      <div className="prompt-skills-block">
-        <div className="body-xs dim" style={{ marginBottom: 10 }}>PROMPT SKILLS · OUTILS PRO</div>
-        <div className="ps-main">
-          {L.promptSkills.main.map(t => (
-            <div key={t.name} className="ps-tool">
-              <div className="ps-tool-name">{t.name}</div>
-              <div className="body-xs dim">{t.org}</div>
-            </div>
-          ))}
-        </div>
-        <div className="ps-secondary">
-          {L.promptSkills.secondary.map(t => <span key={t} className="ps-sec-chip body-xs">{t}</span>)}
-        </div>
-      </div>
-
-      <div className="spacer-lg" />
+      <FloatingIABtn locked={!iaUnlocked} onClick={onTapIA} />
     </div>
   );
 }
