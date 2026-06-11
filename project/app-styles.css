@@ -1724,9 +1724,20 @@ img { display: block; max-width: 100%; }
 /* ---- AGENTS ---- */
 .cantina-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 2px solid var(--color-ink); background: var(--color-primary); color: #fff; font-size: 11px; font-weight: 700; font-family: var(--ff-mono); letter-spacing: 0.05em; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
 .agents-grid { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-.agent-card { border: 1.5px solid var(--color-ink); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; background: var(--color-paper-2); transition: box-shadow 0.15s; }
+
+/* --- flip card --- */
+.agent-card { border: 1.5px solid var(--color-ink); cursor: pointer; perspective: 800px; height: 80px; position: relative; transition: box-shadow 0.15s, border-color 0.15s; }
 .agent-card:hover { box-shadow: 3px 3px 0 var(--color-primary); }
-.agent-card.is-open { border-color: var(--color-primary); background: var(--color-card); }
+.agent-card.is-flipped { border-color: var(--color-primary); }
+.agent-card-inner { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.45s ease; }
+.agent-card.is-flipped .agent-card-inner { transform: rotateY(180deg); }
+.agent-card-front,
+.agent-card-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.agent-card-front { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--color-paper-2); }
+.agent-card-back { transform: rotateY(180deg); background: #000; }
+.agent-card-back video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.agent-back-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 4px 10px; background: rgba(0,0,0,0.55); color: #fff; font-size: 10px; font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 .agent-photo { width: 44px; height: 44px; border: 1.5px solid var(--color-ink); overflow: hidden; flex-shrink: 0; }
 .agent-photo img { width: 100%; height: 100%; object-fit: cover; }
 .agent-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; background: var(--color-primary); color: #fff; }
