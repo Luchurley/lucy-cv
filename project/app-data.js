@@ -76,7 +76,6 @@ window.LUCY = {
         motionSrc: 'assets/videos-projets/brian-launch.mp4',
       },
       desktopMocks: [
-        { src: 'assets/projects/assets-bundle/tec/tec-wireframe.png', cap: 'Wireframe lo-fi' },
         { src: 'assets/projects/assets-bundle/tec/tec-desktop-alt.jpg', cap: 'Site Webflow — desktop' },
         { src: 'assets/projects/assets-bundle/tec/tec-mobile-alt.jpeg', cap: 'Site Webflow — mobile' },
       ],
@@ -177,13 +176,12 @@ window.LUCY = {
         { src: 'assets/projects/assets-bundle/jaccede/jaccede-merch-mockup.jpeg', cap: 'Merch' },
       ],
       phoneMocks: [
-        { src: 'assets/projects/assets-bundle/jaccede/jaccede-home.png', cap: 'Accueil — scroll' },
         { src: 'assets/projects/assets-bundle/jaccede/jaccede-map-radius.jpg', cap: 'Carte — rayon (lo-fi)' },
         { src: 'assets/projects/assets-bundle/jaccede/jaccede-map-poi-detail.jpg', cap: 'Fiche lieu (lo-fi)' },
       ],
       formMocks: [
-        { src: 'assets/projects/assets-bundle/jaccede/jaccede-form-wireframe-mobile.jpg', cap: 'Wireframe lo-fi' },
-        { src: 'assets/projects/assets-bundle/jaccede/jaccede-form-desktop.jpg', cap: 'Formulaire hi-fi' },
+        { src: 'assets/projects/assets-bundle/jaccede/jaccede-lofiwireframe-form.jpeg', cap: 'Wireframe lo-fi' },
+        { src: 'assets/projects/assets-bundle/jaccede/jaccede-form-wireframe-mobile.jpg', cap: 'Formulaire hi-fi' },
       ],
       result: `Design system inclusif complet livré. Maquettes desktop + mobile haute fidélité. UX Audit formalisé avec 7 findings prioritarisés. Motion design sur les interactions clés.`,
       skills: ['UX Research', 'UX Audit · S/E Grid', 'A11y WCAG 2.1 AA', 'ARIA', 'Mobile-first', 'Design System', 'Motion Design', 'Gamification UX'],
@@ -211,7 +209,10 @@ window.LUCY = {
       ],
       result: `Écosystème multisite livré, solution web-to-print intégrée. Coordination 360° entre partenaires techniques, direction et équipes internes.`,
       skills: ['Gestion de projet', 'Web-to-print', 'Pilotage Multi-Acteurs', 'Intégration digitale', 'Mise en Production'],
-      screenshots: [],
+      screenshots: [
+        'assets/projects/assets-bundle/other/adhocmedia-desktop.jpeg',
+        'assets/projects/assets-bundle/other/adhocmedia-mobile.jpeg',
+      ],
     },
     {
       id: 'wegoboard',
@@ -284,7 +285,12 @@ window.LUCY = {
       ],
       result: `Site vitrine + tunnel d'abonnement livrés. Projet qui a poussé loin le couplage entre direction artistique forte et UX rigoureuse. Aimé travailler la tension entre dark fun et clarté commerciale.`,
       skills: ['Direction Artistique', 'UX vitrine', 'Motion design', 'Univers de marque'],
-      screenshots: [],
+      screenshots: [
+        'assets/projects/assets-bundle/other/squidgame-vitrine.png',
+        'assets/projects/assets-bundle/other/squidgame-products.png',
+        'assets/projects/assets-bundle/other/squigame-interface.png',
+        'assets/projects/assets-bundle/other/squigame-services.png',
+      ],
     },
     {
       id: 'equality',
@@ -352,7 +358,11 @@ window.LUCY = {
       ],
       result: `Projet livré en équipe dans le cadre d'un concours. Flow recette→panier ultra-fluide. Une expérience de collaboration créative en conditions réelles.`,
       skills: ['UX e-commerce', 'Information architecture', 'Web + Mobile', 'Conversion'],
-      screenshots: ['assets/projects/cora-detail-1.jpg', 'assets/projects/cora-detail-2.jpg'],
+      screenshots: [
+        'assets/projects/cora-detail-1.jpg', 'assets/projects/cora-detail-2.jpg',
+        'assets/projects/assets-bundle/other/cora-recipe-detail.jpg',
+        'assets/projects/assets-bundle/other/cora-recipe-wireframe.jpg',
+      ],
     },
     {
       id: 'disrupted',
@@ -403,7 +413,7 @@ window.LUCY = {
       ],
       result: `Exercice de style livré en 2h. Démonstration : créativité sous contrainte forte, respect d'un design system existant.`,
       skills: ['UI Design', 'Branding', 'Design sous contrainte', 'Vitesse d\'exécution'],
-      screenshots: [],
+      screenshots: ['assets/projects/assets-bundle/other/ikea-iphone-mockup.png'],
     },
     {
       id: 'yungo',
@@ -425,7 +435,10 @@ window.LUCY = {
       ],
       result: `Maquettes UI complètes livrées. Identité de carte bancaire signature. Système visuel adapté à la double cible ados/parents.`,
       skills: ['UI Design', 'Direction Artistique', 'Fintech', 'Design éthique'],
-      screenshots: ['assets/projects/yungo-teen-bank.png'],
+      screenshots: [
+        'assets/projects/yungo-teen-bank.png',
+        'assets/projects/assets-bundle/other/teen-bank.png',
+      ],
     },
     {
       id: 'squidui',
@@ -471,7 +484,7 @@ window.LUCY = {
       ],
       result: `Site one-page livré en production. Identité visuelle complète. Animations Webflow sur mesure.`,
       skills: ['Direction Artistique', 'Webflow', 'Branding', 'One-page'],
-      screenshots: [],
+      screenshots: ['assets/projects/assets-bundle/other/lacopain-site.jpg'],
       isNew: true,
     },
     {
@@ -495,7 +508,7 @@ window.LUCY = {
       ],
       result: `Site en production pour le mariage. RSVP fonctionnel utilisé par tous les invités — grands-parents compris.`,
       skills: ['Webflow', 'UI Design', 'Simplicité radicale', 'Formulaires'],
-      screenshots: [],
+      screenshots: ['assets/projects/assets-bundle/other/mariage-save-the-date.jpg'],
     },
     {
       id: 'redburger',
@@ -517,7 +530,7 @@ window.LUCY = {
       ],
       result: `Site vitrine livré au client. Parcours mobile optimisé pour la conversion locale.`,
       skills: ['Webflow', 'UI Design', 'Food branding', 'Mobile-first'],
-      screenshots: [],
+      screenshots: ['assets/projects/assets-bundle/other/redburger-site.jpg'],
     },
   ],
 
