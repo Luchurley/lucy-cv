@@ -2382,3 +2382,186 @@ img { display: block; max-width: 100%; }
 }
 .cs-metacard-link:hover { text-decoration: underline; }
 
+/* ===== CASE STUDY SECTION HEADER ===== */
+.cs-sec-h {
+  display: flex; align-items: center; gap: 10px;
+  margin: 20px 0 10px;
+}
+.cs-sec-h::before, .cs-sec-h::after {
+  content: ''; flex: 1; height: 2px; background: var(--color-ink);
+}
+.cs-sec-h > span {
+  font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap;
+}
+.cs-sub-h {
+  font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 6px 0 4px; margin-top: 10px; border-top: 1.5px solid var(--color-ink);
+}
+
+/* ===== CS BODY CARD ===== */
+.cs-body-card {
+  padding: 12px 14px; background: var(--color-paper-2);
+  border: 1.5px solid var(--color-ink); margin-bottom: 10px;
+  font-family: var(--ff-mono); font-size: 11px; line-height: 1.7;
+}
+
+/* ===== CS INFO TEAL (double cible block) ===== */
+.cs-info-teal {
+  background: var(--color-secondary); border: 2px solid var(--color-ink);
+  padding: 12px 14px; margin-bottom: 10px;
+  font-family: var(--ff-mono); font-size: 11px; line-height: 1.7;
+}
+
+/* ===== CS CONTENT BLOCKS (naming / logo / brian / etc.) ===== */
+.cs-blk {
+  border: 1.5px solid var(--color-ink); padding: 12px 14px;
+  margin-bottom: 8px; background: var(--color-paper-2);
+}
+.cs-blk.cs-blk-ink {
+  background: var(--color-ink); color: var(--color-paper-2);
+}
+.cs-blk-l {
+  font-family: var(--ff-mono); font-size: 8.5px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  margin-bottom: 6px; color: var(--color-primary);
+}
+.cs-blk.cs-blk-ink .cs-blk-l { color: var(--color-secondary); }
+.cs-blk-b {
+  font-family: var(--ff-mono); font-size: 11px; line-height: 1.65;
+}
+
+/* ===== RESULT BLOCK ===== */
+.cs-result {
+  border: 2.5px solid var(--color-ink); padding: 14px;
+  background: var(--color-paper); margin-bottom: 10px;
+  font-family: var(--ff-mono); font-size: 11px; line-height: 1.7;
+}
+
+/* ===== PALETTE SWATCHES ===== */
+.cs-palette { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.cs-swatch { display: flex; align-items: center; gap: 8px; }
+.cs-swatch-chip { width: 28px; height: 28px; border: 1.5px solid var(--color-ink); flex-shrink: 0; }
+.cs-swatch-name { font-family: var(--ff-mono); font-size: 10px; font-weight: 700; flex: 1; }
+.cs-swatch-hex { font-family: var(--ff-mono); font-size: 9px; color: var(--color-ink-dim); flex: 1; }
+.cs-swatch-role { font-family: var(--ff-mono); font-size: 9px; color: var(--color-ink-dim); flex: 2; }
+
+/* ===== AUDIT 2-COL (Wegoboard) ===== */
+.cs-audit2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.cs-audit2-col { padding: 10px 12px; border: 1.5px solid var(--color-ink); }
+.cs-audit2-ok { background: rgba(0,184,196,0.12); }
+.cs-audit2-ko { background: rgba(255,0,85,0.08); }
+.cs-audit2-h {
+  font-family: var(--ff-mono); font-size: 8px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+}
+.cs-audit2-item {
+  font-family: var(--ff-mono); font-size: 10px; line-height: 1.55;
+  padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* ===== DESKTOP MOCKS ===== */
+.cs-desk-mock {
+  border: 2px solid var(--color-ink); margin-bottom: 10px; overflow: hidden;
+}
+.cs-desk-mock img { width: 100%; display: block; }
+.cs-desk-mock-ph {
+  height: 180px; background: var(--color-paper-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-mono); font-size: 10px; color: var(--color-ink-dim);
+}
+.cs-desk-mock-cap {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.08em;
+  padding: 6px 10px; background: var(--color-paper-2);
+  border-top: 1.5px solid var(--color-ink); color: var(--color-ink-dim);
+}
+
+/* ===== PHONE MOCKS ===== */
+.cs-phone-mocks {
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
+  margin-bottom: 10px;
+}
+.cs-phone-mocks::-webkit-scrollbar { height: 3px; }
+.cs-phone-mocks::-webkit-scrollbar-thumb { background: var(--color-ink); }
+.cs-phone-mock {
+  flex: 0 0 140px; border: 2px solid var(--color-ink); overflow: hidden;
+  scroll-snap-align: start;
+}
+.cs-phone-mock img { width: 100%; display: block; }
+.cs-phone-mock-ph {
+  width: 140px; height: 240px; background: var(--color-paper-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-mono); font-size: 9px; color: var(--color-ink-dim);
+  text-align: center; padding: 8px;
+}
+.cs-phone-mock figcaption {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.06em;
+  padding: 4px 6px; background: var(--color-paper-2);
+  border-top: 1.5px solid var(--color-ink); color: var(--color-ink-dim);
+}
+
+/* ===== UI KIT GALLERY (horizontal swipe) ===== */
+.cs-gallery-hint {
+  font-family: var(--ff-mono); font-size: 8.5px; letter-spacing: 0.08em;
+  color: var(--color-ink-dim); text-align: center; margin-bottom: 6px;
+  padding: 3px; border: 1px dashed var(--color-ink-dim);
+}
+.cs-gallery {
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
+  margin-bottom: 10px;
+}
+.cs-gallery::-webkit-scrollbar { height: 3px; }
+.cs-gallery::-webkit-scrollbar-thumb { background: var(--color-ink); }
+.cs-gallery-item {
+  flex: 0 0 200px; border: 2px solid var(--color-ink); overflow: hidden;
+  scroll-snap-align: start;
+}
+.cs-gallery-item img { width: 100%; display: block; }
+.cs-gallery-ph {
+  width: 200px; height: 140px; background: var(--color-paper-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-mono); font-size: 9px; color: var(--color-ink-dim);
+}
+.cs-gallery-item figcaption {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.06em;
+  padding: 4px 8px; background: var(--color-paper-2);
+  border-top: 1.5px solid var(--color-ink); color: var(--color-ink-dim);
+}
+
+/* ===== BRIAN / VIDROW ===== */
+.cs-brian { display: flex; flex-direction: column; gap: 0; margin-bottom: 4px; }
+.cs-vidrow {
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch; margin-bottom: 12px;
+}
+.cs-vidrow-item { flex: 0 0 200px; border: 1.5px solid var(--color-ink); overflow: hidden; }
+.cs-vidrow-item video { width: 100%; display: block; }
+.cs-vidrow-cap {
+  font-family: var(--ff-mono); font-size: 8px; padding: 4px 6px;
+  background: var(--color-paper-2); border-top: 1px solid var(--color-ink);
+  color: var(--color-ink-dim); letter-spacing: 0.04em;
+}
+.cs-motion-vid {
+  width: 100%; display: block;
+  border: 1.5px solid var(--color-ink); margin-bottom: 14px;
+}
+
+/* ===== TABS (TEC case study / mission) ===== */
+.cs-tab-bar {
+  display: flex; border: 2.5px solid var(--color-ink);
+  margin-bottom: 16px; overflow: hidden;
+}
+.cs-tab-btn {
+  flex: 1; padding: 10px 8px; text-align: center;
+  font-family: var(--ff-mono); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--color-paper-2); border: none;
+  border-right: 2px solid var(--color-ink); cursor: pointer;
+  transition: background 120ms;
+}
+.cs-tab-btn:last-child { border-right: none; }
+.cs-tab-btn.is-active { background: var(--color-ink); color: var(--color-paper-2); }
+
