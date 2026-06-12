@@ -17,10 +17,13 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
 
   const similar = L.projects.filter(p => p.id !== project.id).slice(0, 5);
   const accent = window.PROJECT_COLOR[project.id] || '#FF0055';
-  // Use real screenshots when present, else 4 generic mockups
   const slides = (project.screenshots && project.screenshots.length)
     ? project.screenshots
     : [null, null, null, null];
+
+  const featuredList = L.projects.filter(p => p.featured);
+  const featuredIdx = featuredList.findIndex(p => p.id === project.id);
+  const isFeatured = featuredIdx >= 0;
 
   const goSlide = (i) => {
     setSlide(i);
@@ -33,60 +36,51 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
 
   return (
     <div className="page" data-screen-label={'Detail ' + project.shortName}>
-      <div className="detail-hero">
-        <window.HeroCover id={project.id} />
+
+      {isFeatured ? (
+        <div className="cs-hero">
+          <span className="cs-kick">CASE STUDY {String(featuredIdx + 1).padStart(2, '0')}</span>
+          <div className="cs-title">{project.name}</div>
+          <p className="cs-tagline">{project.tagline}</p>
+        </div>
+      ) : (
+        <div className="cs-hero cs-hero-proj">
+          <span className="cs-kick">PROJET</span>
+          <div className="cs-title">{project.name}</div>
+          {project.tagline && <p className="cs-tagline">{project.tagline}</p>}
+        </div>
+      )}
+
+      <div className="cs-metacard">
+        <div className="cs-metacard-row">
+          <span className="cs-metacard-k">RÔLE</span>
+          <span className="cs-metacard-v">{project.role}</span>
+        </div>
+        <div className="cs-metacard-row">
+          <span className="cs-metacard-k">CONTEXTE</span>
+          <span className="cs-metacard-v">{project.context}</span>
+        </div>
+        <div className="cs-metacard-row">
+          <span className="cs-metacard-k">PÉRIODE</span>
+          <span className="cs-metacard-v">{project.year} · {project.type.split('·')[0].trim()}</span>
+        </div>
+        {project.url && (
+          <div className="cs-metacard-row">
+            <span className="cs-metacard-k">LIEN</span>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cs-metacard-link"
+              onClick={() => gainXP && gainXP(5, `Site visité — ${project.shortName}`)}
+            >{project.url.replace('https://', '')} ↗</a>
+          </div>
+        )}
       </div>
 
-      <div className="display-lg" style={{ marginTop: 4 }}>{project.name}</div>
-      <div className="page-subline">{project.type} · {project.year}</div>
-
-      <div className="pcard-tags" style={{ marginTop: 10, marginBottom: 12 }}>
+      <div className="pcard-tags" style={{ marginBottom: 16 }}>
         {project.tags.map(t => <span key={t} className="pcard-tag">{t}</span>)}
       </div>
-
-      {project.url && (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="proj-url-link"
-          onClick={() => gainXP && gainXP(5, `Site visité — ${project.shortName}`)}
-        >
-          VOIR LE SITE ↗ <span className="proj-url-val">{project.url.replace('https://', '')}</span>
-        </a>
-      )}
-
-      <SectionDivider>OVERVIEW</SectionDivider>
-      <div className="col-2">
-        <div className="meta-card">
-          <div className="body-xs dim">CONTEXTE</div>
-          <div className="body-md" style={{ marginTop: 4, lineHeight: 1.55 }}>{project.context}</div>
-        </div>
-        <div className="meta-card">
-          <div className="body-xs dim">MON RÔLE</div>
-          <div className="body-md" style={{ marginTop: 4, lineHeight: 1.55 }}>{project.role}</div>
-        </div>
-      </div>
-
-      <div className="spacer-md" />
-      <div className="col-3">
-        <div className="meta-card">
-          <div className="body-xs dim">PÉRIODE</div>
-          <div className="body-md" style={{ marginTop: 4, fontWeight: 700 }}>{project.year}</div>
-        </div>
-        <div className="meta-card">
-          <div className="body-xs dim">TYPE</div>
-          <div className="body-md" style={{ marginTop: 4, fontWeight: 700 }}>{project.type.split('·')[0].trim()}</div>
-        </div>
-        <div className="meta-card accent-rose">
-          <div className="body-xs" style={{ color: 'var(--color-ink)' }}>XP</div>
-          <div className="display-sm" style={{ marginTop: 2 }}>+20</div>
-        </div>
-      </div>
-
-      {project.tagline && (
-        <div className="proj-tagline">{project.tagline}</div>
-      )}
 
       {project.brief && (
         <>

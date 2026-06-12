@@ -126,12 +126,10 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
   const [filters, setFilters] = useState([]);
 
   const FILTERS = [
-    { key: 'ux',       label: 'UX/UI' },
-    { key: 'da',       label: 'DA' },
-    { key: 'strat',    label: 'STRAT.' },
-    { key: 'ia',       label: '✦ IA' },
-    { key: 'cdi',      label: 'CDI' },
-    { key: 'freelance', label: 'FREELANCE' },
+    { key: 'ux',    label: 'UX/UI' },
+    { key: 'da',    label: 'DA' },
+    { key: 'strat', label: 'STRAT.' },
+    { key: 'ia',    label: 'IA' },
   ];
 
   const toggleFilter = (k) => {
@@ -224,26 +222,26 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
         )
       ) : (
         <>
-          <div className="section-divider"><span>★ CASE STUDIES · {featured.length}</span></div>
-          <div className="body-xs dim" style={{ marginBottom: 12 }}>vitrine principale · process en profondeur</div>
+          <div className="section-divider"><span>CASE STUDIES COMPLETS</span></div>
           <div className="featured-grid">
-            {featured.map(p => {
+            {featured.map((p, fi) => {
               const Cover = window.COVERS[p.cover];
+              const foot = p.year + ' · ' + (p.contract?.[0] || p.type.split('·')[0]).toUpperCase().trim();
               return (
                 <button key={p.id} className="featured-card" onClick={() => onOpen(p.id)}>
                   <div className="featured-card-cover">
                     {Cover ? <Cover /> : <div className="featured-card-cover-ph">{p.shortName}</div>}
-                    <span className="featured-badge">★ CASE STUDY</span>
+                    <span className="featured-badge">CASE STUDY →</span>
                   </div>
                   <div className="featured-card-body">
                     <div className="featured-card-title-row">
                       <div className="display-md">{p.name}</div>
-                      <span style={{ fontSize: 16 }}>→</span>
+                      <span className="featured-card-num">0{fi + 1}</span>
                     </div>
                     <div className="body-xs dim" style={{ lineHeight: 1.5, marginTop: 2 }}>{p.tagline}</div>
                     <div className="featured-card-footer">
                       <div className="pcard-tags">{p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}</div>
-                      <span className="featured-voir">VOIR L'ÉTUDE →</span>
+                      <span className="featured-card-foot">{foot}</span>
                     </div>
                   </div>
                 </button>
@@ -252,8 +250,8 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
           </div>
 
           <div className="spacer-md" />
-          <div className="section-divider"><span>AUTRES PROJETS · {others.length}</span></div>
-          <div className="spacer-sm" />
+          <div className="section-divider"><span>AUTRES PROJETS</span></div>
+          <div className="proj-autres-note">Projets clients, exercices et explorations — non détaillés par choix, pas par manque de process.</div>
           <div className="proj-grid">
             {others.map(p => {
               const Cover = window.COVERS[p.cover];
@@ -277,7 +275,15 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
 
       <div className="spacer-lg" />
 
-      <FloatingIABtn locked={!iaUnlocked} onClick={onTapIA} />
+      <button className="proj-ia-band" onClick={onTapIA} aria-label="Accéder à l'univers IA">
+        <div className="proj-ia-band-left">
+          <span className="proj-ia-band-kicker">UNIVERS IA</span>
+          <span className="proj-ia-band-sub">10 agents incarnés · flip vidéo</span>
+        </div>
+        <span className="proj-ia-band-arrow">✦ →</span>
+      </button>
+
+      <div className="spacer-lg" />
     </div>
   );
 }
