@@ -273,6 +273,97 @@ function SlideMockup({ idx, color = '#FF0055' }) {
   return <Item />;
 }
 
+function CoverIkea() {
+  return (
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="300" height="200" fill={C.orange} />
+      <circle cx="150" cy="86" r="46" fill={C.cream} stroke={C.ink} strokeWidth="2.5" />
+      <circle cx="134" cy="80" r="8" fill={C.ink} /><circle cx="166" cy="80" r="8" fill={C.ink} />
+      <circle cx="150" cy="100" r="5" fill={C.ink} />
+      <g stroke={C.ink} strokeWidth="2">{[132, 140, 148, 156, 164].map((x) => <line key={x} x1={x} y1="112" x2={x} y2="124" />)}</g>
+      <rect x="132" y="112" width="36" height="12" fill="none" stroke={C.ink} strokeWidth="2" />
+      {[[150, 30], [206, 86], [150, 142], [94, 86]].map((p, i) => <circle key={i} cx={p[0]} cy={p[1]} r="6" fill={C.rose} stroke={C.ink} strokeWidth="1.5" />)}
+      <rect x="0" y="164" width="300" height="36" fill={C.ink} />
+      <text x="150" y="189" fill={C.cream} fontFamily="Space Mono" fontSize="11" fontWeight="700" letterSpacing="2" textAnchor="middle">IKEA × DÍA DE LOS MUERTOS</text>
+    </svg>
+  );
+}
+
+function CoverSquidUI() {
+  return (
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="300" height="200" fill={C.ink} />
+      <rect x="78" y="40" width="144" height="86" rx="16" fill="#15100e" stroke={C.rose} strokeWidth="2.5" />
+      <rect x="86" y="48" width="128" height="70" rx="11" fill="none" stroke="#2a2220" strokeWidth="2" />
+      <circle cx="150" cy="83" r="22" fill="none" stroke={C.teal} strokeWidth="3" />
+      <text x="150" y="158" fill={C.cream} fontFamily="Bebas Neue" fontSize="30" letterSpacing="2" textAnchor="middle">SQUID · UI</text>
+      <text x="150" y="180" fill={C.rose} fontFamily="Space Mono" fontSize="8" fontWeight="700" letterSpacing="2" textAnchor="middle">NEUMORPHISM · CONCEPT</text>
+    </svg>
+  );
+}
+
+function CoverFlower({ cx, cy, c }) {
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r="3.4" fill={C.ink} />
+      {[[-6, 0], [6, 0], [0, -6], [0, 6]].map((d, i) => <circle key={i} cx={cx + d[0]} cy={cy + d[1]} r="2.8" fill={c} stroke={C.ink} strokeWidth="0.8" />)}
+    </g>
+  );
+}
+
+function CoverSaveDate() {
+  return (
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="300" height="200" fill={C.cream} />
+      <rect x="11" y="11" width="278" height="178" fill="none" stroke={C.ink} strokeWidth="2.5" />
+      <CoverFlower cx={30} cy={36} c={C.rose} /><CoverFlower cx={270} cy={36} c={C.teal} />
+      <CoverFlower cx={30} cy={164} c={C.teal} /><CoverFlower cx={270} cy={164} c={C.rose} />
+      <text x="150" y="56" fill={C.ink} fontFamily="Bebas Neue" fontSize="30" letterSpacing="3" textAnchor="middle">SAVE THE DATE</text>
+      <circle cx="136" cy="103" r="19" fill="none" stroke={C.rose} strokeWidth="3.5" />
+      <circle cx="164" cy="103" r="19" fill="none" stroke={C.teal} strokeWidth="3.5" />
+      <text x="150" y="149" fill={C.ink} fontFamily="Bebas Neue" fontSize="23" letterSpacing="1.5" textAnchor="middle">CLAIRE &amp; MAXIME</text>
+      <text x="150" y="168" fill={C.rose} fontFamily="Space Mono" fontSize="11" fontWeight="700" letterSpacing="3" textAnchor="middle">15 · 06 · 2024</text>
+      <text x="150" y="181" fill={C.ink} fontFamily="Space Mono" fontSize="7" fontWeight="700" letterSpacing="2" textAnchor="middle" opacity="0.6">L'ORBRIE · VENDÉE</text>
+    </svg>
+  );
+}
+
+function CoverLaCopain() {
+  return (
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="300" height="200" fill={C.orange} />
+      <circle cx="40" cy="44" r="11" fill={C.teal} stroke={C.ink} strokeWidth="2" />
+      <circle cx="261" cy="52" r="15" fill={C.rose} stroke={C.ink} strokeWidth="2" />
+      <circle cx="252" cy="150" r="9" fill={C.cream} stroke={C.ink} strokeWidth="2" />
+      <circle cx="46" cy="150" r="7" fill={C.cream} stroke={C.ink} strokeWidth="2" />
+      <rect x="135" y="24" width="30" height="13" fill={C.ink} />
+      <rect x="140" y="36" width="20" height="26" fill={C.cream} stroke={C.ink} strokeWidth="2.5" />
+      <polygon points="140,58 160,58 181,84 119,84" fill={C.cream} stroke={C.ink} strokeWidth="2.5" />
+      <rect x="117" y="80" width="66" height="98" rx="9" fill={C.cream} stroke={C.ink} strokeWidth="2.5" />
+      <rect x="123" y="104" width="54" height="58" fill={C.rose} stroke={C.ink} strokeWidth="2" />
+      <text x="150" y="122" fill={C.cream} fontFamily="Bebas Neue" fontSize="11" textAnchor="middle">LA</text>
+      <text x="150" y="141" fill={C.cream} fontFamily="Bebas Neue" fontSize="16" textAnchor="middle">COPAIN</text>
+      <text x="150" y="192" fill={C.cream} fontFamily="Space Mono" fontSize="8" fontWeight="700" letterSpacing="2" textAnchor="middle">UNE BIÈRE DE POTES · 12 AMIS</text>
+    </svg>
+  );
+}
+
+function CoverRedburger() {
+  return (
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="300" height="200" fill={C.cream} />
+      <path d="M76 98 Q150 46 224 98 Z" fill={C.orange} stroke={C.ink} strokeWidth="2.5" />
+      <circle cx="120" cy="84" r="3" fill={C.cream} /><circle cx="150" cy="76" r="3" fill={C.cream} /><circle cx="180" cy="84" r="3" fill={C.cream} />
+      <rect x="74" y="98" width="152" height="12" rx="2" fill={C.rose} stroke={C.ink} strokeWidth="2" />
+      <rect x="74" y="110" width="152" height="16" fill={C.ink} />
+      <rect x="74" y="126" width="152" height="12" rx="2" fill={C.orange} stroke={C.ink} strokeWidth="2" />
+      <path d="M74 138 h152 v6 q0 16 -18 16 H92 q-18 0 -18 -16 Z" fill={C.orange} stroke={C.ink} strokeWidth="2.5" />
+      <rect x="0" y="172" width="300" height="28" fill={C.ink} />
+      <text x="150" y="191" fill={C.cream} fontFamily="Bebas Neue" fontSize="16" letterSpacing="3" textAnchor="middle">REDBURGER</text>
+    </svg>
+  );
+}
+
 // Single-letter monogram cover (fallback / similar cards)
 function MiniCover({ name, color = '#FF0055' }) {
   const letter = (name || '?')[0].toUpperCase();
@@ -296,6 +387,11 @@ const COVERS = {
   yungo: CoverYungo,
   adhoc: CoverAdhoc,
   squidgame: CoverSquid,
+  ikea: CoverIkea,
+  squidui: CoverSquidUI,
+  savedate: CoverSaveDate,
+  lacopain: CoverLaCopain,
+  redburger: CoverRedburger,
 };
 
 // Project accent color for mockups
@@ -309,6 +405,11 @@ const PROJECT_COLOR = {
   yungo: '#0033A0',
   adhoc: '#FF5500',
   squidgame: '#FF0055',
+  ikea: '#FF5500',
+  squidui: '#FF0055',
+  savedate: '#FF0055',
+  lacopain: '#FF5500',
+  redburger: '#FF5500',
 };
 
 Object.assign(window, { COVERS, HeroCover, SlideMockup, MiniCover, PROJECT_COLOR });
