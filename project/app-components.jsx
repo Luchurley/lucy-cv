@@ -417,9 +417,10 @@ function AgentCardExpand({ agent }) {
   );
 }
 
-// ---------- AGENT ROW IA (compact, flip → video) ----------
+// ---------- AGENT ROW IA (flip card → video + sound + fullscreen) ----------
 function AgentRowIA({ agent, idx, gainXP, seenRef }) {
   const [flipped, setFlipped] = React.useState(false);
+  const [muted, setMuted] = React.useState(true);
   const vidRef = React.useRef(null);
 
   const toggle = () => {
@@ -433,12 +434,33 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
             gainXP(5, `Agent découvert — ${agent.name}`);
           }
         }
-        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
+        setMuted(true);
+        setTimeout(() => { if (vidRef.current) { vidRef.current.muted = true; vidRef.current.play().catch(() => {}); } }, 280);
       } else {
-        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
+        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; vidRef.current.muted = true; }
+        setMuted(true);
       }
       return next;
     });
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    if (!vidRef.current) return;
+    const next = !muted;
+    vidRef.current.muted = next;
+    if (!next && vidRef.current.paused) vidRef.current.play().catch(() => {});
+    setMuted(next);
+  };
+
+  const openFullscreen = (e) => {
+    e.stopPropagation();
+    const v = vidRef.current;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    v.muted = false;
+    setMuted(false);
   };
 
   return (
@@ -460,10 +482,19 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
           <div className="ia-row-flip">↻</div>
         </div>
         <div className="ia-row-back">
-          {agent.video
-            ? <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
-            : <div className="ia-row-back-ph"><span>▶</span><span>VIDÉO</span></div>
-          }
+          {agent.video ? (
+            <>
+              <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
+              <div className="ia-row-video-controls">
+                <button className="ia-row-vc-btn" onClick={toggleMute} aria-label={muted ? 'Activer le son' : 'Couper le son'}>
+                  {muted ? '🔇' : '🔊'}
+                </button>
+                <button className="ia-row-vc-btn" onClick={openFullscreen} aria-label="Plein écran">⛶</button>
+              </div>
+            </>
+          ) : (
+            <div className="ia-row-back-ph"><span>▶</span><span>VIDÉO</span></div>
+          )}
           <div className="ia-row-back-label">{agent.name}</div>
         </div>
       </div>

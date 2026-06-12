@@ -2043,3 +2043,137 @@ img { display: block; max-width: 100%; }
 .audit-item-pos, .audit-item-fric { padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .audit-item-pos::before { content: '✓ '; color: var(--color-secondary); }
 .audit-item-fric::before { content: '× '; color: var(--color-primary); }
+
+/* ===== SKILLS INFOGRAPHIC — 4 PÔLES ===== */
+.skills-infographic { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+
+.skills-ig-hub { position: relative; width: 88px; height: 88px; margin: 0 auto; flex-shrink: 0; }
+.skills-ig-hub-rings {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid var(--color-ink);
+  box-shadow: 0 0 0 6px rgba(10,8,6,0.06), 0 0 0 12px rgba(10,8,6,0.03);
+}
+.skills-ig-hub-inner {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0;
+}
+.skills-ig-hub-num {
+  font-family: var(--ff-display); font-size: 32px; line-height: 1; color: var(--color-ink);
+}
+.skills-ig-hub-lbl {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.14em;
+  color: var(--color-ink-dim); text-transform: uppercase;
+}
+
+.skills-ig-spine { display: flex; flex-direction: column; gap: 8px; }
+.skills-ig-row { display: flex; align-items: flex-start; gap: 10px; }
+
+.skills-ig-pin {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%; background: var(--pin-color, var(--color-ink));
+  border: 2px solid var(--color-ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display); font-size: 16px; color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.skills-ig-card {
+  flex: 1; border: 1.5px solid var(--color-ink); padding: 8px 10px;
+  background: var(--color-card); box-shadow: var(--shadow-sm);
+}
+.skills-ig-cap {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.14em;
+  color: var(--color-ink-dim); margin-bottom: 2px;
+}
+.skills-ig-title {
+  font-family: var(--ff-display); font-size: 18px; line-height: 1;
+  color: var(--color-ink); margin-bottom: 4px;
+}
+.skills-ig-desc {
+  font-size: 11px; color: var(--color-ink-dim); line-height: 1.45; margin-bottom: 6px;
+}
+.skills-ig-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.skills-ig-tags span {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.08em;
+  padding: 2px 6px; border: 1px solid var(--color-ink);
+  background: var(--color-bg); text-transform: uppercase;
+}
+
+.skills-ig-stats {
+  display: flex; gap: 0; border: 2px solid var(--color-ink);
+  overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.skills-ig-stats > div {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 8px 6px; border-right: 1.5px solid var(--color-ink);
+  background: var(--color-paper-2);
+}
+.skills-ig-stats > div:last-child { border-right: none; }
+.skills-ig-stats strong {
+  font-family: var(--ff-display); font-size: 28px; line-height: 1; color: var(--color-ink);
+}
+.skills-ig-stats span {
+  font-family: var(--ff-mono); font-size: 7px; letter-spacing: 0.12em;
+  color: var(--color-ink-dim); text-transform: uppercase; margin-top: 1px;
+}
+
+/* ===== IA HERO UPDATES ===== */
+.ia-hero-kick {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.18em;
+  color: var(--color-secondary); text-transform: uppercase;
+  margin-bottom: 4px; padding: 2px 6px;
+  border: 1px solid var(--color-secondary); display: inline-block;
+}
+
+.ia-meta-teal {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0; margin-bottom: 4px;
+  border-bottom: 1.5px solid var(--color-ink-soft);
+}
+.ia-cantina-badge {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.12em;
+  padding: 3px 10px; background: var(--color-secondary); color: #fff;
+  text-transform: uppercase; border: 1.5px solid var(--color-ink);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== IA TOOL LOGO IMAGE ===== */
+.ia-tool-logo-img {
+  width: 36px; height: 36px; object-fit: contain;
+  border: 1.5px solid var(--color-ink); background: var(--color-card); flex-shrink: 0;
+}
+.ia-tool-info { flex: 1; min-width: 0; }
+.ia-tool-org {
+  font-family: var(--ff-mono); font-size: 8px; letter-spacing: 0.08em;
+  color: var(--color-ink-dim); text-transform: uppercase;
+}
+.ia-tool-usage {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.06em;
+  color: var(--color-secondary); font-weight: 700;
+  border: 1px solid var(--color-secondary); padding: 2px 6px;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* ===== IA SECONDARY CHIPS ===== */
+.ia-secondary-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ia-sec-chip {
+  font-family: var(--ff-mono); font-size: 8.5px; letter-spacing: 0.08em;
+  padding: 3px 8px; border: 1px solid var(--color-ink-dim);
+  color: var(--color-ink-dim); text-transform: uppercase;
+  background: var(--color-card);
+}
+
+/* ===== IA ROW VIDEO CONTROLS ===== */
+.ia-row-video-controls {
+  position: absolute; bottom: 40px; right: 8px;
+  display: flex; flex-direction: column; gap: 5px; z-index: 4;
+}
+.ia-row-vc-btn {
+  width: 30px; height: 30px; border: 1.5px solid rgba(255,255,255,0.85);
+  background: rgba(10,8,6,0.55); color: #fff; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; border-radius: 4px; padding: 0;
+  backdrop-filter: blur(4px);
+  transition: background 120ms;
+}
+.ia-row-vc-btn:hover { background: rgba(10,8,6,0.82); }

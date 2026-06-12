@@ -283,12 +283,54 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
 }
 
 // ---------- SKILLS ----------
+const SKILL_POLES = [
+  { n: '1', color: 'var(--color-secondary)', cap: 'PÔLE PRODUIT', title: 'UX / UI DESIGN', desc: 'Research, wireframes, design systems & prototypes testés.', tags: ['UX Research', 'UI', 'Design Systems', 'Figma', 'A11y'] },
+  { n: '2', color: 'var(--color-primary)', cap: 'PÔLE DA', title: 'DIRECTION ARTISTIQUE', desc: 'Branding, identité, typo & motion — univers cohérents.', tags: ['Branding', 'Identité', 'Motion', 'Adobe Suite'] },
+  { n: '3', color: 'var(--color-tertiary)', cap: 'PÔLE PILOTAGE', title: 'CHEFFE DE PROJET', desc: 'Pilotage 360°, Webflow, Qualiopi, KPIs & reporting.', tags: ['Gestion 360°', 'Webflow', 'CRM', 'KPIs'] },
+  { n: '4', color: 'var(--color-ink)', cap: 'PÔLE IA', title: 'IA & PROMPTING', desc: 'IA conversationnelle, prompt design depuis 2021.', tags: ['IA Conv.', 'Prompt Eng.', 'AI Product', 'Claude / GPT'] },
+];
+
 function SkillsScreen({ skillStates, onSkillTap }) {
   const L = window.LUCY;
   return (
     <div className="page" data-screen-label="Skills">
       <div className="display-lg">SKILLS</div>
       <div className="page-subline">Tape les tags pour gagner des XP. Chaque tag : 2 niveaux.</div>
+
+      {/* 4-pôle infographic */}
+      <div className="skills-infographic">
+        <div className="skills-ig-hub">
+          <div className="skills-ig-hub-rings" />
+          <div className="skills-ig-hub-inner">
+            <span className="skills-ig-hub-num">04</span>
+            <span className="skills-ig-hub-lbl">PÔLES</span>
+          </div>
+        </div>
+        <div className="skills-ig-spine">
+          {SKILL_POLES.map(p => (
+            <div key={p.n} className="skills-ig-row">
+              <div className="skills-ig-pin" style={{ '--pin-color': p.color }}>
+                <span>{p.n}</span>
+              </div>
+              <div className="skills-ig-card">
+                <div className="skills-ig-cap">{p.cap}</div>
+                <div className="skills-ig-title">{p.title}</div>
+                <div className="skills-ig-desc">{p.desc}</div>
+                <div className="skills-ig-tags">
+                  {p.tags.map(t => <span key={t}>{t}</span>)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="skills-ig-stats">
+          <div><strong>8</strong><span>PROJETS</span></div>
+          <div><strong>12</strong><span>EXP.</span></div>
+          <div><strong>3</strong><span>LANGUES</span></div>
+        </div>
+      </div>
+
+      <div className="section-divider" style={{ margin: '16px 0 10px' }}><span>TOUTES LES COMPÉTENCES</span></div>
 
       {L.skillsByCat.map((g, gi) => (
         <div key={gi} className="skill-cat">
@@ -559,6 +601,21 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
 }
 
 // ---------- IA PAGE ----------
+const LOGOS_BASE = 'https://raw.githubusercontent.com/Luchurley/lucy-cv/main/project/assets/projects/assets-bundle/logos/';
+const TOOL_LOGOS = {
+  'Claude': LOGOS_BASE + 'claude-logo.png',
+  'ChatGPT / Sora': LOGOS_BASE + 'chatgpt-logo.png',
+  'Gemini': LOGOS_BASE + 'gemini-logo.png',
+  'DeepSeek': LOGOS_BASE + 'deepseek-logo.png',
+};
+
+function ToolLogo({ name }) {
+  const [err, setErr] = React.useState(false);
+  const src = TOOL_LOGOS[name];
+  if (!src || err) return <div className="ia-tool-logo">{name[0]}</div>;
+  return <img src={src} alt={name} className="ia-tool-logo-img" onError={() => setErr(true)} />;
+}
+
 function IAScreen({ gainXP, onBack }) {
   const L = window.LUCY;
   const seenRef = React.useRef(new Set());
@@ -568,18 +625,20 @@ function IAScreen({ gainXP, onBack }) {
       {/* HERO */}
       <div className="ia-hero">
         <div className="ia-hero-deco" />
-        <div className="body-xs" style={{ opacity: 0.6, position: 'relative' }}>UNIVERS IA</div>
-        <div className="ia-hero-title">AGENTS<br />IA</div>
+        <div className="ia-hero-kick">ESPACE AUTONOME</div>
+        <div className="ia-hero-title">Univers IA</div>
         <div className="ia-hero-sub">
-          10 entités incarnées + les outils IA de mon travail. Un espace autonome du portfolio.
+          Créer une IA, c'est créer un personnage. Chaque agent est une décision de design — une voix, une personnalité, un univers construit prompt par prompt.
         </div>
       </div>
 
-      <div className="spacer-md" />
+      <div className="ia-meta-teal">
+        <span className="ia-cantina-badge">{L.promptSkills.badge}</span>
+      </div>
 
       {/* SECTION 1 */}
-      <div className="section-divider"><span>01 · MES AGENTS IA</span></div>
-      <div className="body-xs dim" style={{ marginBottom: 10 }}>section principale · grille carte d'identité · TAP = FLIP ↻ → VIDÉO</div>
+      <div className="section-divider" style={{ marginTop: 8 }}><span>01 · MES AGENTS IA</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>10 entités incarnées · TAP = FLIP ↻ → VIDÉO · 🔇 son · ⛶ plein écran</div>
 
       <div className="ia-rows-grid">
         {L.iaAgents.map((agent, idx) => (
@@ -588,35 +647,33 @@ function IAScreen({ gainXP, onBack }) {
       </div>
 
       <div className="ia-flip-hint">
-        ↻ tap → flip → vidéo de présentation
+        ↻ tap → flip → vidéo · tap 🔇 pour le son · ⛶ plein écran
       </div>
 
       <div className="section-divider" style={{ margin: '16px 0' }}><span /></div>
 
       {/* SECTION 2 */}
-      <div className="section-divider"><span>02 · OUTILS / IA UTILISÉS</span></div>
-      <div className="body-xs dim" style={{ marginBottom: 10 }}>section secondaire · version simplifiée des cards</div>
+      <div className="section-divider"><span>02 · PROMPT SKILLS · OUTILS PRO</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>outils IA principaux de mon workflow</div>
 
       <div className="ia-tools-list">
         {L.promptSkills.main.map(t => (
           <div key={t.name} className="ia-tool-row">
-            <div className="ia-tool-logo">{t.name[0]}</div>
-            <div className="ia-tool-name">{t.name}</div>
-            <div className="ia-tool-chips">
-              {t.usage.split(',').slice(0, 2).map((u, i) => (
-                <span key={i} className="pcard-tag">{u.trim().split(' ')[0].toUpperCase()}</span>
-              ))}
+            <ToolLogo name={t.name} />
+            <div className="ia-tool-info">
+              <div className="ia-tool-name">{t.name}</div>
+              <div className="ia-tool-org">{t.org}</div>
             </div>
+            <div className="ia-tool-usage">{t.usage.split(',')[0].trim()}</div>
           </div>
         ))}
-        <div className="ia-tool-row ia-tool-row-more">
-          <div className="ia-tool-logo ia-tool-logo-more">+</div>
-          <div className="ia-tool-name" style={{ opacity: 0.45 }}>AUTRES OUTILS · extensible</div>
-          <span style={{ fontFamily: 'var(--ff-display)', fontSize: 20, opacity: 0.35 }}>…</span>
-        </div>
       </div>
 
-      <div className="ia-badge-line">{L.promptSkills.badge}</div>
+      <div className="ia-secondary-chips">
+        {L.promptSkills.secondary.map(s => (
+          <span key={s} className="ia-sec-chip">{s}</span>
+        ))}
+      </div>
 
       <div className="spacer-lg" />
     </div>
