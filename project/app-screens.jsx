@@ -297,24 +297,28 @@ function SkillsScreen({ skillStates, onSkillTap }) {
       <div className="display-lg">SKILLS</div>
       <div className="page-subline">Tape les tags pour gagner des XP. Chaque tag : 2 niveaux.</div>
 
-      {/* 4-pôle infographic */}
+      {/* 4-pôle infographic — dark ink surface */}
       <div className="skills-infographic">
+        <div className="skills-ig-head">
+          <div className="skills-ig-kick">COMPÉTENCES</div>
+          <div className="skills-ig-title-main">PROFIL</div>
+          <div className="skills-ig-sub">4 PÔLES</div>
+        </div>
         <div className="skills-ig-hub">
-          <div className="skills-ig-hub-rings" />
-          <div className="skills-ig-hub-inner">
-            <span className="skills-ig-hub-num">04</span>
-            <span className="skills-ig-hub-lbl">PÔLES</span>
-          </div>
+          <div className="skills-ig-hub-ring" />
+          <div className="skills-ig-hub-ring t2" />
+          <span className="skills-ig-hub-num">04</span>
+          <span className="skills-ig-hub-lbl">PÔLES</span>
         </div>
         <div className="skills-ig-spine">
-          {SKILL_POLES.map(p => (
-            <div key={p.n} className="skills-ig-row">
-              <div className="skills-ig-pin" style={{ '--pin-color': p.color }}>
-                <span>{p.n}</span>
+          {SKILL_POLES.map((p, i) => (
+            <div key={p.n} className={'skills-ig-step' + (i < SKILL_POLES.length - 1 ? ' has-line' : '')} style={{ '--pin-color': p.color }}>
+              <div className="skills-ig-pin">
+                <span className="skills-ig-pin-n">{p.n}</span>
               </div>
-              <div className="skills-ig-card">
+              <div className="skills-ig-card" style={{ '--pin-color': p.color }}>
                 <div className="skills-ig-cap">{p.cap}</div>
-                <div className="skills-ig-title">{p.title}</div>
+                <div className="skills-ig-card-title">{p.title}</div>
                 <div className="skills-ig-desc">{p.desc}</div>
                 <div className="skills-ig-tags">
                   {p.tags.map(t => <span key={t}>{t}</span>)}
@@ -324,9 +328,9 @@ function SkillsScreen({ skillStates, onSkillTap }) {
           ))}
         </div>
         <div className="skills-ig-stats">
-          <div><strong>8</strong><span>PROJETS</span></div>
-          <div><strong>12</strong><span>EXP.</span></div>
-          <div><strong>3</strong><span>LANGUES</span></div>
+          <div><span className="skills-ig-stat-v">8</span><span className="skills-ig-stat-k">PROJETS</span></div>
+          <div><span className="skills-ig-stat-v">12</span><span className="skills-ig-stat-k">ANS XP</span></div>
+          <div><span className="skills-ig-stat-v">3</span><span className="skills-ig-stat-k">LANGUES</span></div>
         </div>
       </div>
 
