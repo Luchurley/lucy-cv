@@ -1891,7 +1891,7 @@ img { display: block; max-width: 100%; }
 .ia-rows-grid { display: flex; flex-direction: column; gap: 8px; }
 
 .ia-row {
-  height: 76px;
+  height: 180px;
   border: var(--border-base);
   cursor: pointer;
   perspective: 800px;
@@ -1922,34 +1922,34 @@ img { display: block; max-width: 100%; }
   background: var(--color-paper-2);
 }
 .ia-row-photo {
-  width: 62px;
+  width: 130px;
   flex-shrink: 0;
   border-right: var(--border-base);
   overflow: hidden;
 }
 .ia-row-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-.ia-row-photo-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; background: var(--color-primary); color: #fff; }
+.ia-row-photo-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; background: var(--color-primary); color: #fff; }
 
 .ia-row-body {
   flex: 1;
-  padding: 7px 8px;
+  padding: 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 5px;
   min-width: 0;
   justify-content: center;
 }
-.ia-row-num { font-family: var(--ff-mono); font-size: 7px; color: var(--color-ink-dim); letter-spacing: 0.5px; text-transform: uppercase; }
-.ia-row-name { font-family: var(--ff-display); font-size: 16px; line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ia-row-sub { font-family: var(--ff-mono); font-size: 8px; opacity: 0.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ia-row-role { font-family: var(--ff-mono); font-style: italic; font-size: 8.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ia-row-num { font-family: var(--ff-mono); font-size: 9px; color: var(--color-ink-dim); letter-spacing: 0.5px; text-transform: uppercase; }
+.ia-row-name { font-family: var(--ff-display); font-size: 26px; line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ia-row-sub { font-family: var(--ff-mono); font-size: 11px; opacity: 0.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ia-row-role { font-family: var(--ff-mono); font-style: italic; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.ia-row-flip { padding: 0 10px; display: flex; align-items: center; font-size: 14px; opacity: 0.3; flex-shrink: 0; }
+.ia-row-flip { padding: 0 14px; display: flex; align-items: center; font-size: 18px; opacity: 0.3; flex-shrink: 0; }
 
 .ia-row-back { transform: rotateY(180deg); background: var(--color-ink); }
 .ia-row-back video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ia-row-back-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; color: rgba(255,248,240,0.5); font-size: 10px; font-family: var(--ff-mono); }
-.ia-row-back-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 4px 8px; background: rgba(10,8,6,0.6); color: #fff; font-family: var(--ff-mono); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.ia-row-back-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: rgba(255,248,240,0.5); font-size: 12px; font-family: var(--ff-mono); }
+.ia-row-back-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 12px; background: rgba(10,8,6,0.6); color: #fff; font-family: var(--ff-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
 
 .ia-flip-hint {
   text-align: center;

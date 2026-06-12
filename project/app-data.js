@@ -68,13 +68,6 @@ window.LUCY = {
         personality: `UX Personality Profile en 5 dimensions : Ton & Voix (motivant mais ancré, witty, direct), Communication (phrases courtes, citations + commentary, toujours une next step), Intelligence émotionnelle (détecte les difficultés, bascule vers le soutien), Traits (fiable, optimiste réaliste, patient), Interaction (proactif sans être intrusif).`,
         corpus: `200+ contenus éditoriaux rédigés à la main : Fun Facts ×5 séries thématiques, blagues interactives format QCM, traditions étranges commentées, 30+ citations motivationnelles avec commentary Brian, microcopy UI complète, expressions de transition (phrasal verbs), polls gamifiés ×10 catégories, scripts d'onboarding complets.`,
         prompt: `Prompt engineering par couches — 1. Identité (nom, personnalité, ton, limites) · 2. Pédagogie (corriger sans décourager) · 3. Contenu (corpus éditorial comme ressource contextuelle) · 4. Contraintes (Brian ne parle pas français sauf exception définie).`,
-        bgGif: 'assets/motion/brian-bg.gif',
-        videos: [
-          { src: 'assets/videos/brian-demo-blagues.mp4', label: 'Blagues interactives — choix de la chute' },
-          { src: 'assets/videos/brian-demo-jokes.mp4', label: 'Dad jokes — contenu personnalisé' },
-          { src: 'assets/videos/brian-demo-articles.mp4', label: 'Articles — lecture en contexte' },
-        ],
-        motionSrc: 'assets/videos/brian-launch.mp4',
       },
       missionComplete: {
         strategic: [
@@ -95,11 +88,6 @@ window.LUCY = {
           text: `Identité visuelle complète déclinée sur tous supports physiques et audiovisuels.`,
           items: ['Flyers événements A5/A6', 'Stands & roll-ups grand format', 'Goodies (stylos, totebags, cartes)', 'Motion design réseaux sociaux'],
           tools: ['Adobe Illustrator', 'InDesign', 'After Effects', 'Figma'],
-          videos: [
-            { src: 'assets/videos/tec-social-padawan.mp4', label: 'Motion réseaux — Meet our Padawan' },
-            { src: 'assets/videos/tec-salon-flyer.mp4', label: 'Salon — présentation flyer' },
-            { src: 'assets/videos/tec-salon-print.mp4', label: 'Salon — supports print' },
-          ],
         },
         marketing: {
           text: `Pilotage de la stratégie marketing dans son ensemble.`,
@@ -115,7 +103,7 @@ window.LUCY = {
       tabLabels: ['Case Study', 'Mission Complète'],
       result: `Plateforme en production. Site Webflow livré. Agent Brian déployé dès 2021. Dendreo configuré pour 5 profils. 3 flux Zapier actifs. 200+ contenus éditoriaux créés. Audits Qualiopi passés. Système digital complet conçu et opéré en autonomie totale sur 2 ans.`,
       skills: ['Head of Digital Design', 'AI Product Design', 'Prompt Engineering', 'Conversation Design', 'Webflow', 'Motion Design (AI + AE)', 'LMS · ERP · Dendreo', 'Zapier Automation', 'CRM Architecture', 'Budget Webmarketing', 'Management'],
-      screenshots: ['assets/projects/tec-desktop.png', 'assets/projects/tec-mobile.png', 'assets/projects/tec-site-1.png', 'assets/projects/tec-site-2.png'],
+      screenshots: ['assets/projects/tec-site-1.png', 'assets/projects/tec-site-2.png', 'assets/projects/tec-interface.png'],
     },
     {
       id: 'jaccede',
@@ -157,14 +145,11 @@ window.LUCY = {
       result: `Design system inclusif complet livré. Maquettes desktop + mobile haute fidélité. UX Audit formalisé avec 7 findings prioritarisés. Motion design sur les interactions clés.`,
       skills: ['UX Research', 'UX Audit · S/E Grid', 'A11y WCAG 2.1 AA', 'ARIA', 'Mobile-first', 'Design System', 'Motion Design', 'Gamification UX'],
       screenshots: [
-        'assets/projects/jaccede-home.png', 'assets/projects/jaccede-home-1.png',
-        'assets/projects/jaccede-home-2.png', 'assets/projects/jaccede-home-3.png',
+        'assets/projects/jaccede-home.png',
+        'assets/projects/jaccede-1.png', 'assets/projects/jaccede-2.png', 'assets/projects/jaccede-3.png',
         'assets/projects/jaccede-desktop.jpg', 'assets/projects/jaccede-map.jpg',
-        'assets/projects/jaccede-wireframe-desktop.jpg', 'assets/projects/jaccede-wireframe-mobile.jpg',
-        'assets/projects/jaccede-ui-icons.jpg', 'assets/projects/jaccede-audit-explore.jpg',
-        'assets/projects/jaccede-audit-accessibility.jpg', 'assets/projects/jaccede-research-trees.jpg',
+        'assets/projects/jaccede-form.jpg', 'assets/projects/jaccede-mapcard.jpg',
       ],
-      motionVideo: 'assets/videos/jaccede-motion.mp4',
     },
     {
       id: 'adhoc',
@@ -235,7 +220,6 @@ window.LUCY = {
       skills: ['UX Audit', 'Benchmark', 'Loi de Hick · Miller · Von Restorff', 'E-commerce UX', 'Direction Artistique', 'Quiz UX'],
       screenshots: [
         'assets/projects/wegoboard-vitrine.png', 'assets/projects/wegoboard-products.png',
-        'assets/projects/wegoboard-services.png', 'assets/projects/wegoboard-interface.png',
         'assets/projects/wegoboard-wireframe.jpg',
       ],
     },
@@ -260,7 +244,7 @@ window.LUCY = {
       ],
       result: `Site vitrine + tunnel d'abonnement livrés. Projet qui a poussé loin le couplage entre direction artistique forte et UX rigoureuse. Aimé travailler la tension entre dark fun et clarté commerciale.`,
       skills: ['Direction Artistique', 'UX vitrine', 'Motion design', 'Univers de marque'],
-      screenshots: ['assets/projects/wegoboard-vitrine.png', 'assets/projects/products.png', 'assets/projects/services.png', 'assets/projects/tec-interface.png'],
+      screenshots: [],
     },
     {
       id: 'equality',
@@ -302,7 +286,7 @@ window.LUCY = {
       screenshots: [
         'assets/projects/equality-splash.jpg', 'assets/projects/equality-login.jpg',
         'assets/projects/equality-games.jpg', 'assets/projects/equality-teams.jpg',
-        'assets/projects/equality-players.jpg', 'assets/projects/equality-mobile-screens.png',
+        'assets/projects/equality-players.jpg',
       ],
     },
     {
