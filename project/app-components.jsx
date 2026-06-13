@@ -247,10 +247,10 @@ function useKonami(onSuccess, onProgress) {
         if (e.target.closest('button, a, input, select, [role="button"]')) return;
         const w = window.innerWidth;
         const h = window.innerHeight;
-        if      (ty < h * 0.30)  code = 'ArrowUp';
-        else if (ty > h * 0.70)  code = 'ArrowDown';
-        else if (tx < w * 0.25)  code = 'ArrowLeft';
-        else if (tx > w * 0.75)  code = 'ArrowRight';
+        if      (ty < h * 0.42)  code = 'ArrowUp';
+        else if (ty > h * 0.58)  code = 'ArrowDown';
+        else if (tx < w * 0.38)  code = 'ArrowLeft';
+        else if (tx > w * 0.62)  code = 'ArrowRight';
         else return;
       } else if (dist >= 50 && Math.min(adx, ady) <= dist * 0.5) {
         // SWIPE — directional, minimum 50px, clearly not diagonal
