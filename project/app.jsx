@@ -4,13 +4,15 @@
 
 /* global React, ReactDOM, Header, BottomNav, ToastStack, useToasts,
    GaryModal, GarySticker, useKonami, KonamiProgress, HomeScreen, ProjetsScreen, ProjetDetail,
-   SkillsScreen, MoiScreen, ContactScreen, IAScreen, tierFromXP */
+   SkillsScreen, MoiScreen, ContactScreen, IAScreen, tierFromXP, BadgeGary */
 
 const { useState: $useState, useEffect: $useEffect, useRef: $useRef, useCallback: $useCallback } = React;
 
 function App() {
   // ---- ROUTING ----
   const [tab, setTab] = $useState('home');
+  // ---- GARY BADGE ----
+  const [garyBadgeUnlocked, setGaryBadgeUnlocked] = $useState(() => !!localStorage.getItem('gary-badge'));
   const [detailId, setDetailId] = $useState(null);
   // ---- XP STATE ----
   const [xp, setXP] = $useState(0);
@@ -190,6 +192,21 @@ function App() {
     }
   };
 
+  // ---- Gary badge unlock listener ----
+  $useEffect(() => {
+    const handler = () => {
+      if (localStorage.getItem('gary-badge')) return;
+      localStorage.setItem('gary-badge', '1');
+      setGaryBadgeUnlocked(true);
+      pushToast({
+        achievement: true,
+        label: "Vous avez gagné la confiance d'un Samoyède. C'est plus rare qu'une recommandation LinkedIn.",
+      });
+    };
+    window.addEventListener('gary-badge-unlocked', handler);
+    return () => window.removeEventListener('gary-badge-unlocked', handler);
+  }, [pushToast]);
+
   const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
 
   const isSub = tab === 'projets' && detailId;
@@ -260,6 +277,8 @@ function App() {
       {garyOpen && <GaryModal onClose={() => setGaryOpen(false)} line={garyLine} />}
 
       <GarySticker tier={garySticker.tier} out={garySticker.out} />
+
+      <BadgeGary unlocked={garyBadgeUnlocked} />
     </>
   );
 }

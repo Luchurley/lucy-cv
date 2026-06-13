@@ -94,10 +94,19 @@ function ToastStack({ toasts, onDismiss }) {
   return (
     <div className="toast-stage" aria-live="polite" aria-atomic="true">
       {toasts.map(t => (
-        <div key={t.id} className={'toast' + (t.tier ? ' is-levelup' : '') + (t.funfact ? ' is-funfact' : '') + (t.out ? ' is-out' : '')}>
-          {t.funfact && <span className="fact-emoji">{t.emoji}</span>}
-          {!t.funfact && t.xp != null && <span className="xp-pill">{t.tier ? '★' : (t.xp > 0 ? '+' + t.xp + ' XP' : t.xp + ' XP')}</span>}
-          <span>{t.label}</span>
+        <div key={t.id} className={'toast' + (t.tier ? ' is-levelup' : '') + (t.funfact ? ' is-funfact' : '') + (t.achievement ? ' is-achievement' : '') + (t.out ? ' is-out' : '')}>
+          {t.achievement ? (
+            <>
+              <div className="achievement-title">🏆 ACHIEVEMENT UNLOCKED</div>
+              <div className="achievement-body">{t.label}</div>
+            </>
+          ) : (
+            <>
+              {t.funfact && <span className="fact-emoji">{t.emoji}</span>}
+              {!t.funfact && t.xp != null && <span className="xp-pill">{t.tier ? '★' : (t.xp > 0 ? '+' + t.xp + ' XP' : t.xp + ' XP')}</span>}
+              <span>{t.label}</span>
+            </>
+          )}
         </div>
       ))}
     </div>
@@ -110,13 +119,14 @@ function useToasts() {
 
   const push = useCallback((t) => {
     const id = ++idRef.current;
+    const dur = t.achievement ? 5000 : 2500;
     setToasts(prev => [...prev, { id, ...t }]);
     setTimeout(() => {
       setToasts(prev => prev.map(x => x.id === id ? { ...x, out: true } : x));
-    }, 2500);
+    }, dur);
     setTimeout(() => {
       setToasts(prev => prev.filter(x => x.id !== id));
-    }, 2800);
+    }, dur + 300);
   }, []);
 
   return [toasts, push];
@@ -428,8 +438,20 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
   const [flipped, setFlipped] = React.useState(false);
   const [muted, setMuted]     = React.useState(true);
   const [toast, setToast]     = React.useState('');
-  const vidRef  = React.useRef(null);
-  const initRef = React.useRef(false);
+  const vidRef         = React.useRef(null);
+  const initRef        = React.useRef(false);
+  const garyFiredRef   = React.useRef(false);
+
+  const onGaryProgress = React.useCallback(() => {
+    if (agent.id !== 'yogary') return;
+    if (garyFiredRef.current || localStorage.getItem('gary-badge')) return;
+    const v = vidRef.current;
+    if (!v || !v.duration) return;
+    if (v.currentTime / v.duration >= 0.90) {
+      garyFiredRef.current = true;
+      window.dispatchEvent(new CustomEvent('gary-badge-unlocked'));
+    }
+  }, [agent.id]);
 
   const showToast = (msg) => {
     setToast(msg);
@@ -512,7 +534,8 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
           <div className="ia-card-poster">
             <span className="ia-card-poster-lbl">▶ {agent.name.toUpperCase()}</span>
           </div>
-          <video ref={vidRef} muted loop playsInline preload="none" />
+          <video ref={vidRef} muted loop playsInline preload="none"
+            onTimeUpdate={agent.id === 'yogary' ? onGaryProgress : undefined} />
           <span className="ia-card-vlabel">▶ {agent.name}</span>
           <button className="ia-card-vback" onClick={flipBack}>← RECTO</button>
           <div className="ia-card-vctrl">
@@ -551,8 +574,19 @@ function FloatingIABtn({ locked, onClick }) {
   );
 }
 
+// ---------- BADGE GARY — persistent achievement ----------
+function BadgeGary({ unlocked }) {
+  if (!unlocked) return null;
+  return (
+    <div className="badge-gary-wrap" title="Gary Approved ✓">
+      <img src="assets/badges/badge-cire.png" alt="Gary Approved" />
+    </div>
+  );
+}
+
 Object.assign(window, {
   Header, BottomNav, ToastStack, useToasts, GaryModal, GarySticker, useKonami,
   SectionDivider, EmptyState, tierFromXP, xpProgress, KonamiProgress,
   AgentCard, ProjectDetailTabs, AgentCardExpand, AgentRowIA, FloatingIABtn,
+  BadgeGary,
 });

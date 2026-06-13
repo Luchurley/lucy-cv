@@ -685,6 +685,55 @@ img { display: block; max-width: 100%; }
   to   { transform: translateX(120%); opacity: 0; }
 }
 
+/* Achievement toast — neubrutaliste */
+.toast.is-achievement {
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  border: 2.5px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 280px;
+  padding: 12px 16px;
+}
+.toast.is-achievement .achievement-title {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.toast.is-achievement .achievement-body {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-ink);
+  line-height: 1.5;
+}
+
+/* Badge Gary — fixed bottom-right, persiste toute la navigation */
+.badge-gary-wrap {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  width: 80px;
+  height: 80px;
+  z-index: 390;
+  pointer-events: none;
+  animation: badgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.badge-gary-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+@keyframes badgePop {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
 /* ============================================================
    MODAL (Gary 🐺 + secrets)
 ============================================================ */
