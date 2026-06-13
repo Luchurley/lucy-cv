@@ -177,17 +177,30 @@ function GarySticker({ tier, out }) {
 
 // ---------- KONAMI ----------
 function useKonami(onSuccess, onProgress) {
-  const buf = useRef([]);
-  const touchRef = useRef(null);
+  const buf          = useRef([]);
+  const touchRef     = useRef(null);
+  const resetTimerRef = useRef(null);
   const SEQ = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
 
   useEffect(() => {
+    const scheduleReset = () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = setTimeout(() => {
+        if (buf.current.length > 0) {
+          buf.current = [];
+          if (onProgress) onProgress(0);
+        }
+      }, 5000);
+    };
+
     const feed = (code) => {
       buf.current.push(code);
       if (buf.current.length > SEQ.length) buf.current.shift();
       if (buf.current.join(',') === SEQ.join(',')) {
         buf.current = [];
+        if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
         if (onProgress) onProgress(0);
+        if (navigator.vibrate) navigator.vibrate([60, 40, 120]);
         onSuccess();
       } else if (onProgress) {
         let maxPrefix = 0;
@@ -198,6 +211,10 @@ function useKonami(onSuccess, onProgress) {
           while (count < sub.length && sub[count] === SEQ[count]) count++;
           if (count === sub.length && count > maxPrefix) maxPrefix = count;
         }
+        if (maxPrefix > 0) {
+          if (navigator.vibrate) navigator.vibrate(18);
+          scheduleReset();
+        }
         onProgress(maxPrefix);
       }
     };
@@ -205,7 +222,9 @@ function useKonami(onSuccess, onProgress) {
     const onKey = (e) => feed(e.code);
 
     const onTouchStart = (e) => {
-      touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      const touch = e.touches[0];
+      if (touch.clientX < 15) return; // ignore iOS back-nav edge zone
+      touchRef.current = { x: touch.clientX, y: touch.clientY };
     };
 
     const onTouchCancel = () => {
@@ -217,8 +236,13 @@ function useKonami(onSuccess, onProgress) {
       const dx = e.changedTouches[0].clientX - touchRef.current.x;
       const dy = e.changedTouches[0].clientY - touchRef.current.y;
       touchRef.current = null;
-      if (Math.max(Math.abs(dx), Math.abs(dy)) < 35) return;
-      const code = Math.abs(dx) > Math.abs(dy)
+      const adx = Math.abs(dx);
+      const ady = Math.abs(dy);
+      const dominant = Math.max(adx, ady);
+      const recessive = Math.min(adx, ady);
+      if (dominant < 50) return; // require deliberate swipe (was 35)
+      if (recessive > dominant * 0.5) return; // must be clearly directional, not diagonal
+      const code = adx > ady
         ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
         : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
       feed(code);
@@ -233,13 +257,14 @@ function useKonami(onSuccess, onProgress) {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('touchcancel', onTouchCancel);
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
     };
   }, [onSuccess, onProgress]);
 }
 
 // ---------- KONAMI PROGRESS OVERLAY ----------
 function KonamiProgress({ progress }) {
-  if (progress < 3) return null;
+  if (progress < 1) return null;
   const pct = Math.round((progress / 10) * 100);
   return (
     <div className="konami-progress" aria-live="polite" aria-label={`Code Konami : ${progress} sur 10`}>
