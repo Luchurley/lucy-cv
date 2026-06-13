@@ -442,15 +442,25 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
   const initRef        = React.useRef(false);
   const garyFiredRef   = React.useRef(false);
 
-  const onGaryProgress = React.useCallback(() => {
+  // Native listener — React's onTimeUpdate is unreliable on iOS (non-bubbling media event)
+  React.useEffect(() => {
     if (agent.id !== 'yogary') return;
-    if (garyFiredRef.current || localStorage.getItem('gary-badge')) return;
     const v = vidRef.current;
-    if (!v || !v.duration) return;
-    if (v.currentTime / v.duration >= 0.90) {
-      garyFiredRef.current = true;
-      window.dispatchEvent(new CustomEvent('gary-badge-unlocked'));
-    }
+    if (!v) return;
+    const check = () => {
+      if (garyFiredRef.current || localStorage.getItem('gary-badge')) return;
+      if (!v.duration || !isFinite(v.duration)) return;
+      if (v.currentTime / v.duration >= 0.90) {
+        garyFiredRef.current = true;
+        window.dispatchEvent(new CustomEvent('gary-badge-unlocked'));
+      }
+    };
+    v.addEventListener('timeupdate', check);
+    v.addEventListener('ended', check);
+    return () => {
+      v.removeEventListener('timeupdate', check);
+      v.removeEventListener('ended', check);
+    };
   }, [agent.id]);
 
   const showToast = (msg) => {
@@ -534,8 +544,7 @@ function AgentRowIA({ agent, idx, gainXP, seenRef }) {
           <div className="ia-card-poster">
             <span className="ia-card-poster-lbl">▶ {agent.name.toUpperCase()}</span>
           </div>
-          <video ref={vidRef} muted loop playsInline preload="none"
-            onTimeUpdate={agent.id === 'yogary' ? onGaryProgress : undefined} />
+          <video ref={vidRef} muted loop playsInline preload="none" />
           <span className="ia-card-vlabel">▶ {agent.name}</span>
           <button className="ia-card-vback" onClick={flipBack}>← RECTO</button>
           <div className="ia-card-vctrl">
