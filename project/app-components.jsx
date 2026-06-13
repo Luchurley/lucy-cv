@@ -198,6 +198,10 @@ function useKonami(onSuccess, onProgress) {
       touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
+    const onTouchCancel = () => {
+      touchRef.current = null;
+    };
+
     const onTouchEnd = (e) => {
       if (!touchRef.current) return;
       const dx = e.changedTouches[0].clientX - touchRef.current.x;
@@ -213,10 +217,12 @@ function useKonami(onSuccess, onProgress) {
     window.addEventListener('keydown', onKey);
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchCancel, { passive: true });
     return () => {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchCancel);
     };
   }, [onSuccess, onProgress]);
 }
@@ -417,54 +423,110 @@ function AgentCardExpand({ agent }) {
   );
 }
 
-// ---------- AGENT ROW IA (compact, flip → video) ----------
+// ---------- AGENT CARD IA — Option A vertical + flip → video ----------
 function AgentRowIA({ agent, idx, gainXP, seenRef }) {
   const [flipped, setFlipped] = React.useState(false);
-  const vidRef = React.useRef(null);
+  const [muted, setMuted]     = React.useState(true);
+  const [toast, setToast]     = React.useState('');
+  const vidRef  = React.useRef(null);
+  const initRef = React.useRef(false);
 
-  const toggle = () => {
-    setFlipped(f => {
-      const next = !f;
-      if (next) {
-        if (gainXP && seenRef && seenRef.current) {
-          const k = 'ia:' + agent.id;
-          if (!seenRef.current.has(k)) {
-            seenRef.current.add(k);
-            gainXP(5, `Agent découvert — ${agent.name}`);
-          }
-        }
-        setTimeout(() => { if (vidRef.current) vidRef.current.play(); }, 280);
-      } else {
-        if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; }
-      }
-      return next;
-    });
+  const showToast = (msg) => {
+    setToast(msg);
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => setToast(''), 1100);
   };
 
+  const flipToVideo = () => {
+    if (gainXP && seenRef?.current) {
+      const k = 'ia:' + agent.id;
+      if (!seenRef.current.has(k)) {
+        seenRef.current.add(k);
+        gainXP(5, `Agent découvert — ${agent.name}`);
+      }
+    }
+    setFlipped(true);
+    setMuted(true);
+    const v = vidRef.current;
+    if (v) {
+      if (!initRef.current) { initRef.current = true; v.src = agent.video; }
+      v.muted = true;
+      v.play().catch(() => {});
+    }
+  };
+
+  const flipBack = (e) => {
+    e.stopPropagation();
+    const v = vidRef.current;
+    if (v) { v.pause(); v.currentTime = 0; v.muted = true; }
+    setMuted(true);
+    setFlipped(false);
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    if (!vidRef.current) return;
+    const next = !muted;
+    vidRef.current.muted = next;
+    if (!next && vidRef.current.paused) vidRef.current.play().catch(() => {});
+    setMuted(next);
+    showToast(next ? '🔇 Muet' : '🔊 Son activé');
+  };
+
+  const openFullscreen = (e) => {
+    e.stopPropagation();
+    const v = vidRef.current;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    v.muted = false;
+    setMuted(false);
+  };
+
+  const tones = (agent.tone || '').split(' · ').slice(0, 3).filter(Boolean);
+
   return (
-    <div className={'ia-row' + (flipped ? ' is-flipped' : '')} onClick={toggle}>
-      <div className="ia-row-inner">
-        <div className="ia-row-front">
-          <div className="ia-row-photo">
-            {agent.photo
-              ? <img src={agent.photo} alt={agent.name} loading="lazy" />
-              : <div className="ia-row-photo-ph">{agent.name[0]}</div>
-            }
-          </div>
-          <div className="ia-row-body">
-            <div className="ia-row-num">CARTE N°{String(idx).padStart(2,'0')}</div>
-            <div className="ia-row-name">{agent.name}</div>
-            <div className="ia-row-sub">{agent.age} · {agent.domain}</div>
-            <div className="ia-row-role">{agent.role}</div>
-          </div>
-          <div className="ia-row-flip">↻</div>
+    <div className={'ia-card' + (flipped ? ' is-flipped' : '')} onClick={!flipped ? flipToVideo : undefined}>
+      {/* RECTO */}
+      <div className="ia-card-recto">
+        <div className="ia-card-portrait">
+          {agent.photo
+            ? <img src={agent.photo} alt={agent.name} loading="lazy" />
+            : <div className="ia-card-portrait-ph">{agent.name[0]}</div>}
+          <div className="ia-card-flipbadge">↻ VIDÉO</div>
         </div>
-        <div className="ia-row-back">
-          {agent.video
-            ? <video ref={vidRef} src={agent.video} muted loop playsInline preload="none" />
-            : <div className="ia-row-back-ph"><span>▶</span><span>VIDÉO</span></div>
-          }
-          <div className="ia-row-back-label">{agent.name}</div>
+        <div className="ia-card-body">
+          <span className="ia-card-num">CARTE N°{String(idx).padStart(2,'0')}</span>
+          <span className="ia-card-name">{agent.name}</span>
+          <span className="ia-card-meta"><span className="ia-card-age">{agent.age}</span> · {agent.domain}</span>
+          <span className="ia-card-role">· {agent.role} ·</span>
+          <div className="ia-card-tons">
+            {tones.map(t => <span key={t} className="ia-card-ton">{t}</span>)}
+          </div>
+        </div>
+      </div>
+
+      {/* VERSO */}
+      <div className="ia-card-verso">
+        <div className="ia-card-vstage">
+          <div className="ia-card-poster">
+            <span className="ia-card-poster-lbl">▶ {agent.name.toUpperCase()}</span>
+          </div>
+          <video ref={vidRef} muted loop playsInline preload="none" />
+          <span className="ia-card-vlabel">▶ {agent.name}</span>
+          <button className="ia-card-vback" onClick={flipBack}>← RECTO</button>
+          <div className="ia-card-vctrl">
+            <button className={'ia-card-vbtn' + (!muted ? ' is-on' : '')} onClick={toggleMute} aria-label={muted ? 'Activer le son' : 'Couper le son'}>
+              {muted ? '🔇' : '🔊'}
+            </button>
+            <button className="ia-card-vbtn" onClick={openFullscreen} aria-label="Plein écran">⛶</button>
+          </div>
+          {toast && <div className="ia-card-toast">{toast}</div>}
+        </div>
+        <div className="ia-card-vbody">
+          <span className="ia-card-num ia-card-num-verso">CARTE N°{String(idx).padStart(2,'0')} · FICHE</span>
+          <span className="ia-card-name ia-card-name-verso">{agent.name}</span>
+          <span className="ia-card-role ia-card-role-verso">· {agent.role} ·</span>
         </div>
       </div>
     </div>

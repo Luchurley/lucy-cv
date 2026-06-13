@@ -126,12 +126,10 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
   const [filters, setFilters] = useState([]);
 
   const FILTERS = [
-    { key: 'ux',       label: 'UX/UI' },
-    { key: 'da',       label: 'DA' },
-    { key: 'strat',    label: 'STRAT.' },
-    { key: 'ia',       label: '✦ IA' },
-    { key: 'cdi',      label: 'CDI' },
-    { key: 'freelance', label: 'FREELANCE' },
+    { key: 'ux',    label: 'UX/UI' },
+    { key: 'da',    label: 'DA' },
+    { key: 'strat', label: 'STRAT.' },
+    { key: 'ia',    label: 'IA' },
   ];
 
   const toggleFilter = (k) => {
@@ -224,26 +222,26 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
         )
       ) : (
         <>
-          <div className="section-divider"><span>★ CASE STUDIES · {featured.length}</span></div>
-          <div className="body-xs dim" style={{ marginBottom: 12 }}>vitrine principale · process en profondeur</div>
+          <div className="section-divider"><span>CASE STUDIES COMPLETS</span></div>
           <div className="featured-grid">
-            {featured.map(p => {
+            {featured.map((p, fi) => {
               const Cover = window.COVERS[p.cover];
+              const foot = p.year + ' · ' + (p.contract?.[0] || p.type.split('·')[0]).toUpperCase().trim();
               return (
                 <button key={p.id} className="featured-card" onClick={() => onOpen(p.id)}>
                   <div className="featured-card-cover">
                     {Cover ? <Cover /> : <div className="featured-card-cover-ph">{p.shortName}</div>}
-                    <span className="featured-badge">★ CASE STUDY</span>
+                    <span className="featured-badge">CASE STUDY →</span>
                   </div>
                   <div className="featured-card-body">
                     <div className="featured-card-title-row">
                       <div className="display-md">{p.name}</div>
-                      <span style={{ fontSize: 16 }}>→</span>
+                      <span className="featured-card-num">0{fi + 1}</span>
                     </div>
                     <div className="body-xs dim" style={{ lineHeight: 1.5, marginTop: 2 }}>{p.tagline}</div>
                     <div className="featured-card-footer">
                       <div className="pcard-tags">{p.tags.slice(0, 3).map(t => <span key={t} className="pcard-tag">{t}</span>)}</div>
-                      <span className="featured-voir">VOIR L'ÉTUDE →</span>
+                      <span className="featured-card-foot">{foot}</span>
                     </div>
                   </div>
                 </button>
@@ -252,8 +250,8 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
           </div>
 
           <div className="spacer-md" />
-          <div className="section-divider"><span>AUTRES PROJETS · {others.length}</span></div>
-          <div className="spacer-sm" />
+          <div className="section-divider"><span>AUTRES PROJETS</span></div>
+          <div className="proj-autres-note">Projets clients, exercices et explorations — non détaillés par choix, pas par manque de process.</div>
           <div className="proj-grid">
             {others.map(p => {
               const Cover = window.COVERS[p.cover];
@@ -277,18 +275,72 @@ function ProjetsScreen({ onOpen, gainXP, onTapIA, iaUnlocked }) {
 
       <div className="spacer-lg" />
 
-      <FloatingIABtn locked={!iaUnlocked} onClick={onTapIA} />
+      <button className="proj-ia-band" onClick={onTapIA} aria-label="Accéder à l'univers IA">
+        <div className="proj-ia-band-left">
+          <span className="proj-ia-band-kicker">UNIVERS IA</span>
+          <span className="proj-ia-band-sub">10 agents incarnés · flip vidéo</span>
+        </div>
+        <span className="proj-ia-band-arrow">✦ →</span>
+      </button>
+
+      <div className="spacer-lg" />
     </div>
   );
 }
 
 // ---------- SKILLS ----------
+const SKILL_POLES = [
+  { n: '1', color: 'var(--color-secondary)', cap: 'PÔLE PRODUIT', title: 'UX / UI DESIGN', desc: 'Research, wireframes, design systems & prototypes testés.', tags: ['UX Research', 'UI', 'Design Systems', 'Figma', 'A11y'] },
+  { n: '2', color: 'var(--color-primary)', cap: 'PÔLE DA', title: 'DIRECTION ARTISTIQUE', desc: 'Branding, identité, typo & motion — univers cohérents.', tags: ['Branding', 'Identité', 'Motion', 'Adobe Suite'] },
+  { n: '3', color: 'var(--color-tertiary)', cap: 'PÔLE PILOTAGE', title: 'CHEFFE DE PROJET', desc: 'Pilotage 360°, Webflow, Qualiopi, KPIs & reporting.', tags: ['Gestion 360°', 'Webflow', 'CRM', 'KPIs'] },
+  { n: '4', color: 'var(--color-ink)', cap: 'PÔLE IA', title: 'IA & PROMPTING', desc: 'IA conversationnelle, prompt design depuis 2021.', tags: ['IA Conv.', 'Prompt Eng.', 'AI Product', 'Claude / GPT'] },
+];
+
 function SkillsScreen({ skillStates, onSkillTap }) {
   const L = window.LUCY;
   return (
     <div className="page" data-screen-label="Skills">
       <div className="display-lg">SKILLS</div>
       <div className="page-subline">Tape les tags pour gagner des XP. Chaque tag : 2 niveaux.</div>
+
+      {/* 4-pôle infographic — dark ink surface */}
+      <div className="skills-infographic">
+        <div className="skills-ig-head">
+          <div className="skills-ig-kick">COMPÉTENCES</div>
+          <div className="skills-ig-title-main">PROFIL</div>
+          <div className="skills-ig-sub">4 PÔLES</div>
+        </div>
+        <div className="skills-ig-hub">
+          <div className="skills-ig-hub-ring" />
+          <div className="skills-ig-hub-ring t2" />
+          <span className="skills-ig-hub-num">04</span>
+          <span className="skills-ig-hub-lbl">PÔLES</span>
+        </div>
+        <div className="skills-ig-spine">
+          {SKILL_POLES.map((p, i) => (
+            <div key={p.n} className={'skills-ig-step' + (i < SKILL_POLES.length - 1 ? ' has-line' : '')} style={{ '--pin-color': p.color }}>
+              <div className="skills-ig-pin">
+                <span className="skills-ig-pin-n">{p.n}</span>
+              </div>
+              <div className="skills-ig-card" style={{ '--pin-color': p.color }}>
+                <div className="skills-ig-cap">{p.cap}</div>
+                <div className="skills-ig-card-title">{p.title}</div>
+                <div className="skills-ig-desc">{p.desc}</div>
+                <div className="skills-ig-tags">
+                  {p.tags.map(t => <span key={t}>{t}</span>)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="skills-ig-stats">
+          <div><span className="skills-ig-stat-v">8</span><span className="skills-ig-stat-k">PROJETS</span></div>
+          <div><span className="skills-ig-stat-v">12</span><span className="skills-ig-stat-k">ANS XP</span></div>
+          <div><span className="skills-ig-stat-v">3</span><span className="skills-ig-stat-k">LANGUES</span></div>
+        </div>
+      </div>
+
+      <div className="section-divider" style={{ margin: '16px 0 10px' }}><span>TOUTES LES COMPÉTENCES</span></div>
 
       {L.skillsByCat.map((g, gi) => (
         <div key={gi} className="skill-cat">
@@ -559,6 +611,21 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
 }
 
 // ---------- IA PAGE ----------
+const LOGOS_BASE = 'https://raw.githubusercontent.com/Luchurley/lucy-cv/main/project/assets/projects/assets-bundle/logos/';
+const TOOL_LOGOS = {
+  'Claude': LOGOS_BASE + 'claude-logo.png',
+  'ChatGPT / Sora': LOGOS_BASE + 'chatgpt-logo.png',
+  'Gemini': LOGOS_BASE + 'gemini-logo.png',
+  'DeepSeek': LOGOS_BASE + 'deepseek-logo.png',
+};
+
+function ToolLogo({ name }) {
+  const [err, setErr] = React.useState(false);
+  const src = TOOL_LOGOS[name];
+  if (!src || err) return <div className="ia-tool-logo">{name[0]}</div>;
+  return <img src={src} alt={name} className="ia-tool-logo-img" onError={() => setErr(true)} />;
+}
+
 function IAScreen({ gainXP, onBack }) {
   const L = window.LUCY;
   const seenRef = React.useRef(new Set());
@@ -568,18 +635,20 @@ function IAScreen({ gainXP, onBack }) {
       {/* HERO */}
       <div className="ia-hero">
         <div className="ia-hero-deco" />
-        <div className="body-xs" style={{ opacity: 0.6, position: 'relative' }}>UNIVERS IA</div>
-        <div className="ia-hero-title">AGENTS<br />IA</div>
+        <div className="ia-hero-kick">ESPACE AUTONOME</div>
+        <div className="ia-hero-title">Univers IA</div>
         <div className="ia-hero-sub">
-          10 entités incarnées + les outils IA de mon travail. Un espace autonome du portfolio.
+          Créer une IA, c'est créer un personnage. Chaque agent est une décision de design — une voix, une personnalité, un univers construit prompt par prompt.
         </div>
       </div>
 
-      <div className="spacer-md" />
+      <div className="ia-meta-teal">
+        <span className="ia-cantina-badge">{L.promptSkills.badge}</span>
+      </div>
 
       {/* SECTION 1 */}
-      <div className="section-divider"><span>01 · MES AGENTS IA</span></div>
-      <div className="body-xs dim" style={{ marginBottom: 10 }}>section principale · grille carte d'identité · TAP = FLIP ↻ → VIDÉO</div>
+      <div className="section-divider" style={{ marginTop: 8 }}><span>01 · MES AGENTS IA</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>10 entités incarnées · TAP = FLIP ↻ → VIDÉO · 🔇 son · ⛶ plein écran</div>
 
       <div className="ia-rows-grid">
         {L.iaAgents.map((agent, idx) => (
@@ -588,35 +657,33 @@ function IAScreen({ gainXP, onBack }) {
       </div>
 
       <div className="ia-flip-hint">
-        ↻ tap → flip → vidéo de présentation
+        ↻ tap → flip → vidéo · tap 🔇 pour le son · ⛶ plein écran
       </div>
 
       <div className="section-divider" style={{ margin: '16px 0' }}><span /></div>
 
       {/* SECTION 2 */}
-      <div className="section-divider"><span>02 · OUTILS / IA UTILISÉS</span></div>
-      <div className="body-xs dim" style={{ marginBottom: 10 }}>section secondaire · version simplifiée des cards</div>
+      <div className="section-divider"><span>02 · PROMPT SKILLS · OUTILS PRO</span></div>
+      <div className="body-xs dim" style={{ marginBottom: 10 }}>outils IA principaux de mon workflow</div>
 
       <div className="ia-tools-list">
         {L.promptSkills.main.map(t => (
           <div key={t.name} className="ia-tool-row">
-            <div className="ia-tool-logo">{t.name[0]}</div>
-            <div className="ia-tool-name">{t.name}</div>
-            <div className="ia-tool-chips">
-              {t.usage.split(',').slice(0, 2).map((u, i) => (
-                <span key={i} className="pcard-tag">{u.trim().split(' ')[0].toUpperCase()}</span>
-              ))}
+            <ToolLogo name={t.name} />
+            <div className="ia-tool-info">
+              <div className="ia-tool-name">{t.name}</div>
+              <div className="ia-tool-org">{t.org}</div>
             </div>
+            <div className="ia-tool-usage">{t.usage.split(',')[0].trim()}</div>
           </div>
         ))}
-        <div className="ia-tool-row ia-tool-row-more">
-          <div className="ia-tool-logo ia-tool-logo-more">+</div>
-          <div className="ia-tool-name" style={{ opacity: 0.45 }}>AUTRES OUTILS · extensible</div>
-          <span style={{ fontFamily: 'var(--ff-display)', fontSize: 20, opacity: 0.35 }}>…</span>
-        </div>
       </div>
 
-      <div className="ia-badge-line">{L.promptSkills.badge}</div>
+      <div className="ia-secondary-chips">
+        {L.promptSkills.secondary.map(s => (
+          <span key={s} className="ia-sec-chip">{s}</span>
+        ))}
+      </div>
 
       <div className="spacer-lg" />
     </div>
