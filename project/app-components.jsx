@@ -222,9 +222,7 @@ function useKonami(onSuccess, onProgress) {
     const onKey = (e) => feed(e.code);
 
     const onTouchStart = (e) => {
-      const touch = e.touches[0];
-      if (touch.clientX < 15) return; // ignore iOS back-nav edge zone
-      touchRef.current = { x: touch.clientX, y: touch.clientY };
+      touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
     const onTouchCancel = () => {
@@ -233,18 +231,36 @@ function useKonami(onSuccess, onProgress) {
 
     const onTouchEnd = (e) => {
       if (!touchRef.current) return;
-      const dx = e.changedTouches[0].clientX - touchRef.current.x;
-      const dy = e.changedTouches[0].clientY - touchRef.current.y;
+      const tx = e.changedTouches[0].clientX;
+      const ty = e.changedTouches[0].clientY;
+      const dx = tx - touchRef.current.x;
+      const dy = ty - touchRef.current.y;
       touchRef.current = null;
       const adx = Math.abs(dx);
       const ady = Math.abs(dy);
-      const dominant = Math.max(adx, ady);
-      const recessive = Math.min(adx, ady);
-      if (dominant < 50) return; // require deliberate swipe (was 35)
-      if (recessive > dominant * 0.5) return; // must be clearly directional, not diagonal
-      const code = adx > ady
-        ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
-        : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
+      const dist = Math.max(adx, ady);
+
+      let code;
+
+      if (dist <= 15) {
+        // TAP — zone detection (top/bottom/left/right of screen)
+        if (e.target.closest('button, a, input, select, [role="button"]')) return;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        if      (ty < h * 0.30)  code = 'ArrowUp';
+        else if (ty > h * 0.70)  code = 'ArrowDown';
+        else if (tx < w * 0.25)  code = 'ArrowLeft';
+        else if (tx > w * 0.75)  code = 'ArrowRight';
+        else return;
+      } else if (dist >= 50 && Math.min(adx, ady) <= dist * 0.5) {
+        // SWIPE — directional, minimum 50px, clearly not diagonal
+        code = adx > ady
+          ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
+          : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
+      } else {
+        return;
+      }
+
       feed(code);
     };
 
