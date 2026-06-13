@@ -964,8 +964,10 @@ img { display: block; max-width: 100%; }
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-bottom: 4px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
-.process-text { font-size: 12px; line-height: 1.65; color: var(--color-ink); }
+.process-text { font-size: 12px; line-height: 1.65; color: var(--color-ink); word-break: break-word; overflow-wrap: break-word; }
 
 .carousel {
   border: var(--border-base);
@@ -2562,4 +2564,5 @@ img { display: block; max-width: 100%; }
 }
 .cs-tab-btn:last-child { border-right: none; }
 .cs-tab-btn.is-active { background: var(--color-ink); color: var(--color-paper-2); }
+.cs-tab-bar-bottom { margin-top: 24px; margin-bottom: 0; }
 

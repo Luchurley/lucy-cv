@@ -350,6 +350,22 @@ function ProjetDetail({ projectId, onBack, onOpen, gainXP }) {
       <div className="skill-tags" style={{ marginBottom: 20 }}>
         {project.skills.map(s => <span key={s} className="skill-tag" style={{ cursor: 'default' }}>{s}</span>)}
       </div>
+
+      {project.hasTabs && (
+        <div className="cs-tab-bar cs-tab-bar-bottom">
+          {project.tabLabels.map((label, i) => (
+            <button key={i}
+              className={'cs-tab-btn' + (tab === i ? ' is-active' : '')}
+              onClick={() => {
+                setTab(i);
+                if (i === 1 && gainXP) gainXP(10, 'Mission complète explorée');
+                window.scrollTo && window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}>
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 
