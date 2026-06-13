@@ -855,7 +855,7 @@ Une sensibilité aux problématiques sociales concrètes, et l'envie de concevoi
   // ============== GARY LINES ==============
   garyLines: [
     `Il approuve votre curiosité. Pour cette fois.`,
-    `Il juge. Il ne dit rien. C'est suffisant.`,
+    `💖 Compagnon légendaire invoqué. Les dégâts émotionnels sont réduits. 💖`,
     `Vous avez trouvé le code. Il s'en foutait de toute façon.`,
     `Curiosité validée. Gary est impressionné — mais ne le dira jamais.`,
     `Un Samoyède stratégique dans ton portfolio. Tu l'as mérité.`,
