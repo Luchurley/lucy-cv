@@ -198,6 +198,10 @@ function useKonami(onSuccess, onProgress) {
       touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
+    const onTouchCancel = () => {
+      touchRef.current = null;
+    };
+
     const onTouchEnd = (e) => {
       if (!touchRef.current) return;
       const dx = e.changedTouches[0].clientX - touchRef.current.x;
@@ -213,10 +217,12 @@ function useKonami(onSuccess, onProgress) {
     window.addEventListener('keydown', onKey);
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchCancel, { passive: true });
     return () => {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchCancel);
     };
   }, [onSuccess, onProgress]);
 }

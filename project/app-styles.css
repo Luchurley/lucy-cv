@@ -290,6 +290,7 @@ img { display: block; max-width: 100%; }
   padding-bottom: 100px; /* space for bottom nav + sticky CTA */
   scrollbar-width: thin;
   scrollbar-color: var(--color-ink-soft) transparent;
+  overscroll-behavior: none; /* prevent iOS pull-to-refresh firing touchcancel mid-konami */
 }
 .scroll::-webkit-scrollbar { width: 4px; }
 .scroll::-webkit-scrollbar-thumb { background: var(--color-ink-soft); }
