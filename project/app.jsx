@@ -15,7 +15,7 @@ function App() {
   const [garyBadgeUnlocked, setGaryBadgeUnlocked] = $useState(() => !!localStorage.getItem('gary-badge'));
   const [detailId, setDetailId] = $useState(null);
   // ---- XP STATE ----
-  const [xp, setXP] = $useState(0);
+  const [xp, setXP] = $useState(() => parseInt(localStorage.getItem('lucy-xp') || '0', 10));
   const lastTierRef = $useRef('visitor');
   // ---- EASTER EGG STATES ----
   const [garyOpen, setGaryOpen] = $useState(false);
@@ -47,7 +47,9 @@ function App() {
   // ---- BADGES SEEN ----
   const badgesSeenRef = $useRef(new Set());
   // ---- FUN FACTS ----
-  const [unlockedFacts, setUnlockedFacts] = $useState([]);
+  const [unlockedFacts, setUnlockedFacts] = $useState(() => {
+    try { return JSON.parse(localStorage.getItem('lucy-facts') || '[]'); } catch { return []; }
+  });
 
   // ---- unlockFact helper ----
   const unlockFact = $useCallback((id) => {
@@ -59,6 +61,10 @@ function App() {
       return [...prev, fact];
     });
   }, [pushToast]);
+
+  // ---- Persist XP + fun facts to localStorage ----
+  $useEffect(() => { localStorage.setItem('lucy-xp', String(xp)); }, [xp]);
+  $useEffect(() => { localStorage.setItem('lucy-facts', JSON.stringify(unlockedFacts)); }, [unlockedFacts]);
 
   // ---- gainXP helper ----
   const gainXP = $useCallback((amount, label) => {
