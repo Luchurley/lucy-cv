@@ -854,10 +854,10 @@ Une sensibilité aux problématiques sociales concrètes, et l'envie de concevoi
 
   // ============== GARY LINES ==============
   garyLines: [
-    `Il approuve votre curiosité. Pour cette fois.`,
-    `Il juge. Il ne dit rien. C'est suffisant.`,
-    `Vous avez trouvé le code. Il s'en foutait de toute façon.`,
-    `Curiosité validée. Gary est impressionné — mais ne le dira jamais.`,
-    `💖 Compagnon légendaire invoqué. Les dégâts émotionnels sont réduits. 💖`,
+    `🐾 Aura de Samoyède activée : anxiété -50 %, sérénité +100 %.`,
+    `💖 Compagnon légendaire invoqué. Les dégâts émotionnels sont réduits.`,
+    `🦴 Effet passif débloqué : réconfort constant.`,
+    `✨ Aura de Gary : stress -50 %, loyauté +∞.`,
+    `🎮 Familier équipé. Bonus d'affection permanent.`,
   ],
 };
