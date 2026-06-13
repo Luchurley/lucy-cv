@@ -576,9 +576,34 @@ function FloatingIABtn({ locked, onClick }) {
 
 // ---------- BADGE GARY — persistent achievement ----------
 function BadgeGary({ unlocked }) {
-  if (!unlocked) return null;
+  const [hidden, setHidden] = React.useState(() => !!localStorage.getItem('gary-badge-hidden'));
+  const lastTapRef = React.useRef(0);
+
+  if (!unlocked || hidden) return null;
+
+  const dismiss = () => {
+    localStorage.setItem('gary-badge-hidden', '1');
+    setHidden(true);
+  };
+
+  const onDoubleClick = (e) => {
+    e.preventDefault();
+    dismiss();
+  };
+
+  const onTouchEnd = (e) => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) {
+      e.preventDefault();
+      dismiss();
+    }
+    lastTapRef.current = now;
+  };
+
   return (
-    <div className="badge-gary-wrap" title="Gary Approved ✓">
+    <div className="badge-gary-wrap" title="Double-clic pour masquer"
+      onDoubleClick={onDoubleClick}
+      onTouchEnd={onTouchEnd}>
       <img src="assets/badges/badge-cire.png" alt="Gary Approved" />
     </div>
   );
