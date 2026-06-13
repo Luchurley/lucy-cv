@@ -717,8 +717,8 @@ img { display: block; max-width: 100%; }
   position: absolute;
   bottom: 80px;
   right: 10px;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   z-index: 390;
   pointer-events: auto;
   cursor: pointer;
