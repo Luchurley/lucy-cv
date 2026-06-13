@@ -202,10 +202,11 @@ function App() {
         achievement: true,
         label: "Vous avez gagné la confiance d'un Samoyède. C'est plus rare qu'une recommandation LinkedIn.",
       });
+      unlockFact('konami');
     };
     window.addEventListener('gary-badge-unlocked', handler);
     return () => window.removeEventListener('gary-badge-unlocked', handler);
-  }, [pushToast]);
+  }, [pushToast, unlockFact]);
 
   const iaUnlocked = unlockedFacts.some(f => f.id === 'curious');
 
