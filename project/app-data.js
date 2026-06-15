@@ -770,7 +770,7 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
   skillsByCat: [
     {
       cat: 'UX / UI DESIGN', tagCat: 'ux',
-      tags: ['UX Research', 'UI Design', 'Wireframing', 'Prototypage', 'Design Systems', 'Usability Testing', 'Figma', 'Mobile-first', 'A11y WCAG'],
+      tags: ['UX Research', 'UI Design', 'Wireframing', 'Prototypage', 'Design Systems', 'Usability Testing', 'Figma', 'Mobile-first', 'A11y WCAG', 'Miro · FigJam', 'Hotjar'],
     },
     {
       cat: 'DIRECTION ARTISTIQUE', tagCat: 'da',
@@ -778,11 +778,15 @@ M'a appris les marques expérientielles, le branding émotionnel, la cohérence 
     },
     {
       cat: 'CHEFFE DE PROJET DIGITAL', tagCat: 'pm',
-      tags: ['Gestion projet 360°', 'CRM Architecture', 'Webflow', 'CMS', 'Coordination', 'Qualiopi · CPF', 'KPIs & Reporting'],
+      tags: ['Gestion projet 360°', 'CRM Architecture', 'Webflow', 'CMS', 'Coordination', 'Qualiopi · CPF', 'KPIs & Reporting', 'Git · GitHub'],
     },
     {
       cat: 'IA & PROMPTING', tagCat: 'ai',
       tags: ['IA Conversationnelle', 'Prompt Engineering', 'AI Product Design', 'Chatbot UX', 'Claude / GPT', 'Automatisation'],
+    },
+    {
+      cat: 'PRODUCT OWNERSHIP', tagCat: 'pm',
+      tags: ['Product Discovery', 'Backlog & User Stories', 'Priorisation (RICE · MoSCoW)', 'Roadmap produit', 'Scrum · Kanban', 'Stakeholder Management', 'Décisions data-driven', 'OKR · KPIs', 'Jira', 'Notion'],
     },
   ],
 
