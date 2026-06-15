@@ -606,7 +606,7 @@ window.LUCY = {
       { name: 'Gemini', org: 'Google', usage: 'Recherche, synthèse, intégration G Suite' },
       { name: 'DeepSeek', org: 'DeepSeek', usage: 'Analyse, code, raisonnement technique' },
     ],
-    secondary: ['Runway', 'Leonardo', 'Otter', 'DeepL', 'Mistral', 'Playground AI', 'Snapseed', 'Copilot'],
+    secondary: ['Runway', 'Leonardo', 'Otter', 'DeepL', 'Mistral', 'Playground AI', 'Snapseed', 'Copilot', 'Perplexity', 'v0', 'Cursor', 'Relume', 'Figma AI', 'Notion AI', 'Midjourney', 'ElevenLabs', 'Gamma'],
     badge: '🏅 Créatrice certifiée Cantina',
   },
 
