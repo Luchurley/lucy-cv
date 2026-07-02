@@ -586,6 +586,40 @@ h2 > .icon, summary > .icon { color: var(--glacier-d); }
   margin-top: 12px;
 }
 
+/* Pop-up récompense : icône célébrée + bienfait du soin */
+.reward-modal { text-align: center; }
+.reward-modal h2 { justify-content: center; display: flex; }
+.reward-pop {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; margin-top: 12px;
+}
+.reward-pop-icon {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  display: grid; place-items: center;
+  animation: reward-pop .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+.reward-pop-icon .icon {
+  width: 32px; height: 32px;
+  color: var(--glacier-d);
+}
+.reward-modal .text-plate { text-align: left; }
+.reward-modal .text-plate p { font-size: .9rem; }
+.reward-bienfait-titre {
+  font-size: .72rem !important;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+@keyframes reward-pop {
+  from { transform: scale(.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 /* ============== MODE SOIGNANT — filtre global ============== */
 body.mode-soignant [data-mode="perso"] { display: none !important; }
 

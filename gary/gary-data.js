@@ -379,21 +379,66 @@ window.GARY = {
   // Pas de barre d'XP ni de niveaux : des récompenses ponctuelles,
   // débloquées par de vraies actions de soin. Les conditions vivent
   // dans app.js (BADGE_CHECKS), la présentation ici.
+  // `bienfait` : au déblocage, une pop-up explique ce que ce soin
+  // apporte concrètement à Gary — la récompense, c'est de comprendre
+  // ce qu'on vient de lui offrir. (Principes établis, pas de chiffres.)
   badges: [
-    { id: 'premiere-balade', nom: 'Premiers pas', desc: 'Compter une première promenade', icon: 'footprints' },
-    { id: 'promeneur', nom: 'Grand promeneur', desc: '25 promenades comptées', icon: 'medal' },
-    { id: 'grand-air', nom: 'Bol d\'air', desc: '5 heures de balade cumulées', icon: 'timer' },
-    { id: 'jour-parfait', nom: 'Journée parfaite', desc: 'Toute la checklist du jour cochée', icon: 'sun' },
-    { id: 'semaine-reglee', nom: 'Semaine réglée', desc: 'Toute la checklist de la semaine cochée', icon: 'calendar-days' },
-    { id: 'mois-carre', nom: 'Mois carré', desc: 'Toute la checklist du mois cochée', icon: 'star' },
-    { id: 'premiere-pesee', nom: 'Sur la balance', desc: 'Ajouter une pesée à la courbe de poids', icon: 'weight' },
-    { id: 'photographe', nom: 'Paparazzi polaire', desc: '3 photos dans la galerie', icon: 'camera' },
-    { id: 'lecteur-de-gary', nom: 'Traducteur de Gary', desc: 'Un sans-faute au quiz « Que dit Gary ? »', icon: 'paw-print' },
-    { id: 'demystificateur', nom: 'Démystificateur', desc: 'Un sans-faute au quiz « Vrai ou Mythe ? »', icon: 'snowflake' },
-    { id: 'sante-planifiee', nom: 'Santé sous contrôle', desc: 'Vaccin, vermifuge, antipuces et véto planifiés, rien en retard', icon: 'stethoscope' },
-    { id: 'archiviste', nom: 'Archiviste', desc: 'Faire un export JSON de sauvegarde', icon: 'save' },
-    { id: 'fidele', nom: 'Fidèle au poste', desc: 'Ouvrir l\'app 7 jours de suite', icon: 'award' },
-    { id: 'champion', nom: 'Champion des neiges', desc: 'Débloquer toutes les autres récompenses', icon: 'trophy' },
+    {
+      id: 'premiere-balade', nom: 'Premiers pas', desc: 'Compter une première promenade', icon: 'footprints',
+      bienfait: 'La promenade couvre un besoin fondamental : se dépenser, mais surtout FLAIRER. L\'odorat est le premier canal d\'information de Gary — une balade riche en odeurs le fatigue et l\'apaise autant que la course.',
+    },
+    {
+      id: 'promeneur', nom: 'Grand promeneur', desc: '25 promenades comptées', icon: 'medal',
+      bienfait: 'La régularité des sorties stabilise tout le reste : un chien suffisamment dépensé gère mieux la frustration, l\'excitation et le calme à la maison — exactement les chantiers de Gary.',
+    },
+    {
+      id: 'grand-air', nom: 'Bol d\'air', desc: '5 heures de balade cumulées', icon: 'timer',
+      bienfait: 'Le temps cumulé dehors compte plus que l\'intensité : marcher, flairer, observer, c\'est de la dépense mentale autant que physique. Pour un chien nordique énergique comme Gary, c\'est la base de son équilibre.',
+    },
+    {
+      id: 'jour-parfait', nom: 'Journée parfaite', desc: 'Toute la checklist du jour cochée', icon: 'sun',
+      bienfait: 'Une journée complète, c\'est tous les besoins de base couverts : eau, repas, sorties, jeu, et le retour au calme. La prévisibilité de la routine rassure — et elle évite que les petits oublis s\'accumulent.',
+    },
+    {
+      id: 'semaine-reglee', nom: 'Semaine réglée', desc: 'Toute la checklist de la semaine cochée', icon: 'calendar-days',
+      bienfait: 'Les contrôles de la semaine (brossage, oreilles, yeux, tiques) servent à repérer TÔT ce qui change. La détection précoce est le soin le plus efficace qui existe — et sous le double manteau d\'un Samoyède, rien ne se voit tout seul.',
+    },
+    {
+      id: 'mois-carre', nom: 'Mois carré', desc: 'Toute la checklist du mois cochée', icon: 'star',
+      bienfait: 'Pesée, griffes, antiparasitaire, stock : le suivi mensuel transforme des impressions en données. Le jour où quelque chose cloche, ce sont ces repères réguliers qui aideront le vétérinaire.',
+    },
+    {
+      id: 'premiere-pesee', nom: 'Sur la balance', desc: 'Ajouter une pesée à la courbe de poids', icon: 'weight',
+      bienfait: 'Le poids est l\'indicateur santé le plus simple et le plus objectif qui soit. Une prise ou une perte lente est invisible à l\'œil sous la fourrure — la courbe, elle, la montre tout de suite.',
+    },
+    {
+      id: 'photographe', nom: 'Paparazzi polaire', desc: '3 photos dans la galerie', icon: 'camera',
+      bienfait: 'Des photos datées gardent une trace de son état : silhouette, poil, posture. C\'est un vrai outil de comparaison dans le temps — et un plaisir qui entretient la relation, ce qui est aussi un soin.',
+    },
+    {
+      id: 'lecteur-de-gary', nom: 'Traducteur de Gary', desc: 'Un sans-faute au quiz « Que dit Gary ? »', icon: 'paw-print',
+      bienfait: 'Savoir lire ses signaux, c\'est intervenir AVANT que la tension monte : on ne le met pas en échec, on désamorce tôt, et la confiance grandit. C\'est le fondement de toute l\'éducation positive.',
+    },
+    {
+      id: 'demystificateur', nom: 'Démystificateur', desc: 'Un sans-faute au quiz « Vrai ou Mythe ? »', icon: 'snowflake',
+      bienfait: 'Trier les faits du folklore, c\'est soigner Gary d\'après ce qu\'on sait vraiment — pas d\'après les légendes d\'éleveurs ou les conseils de trottoir. Le doute méthodique est un soin, lui aussi.',
+    },
+    {
+      id: 'sante-planifiee', nom: 'Santé sous contrôle', desc: 'Vaccin, vermifuge, antipuces et véto planifiés, rien en retard', icon: 'stethoscope',
+      bienfait: 'Vaccins, vermifuges et antiparasitaires à jour, c\'est de la prévention pure : des risques évités plutôt que des maladies soignées. Et des rappels calculés au bon moment, plutôt que de mémoire.',
+    },
+    {
+      id: 'archiviste', nom: 'Archiviste', desc: 'Faire un export JSON de sauvegarde', icon: 'save',
+      bienfait: 'La sauvegarde protège tout l\'historique de Gary et permet de le transmettre à un autre soignant en un fichier. C\'est la raison d\'être de cette app : que n\'importe qui puisse bien s\'occuper de lui.',
+    },
+    {
+      id: 'fidele', nom: 'Fidèle au poste', desc: 'Ouvrir l\'app 7 jours de suite', icon: 'award',
+      bienfait: 'La constance est le soin invisible : ce ne sont pas les gros efforts ponctuels qui font la santé et l\'équilibre d\'un chien, c\'est la répétition tranquille, jour après jour.',
+    },
+    {
+      id: 'champion', nom: 'Champion des neiges', desc: 'Débloquer toutes les autres récompenses', icon: 'trophy',
+      bienfait: 'Tout y est : les besoins couverts, la santé anticipée, les signaux compris, l\'historique en sécurité. Gary a un humain qui s\'occupe de lui avec méthode ET avec cœur — c\'est tout ce qu\'un chien demande.',
+    },
   ],
 
   // ============== DISCLAIMER PERMANENT ==============

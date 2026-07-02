@@ -162,17 +162,46 @@ const BADGE_CHECKS = {
   'champion': () => D.badges.filter(b => b.id !== 'champion')
     .every(b => S.get('badges', []).includes(b.id)),
 };
-// Vérifie tout, débloque le nouveau, toast. Appelé avant chaque rendu.
+// Vérifie tout, débloque le nouveau, et ouvre la pop-up « bienfait ».
+// Appelé avant chaque rendu. La récompense, c'est de lire ce que le
+// soin qu'on vient de faire apporte concrètement à Gary.
 function refreshBadges() {
-  const owned = S.get('badges', []);
-  const news = D.badges.filter(b => !owned.includes(b.id) && BADGE_CHECKS[b.id] && BADGE_CHECKS[b.id]());
-  if (!news.length) return 0;
-  S.set('badges', [...owned, ...news.map(b => b.id)]);
-  toast(news.length === 1
-    ? `🏅 Récompense débloquée : ${news[0].nom} !`
-    : `🏅 ${news.length} récompenses débloquées !`);
-  // « Champion » peut se débloquer dans la foulée de la dernière
-  return news.length + refreshBadges();
+  const collected = [];
+  // boucle : « Champion » peut se débloquer dans la foulée de la dernière
+  for (;;) {
+    const owned = S.get('badges', []);
+    const news = D.badges.filter(b => !owned.includes(b.id) && BADGE_CHECKS[b.id] && BADGE_CHECKS[b.id]());
+    if (!news.length) break;
+    S.set('badges', [...owned, ...news.map(b => b.id)]);
+    collected.push(...news);
+  }
+  if (collected.length) showRewardModal(collected);
+  return collected.length;
+}
+
+// Pop-up de récompense (modale = calque flottant → givre autorisé ;
+// le texte du bienfait repose sur une plaque opaque, jamais sur le frost)
+function showRewardModal(list) {
+  const root = $('#modal-root');
+  root.innerHTML = `
+    <div class="modal-overlay" data-action="modal-overlay">
+      <div class="modal reward-modal" role="dialog" aria-modal="true" aria-labelledby="reward-title">
+        <h2 id="reward-title">Récompense${list.length > 1 ? 's' : ''} débloquée${list.length > 1 ? 's' : ''} !</h2>
+        ${list.map(b => `
+          <div class="reward-pop">
+            <span class="reward-pop-icon">${icon(b.icon)}</span>
+            <strong>${esc(b.nom)}</strong>
+          </div>
+          <div class="text-plate">
+            <p class="reward-bienfait-titre">Ce que ça apporte à Gary</p>
+            <p>${esc(b.bienfait || b.desc)}</p>
+          </div>`).join('')}
+        <div class="btn-row" style="justify-content:center">
+          <button class="btn btn-primary" data-action="modal-close">Merci pour Gary ❄️</button>
+        </div>
+      </div>
+    </div>`;
+  root.querySelector('[data-action="modal-close"]').focus();
 }
 
 // ============== CHIPS DE VÉRITÉ ==============
@@ -925,17 +954,24 @@ const actions = {
   },
   'import': () => $('#import-file').click(),
   'print': () => window.print(),
+
+  // --- pop-up récompense ---
+  'modal-close': () => { $('#modal-root').innerHTML = ''; },
+  'modal-overlay': (t, e) => { if (e.target === t) $('#modal-root').innerHTML = ''; },
 };
 
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-action]');
   if (t && actions[t.dataset.action]) actions[t.dataset.action](t, e);
 });
-// checklists accessibles au clavier (role=checkbox)
+// checklists accessibles au clavier (role=checkbox) + Échap ferme la pop-up
 document.addEventListener('keydown', e => {
   if ((e.key === ' ' || e.key === 'Enter') && e.target.matches('.check-item')) {
     e.preventDefault();
     actions['check-toggle'](e.target);
+  }
+  if (e.key === 'Escape' && $('#modal-root').innerHTML) {
+    $('#modal-root').innerHTML = '';
   }
 });
 
