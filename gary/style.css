@@ -1,0 +1,595 @@
+/* ============================================================
+   GARY · STYLE — système « neige tassée + givre »
+   ------------------------------------------------------------
+   Base   = neumorphism opaque (surfaces, cartes au repos, boutons)
+   Givre  = calques translucides (backdrop-filter) UNIQUEMENT sur :
+            modales, hero, carte active/ouverte, panneau latéral.
+   Règles dures :
+   - frost jamais sous un texte long
+   - texte à contraste élevé (jamais le piège faible-contraste)
+   - affordance cliquable : état inset net au press
+   - fallback opaque si backdrop-filter non supporté
+   ============================================================ */
+
+/* ============== TOKENS — CLAIR ============== */
+:root {
+  --ice: #E4EBF2;
+  --ice-deep: #DCE4EC;
+  --light: #FFFFFF;            /* ombre claire haut-gauche */
+  --dark: #A9B8CC;             /* ombre froide bas-droite */
+  --ink: #2A3B4D;
+  --ink-soft: #5E6E7E;
+  --ink-faint: #8294A4;
+  --glacier: #3E92C9;
+  --glacier-d: #2C7BAE;
+  --cyan: #5FC9D6;
+  --warn: #E08A6B;
+  --good: #5BB98C;
+  --r: 26px;
+  --r-sm: 16px;
+  --shadow-up: 8px 8px 18px var(--dark), -8px -8px 18px var(--light);
+  --shadow-up-sm: 5px 5px 12px var(--dark), -5px -5px 12px var(--light);
+  --shadow-in: inset 6px 6px 12px var(--dark), inset -6px -6px 12px var(--light);
+  --shadow-in-sm: inset 3px 3px 7px var(--dark), inset -3px -3px 7px var(--light);
+  --frost-bg: rgba(255, 255, 255, .55);
+  --frost-border: rgba(255, 255, 255, .6);
+  --chip-fait: #3F8F68;
+  --chip-fait-bg: #D9EEE3;
+  --chip-folklore: #B05E3B;
+  --chip-folklore-bg: #F6E3D9;
+  --chip-hypothese: #57708E;
+  --chip-hypothese-bg: #DEE7F1;
+  --grid-line: rgba(94, 110, 126, .18);
+}
+
+/* ============== TOKENS — NUIT GLACIAIRE ============== */
+/* Base bleu-nuit désaturé, ombres claires atténuées, accents conservés,
+   texte clair contraste ≥ AA. */
+[data-theme="dark"] {
+  --ice: #1F2733;
+  --ice-deep: #1A212C;
+  --light: #2C3644;             /* ombre claire atténuée */
+  --dark: #12181F;
+  --ink: #E8EEF4;
+  --ink-soft: #AEBBC9;
+  --ink-faint: #7E8C9B;
+  --glacier: #3E92C9;
+  --glacier-d: #5FB2E4;
+  --frost-bg: rgba(31, 40, 54, .55);
+  --frost-border: rgba(255, 255, 255, .12);
+  --chip-fait: #8FD8B4;
+  --chip-fait-bg: #24463A;
+  --chip-folklore: #F0B08F;
+  --chip-folklore-bg: #4A3327;
+  --chip-hypothese: #A9C4E2;
+  --chip-hypothese-bg: #2A3B50;
+  --grid-line: rgba(174, 187, 201, .18);
+}
+
+/* ============== RESET / BASE ============== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Fredoka', system-ui, sans-serif;
+  background: var(--ice);
+  color: var(--ink);
+  line-height: 1.55;
+  min-height: 100dvh;
+  transition: background .3s, color .3s;
+}
+img { max-width: 100%; display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--glacier-d); }
+
+/* Focus clavier visible partout */
+:focus-visible {
+  outline: 3px solid var(--glacier);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ============== LAYOUT ============== */
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 16px 96px;
+}
+
+/* ============== HEADER (hero = givre, autorisé) ============== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: -16px -16px 16px;
+  padding: 14px 16px 10px;
+  background: var(--ice);            /* fallback opaque */
+  border-bottom: 1px solid var(--frost-border);
+}
+@supports (backdrop-filter: blur(14px)) {
+  .header { background: var(--frost-bg); backdrop-filter: blur(14px); }
+}
+.header-row {
+  display: flex; align-items: center; gap: 10px;
+}
+.header-title {
+  font-size: 1.5rem; font-weight: 600; letter-spacing: .5px;
+  line-height: 1.15;
+  flex: 1; min-width: 0;
+}
+.header-title small {
+  display: block;
+  font-size: .78rem; font-weight: 500; color: var(--ink-soft);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Boutons ronds neumorphes du header */
+.btn-round {
+  width: 42px; height: 42px; flex: none;
+  border: none; border-radius: 50%;
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: grid; place-items: center;
+  transition: box-shadow .15s;
+}
+.btn-round:active, .btn-round[aria-pressed="true"] { box-shadow: var(--shadow-in-sm); }
+
+/* Bandeau mode garde */
+.garde-banner {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: var(--r-sm);
+  background: var(--glacier);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 500;
+  display: none;
+}
+body.mode-soignant .garde-banner { display: block; }
+
+/* Recherche */
+.search-wrap { margin-top: 10px; display: none; }
+.search-wrap.open { display: block; }
+.search-input {
+  width: 100%;
+  border: none; border-radius: var(--r-sm);
+  padding: 11px 16px;
+  background: var(--ice);
+  box-shadow: var(--shadow-in-sm);
+  color: var(--ink);
+}
+.search-input::placeholder { color: var(--ink-faint); }
+.search-results { margin-top: 8px; display: grid; gap: 6px; }
+.search-hit {
+  text-align: left; border: none; cursor: pointer;
+  padding: 10px 14px; border-radius: var(--r-sm);
+  background: var(--ice); box-shadow: var(--shadow-up-sm);
+  color: var(--ink);
+}
+.search-hit:active { box-shadow: var(--shadow-in-sm); }
+.search-hit .hit-where { font-size: .72rem; color: var(--ink-faint); display: block; }
+
+/* ============== NAV (onglets scrollables) ============== */
+.tabs {
+  display: flex; gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none;
+  border: none; cursor: pointer;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-size: .9rem;
+  transition: box-shadow .15s, color .15s;
+}
+.tab[aria-selected="true"] {
+  box-shadow: var(--shadow-in-sm);
+  color: var(--glacier-d);
+}
+.tab:active { box-shadow: var(--shadow-in-sm); }
+
+/* ============== CARTES (neige tassée) ============== */
+.card {
+  background: var(--ice);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-up);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.card h2 {
+  font-size: 1.05rem; font-weight: 600;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card h3 { font-size: .95rem; font-weight: 600; margin: 12px 0 6px; }
+.card p { color: var(--ink); font-size: .92rem; }
+.card .muted { color: var(--ink-soft); font-size: .85rem; }
+.card .faint { color: var(--ink-faint); font-size: .78rem; }
+
+/* Carte givre — réservée aux calques flottants (hero, carte active) */
+.card-frost {
+  background: var(--ice-deep);        /* fallback opaque */
+  border: 1px solid var(--frost-border);
+}
+@supports (backdrop-filter: blur(14px)) {
+  .card-frost { background: var(--frost-bg); backdrop-filter: blur(14px); }
+}
+
+/* ============== HERO ACCUEIL ============== */
+.hero {
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-emoji {
+  width: 68px; height: 68px; flex: none;
+  border-radius: 50%;
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  display: grid; place-items: center;
+  font-size: 2rem;
+}
+.hero-name { font-size: 1.45rem; font-weight: 600; line-height: 1.15; }
+.hero-sub { color: var(--ink-soft); font-size: .85rem; }
+
+/* ============== BOUTONS ============== */
+.btn {
+  border: none; cursor: pointer;
+  padding: 10px 18px;
+  border-radius: var(--r-sm);
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: .88rem;
+  transition: box-shadow .15s;
+}
+.btn:active { box-shadow: var(--shadow-in-sm); }
+.btn-primary { background: var(--glacier); color: #fff; box-shadow: var(--shadow-up-sm); }
+.btn-primary:active { box-shadow: var(--shadow-in-sm); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+
+/* Compteurs +/- */
+.counter { display: flex; align-items: center; gap: 12px; }
+.counter-val {
+  min-width: 64px; text-align: center;
+  padding: 8px 12px; border-radius: var(--r-sm);
+  box-shadow: var(--shadow-in-sm);
+  font-weight: 600; font-size: 1.1rem;
+}
+
+/* ============== CHIPS DE VÉRITÉ + BADGES ============== */
+.chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.chip-fait { background: var(--chip-fait-bg); color: var(--chip-fait); }
+.chip-folklore { background: var(--chip-folklore-bg); color: var(--chip-folklore); }
+.chip-hypothese { background: var(--chip-hypothese-bg); color: var(--chip-hypothese); }
+.chip-mode { background: var(--ice-deep); color: var(--ink-soft); box-shadow: var(--shadow-in-sm); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: .72rem; font-weight: 600;
+}
+.badge-late { background: var(--warn); color: #fff; }
+.badge-soon { background: var(--glacier); color: #fff; }
+.badge-ok { background: var(--good); color: #fff; }
+.badge-off { background: var(--ice-deep); color: var(--ink-soft); }
+
+/* ============== FICHES / ACCORDÉONS ============== */
+.fiche { margin-bottom: 14px; }
+.fiche-head {
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.fiche-head h3 { flex: 1; margin: 0; font-size: .98rem; }
+.fav-btn {
+  border: none; background: none; cursor: pointer;
+  font-size: 1.05rem; line-height: 1;
+  color: var(--ink-faint);
+  padding: 2px 4px;
+}
+.fav-btn[aria-pressed="true"] { color: var(--warn); }
+.fiche-corps { margin-top: 6px; font-size: .9rem; }
+.fiche-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+/* Accordéon natif <details> — a_savoir toujours plié par défaut */
+details.acc {
+  border-radius: var(--r-sm);
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+details.acc summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 16px;
+  font-weight: 500;
+  font-size: .92rem;
+  display: flex; align-items: center; gap: 8px;
+  user-select: none;
+}
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after {
+  content: '▾'; margin-left: auto; color: var(--ink-faint);
+  transition: transform .2s;
+}
+details.acc[open] summary::after { transform: rotate(180deg); }
+details.acc[open] {
+  /* carte ouverte = calque actif → givre autorisé */
+  box-shadow: var(--shadow-in-sm);
+}
+details.acc .acc-body { padding: 0 16px 14px; }
+
+/* ============== CHECKLISTS ============== */
+.check-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: box-shadow .15s, opacity .15s;
+}
+.check-item.done { box-shadow: var(--shadow-in-sm); opacity: .72; }
+.check-item.done .check-label { text-decoration: line-through; color: var(--ink-soft); }
+.check-box {
+  width: 24px; height: 24px; flex: none;
+  border-radius: 8px;
+  box-shadow: var(--shadow-in-sm);
+  display: grid; place-items: center;
+  font-size: .85rem; color: var(--good);
+}
+.check-label { flex: 1; font-size: .9rem; }
+.check-del {
+  border: none; background: none; cursor: pointer;
+  color: var(--ink-faint); font-size: .95rem; padding: 4px;
+}
+
+/* ============== FORMULAIRES ============== */
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: .78rem; color: var(--ink-soft); margin-bottom: 4px; font-weight: 500; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  border: none; border-radius: var(--r-sm);
+  padding: 10px 14px;
+  background: var(--ice);
+  box-shadow: var(--shadow-in-sm);
+  color: var(--ink);
+}
+.field input::placeholder { color: var(--ink-faint); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+@media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* ============== TABLEAU DE BORD ============== */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.stat-tile {
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-in-sm);
+  background: var(--ice);
+}
+.stat-tile .stat-val { font-size: 1.25rem; font-weight: 600; }
+.stat-tile .stat-label { font-size: .74rem; color: var(--ink-soft); }
+
+.countdown-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--grid-line);
+  font-size: .9rem;
+}
+.countdown-row:last-child { border-bottom: none; }
+.countdown-row .cd-label { flex: 1; }
+
+/* ============== SANTÉ ============== */
+.event-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px;
+  border-radius: var(--r-sm);
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  margin-bottom: 10px;
+  font-size: .9rem;
+}
+.event-row .ev-main { flex: 1; min-width: 0; }
+.event-row .ev-date { font-size: .76rem; color: var(--ink-soft); }
+
+/* ============== GALERIE ============== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+.photo-cell {
+  position: relative;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-up-sm);
+  aspect-ratio: 1;
+  background: var(--ice-deep);
+}
+.photo-cell img { width: 100%; height: 100%; object-fit: cover; }
+.photo-del {
+  position: absolute; top: 6px; right: 6px;
+  border: none; cursor: pointer;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(0,0,0,.45); color: #fff;
+  font-size: .8rem;
+}
+
+/* ============== COURBE DE POIDS ============== */
+.chart-wrap { overflow-x: auto; }
+.chart-svg { width: 100%; height: auto; display: block; }
+.chart-svg .grid-line { stroke: var(--grid-line); stroke-width: 1; }
+.chart-svg .axis-label { fill: var(--ink-soft); font-size: 11px; font-family: inherit; }
+.chart-svg .data-line { stroke: var(--glacier); stroke-width: 2; fill: none; }
+.chart-svg .data-dot { fill: var(--glacier); }
+.chart-svg .data-label { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: inherit; }
+.weight-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 12px; }
+.weight-table th { text-align: left; color: var(--ink-soft); font-weight: 500; font-size: .76rem; padding: 6px 8px; }
+.weight-table td { padding: 6px 8px; border-top: 1px solid var(--grid-line); }
+.chart-tip {
+  position: absolute;
+  pointer-events: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--ice);
+  font-size: .76rem;
+  font-weight: 500;
+  transform: translate(-50%, -130%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* ============== XP / JEUX ============== */
+.xp-bar-wrap {
+  height: 18px; border-radius: 999px;
+  box-shadow: var(--shadow-in-sm);
+  overflow: hidden;
+  background: var(--ice);
+}
+.xp-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--glacier), var(--cyan));
+  border-radius: 999px;
+  transition: width .5s ease;
+  min-width: 6px;
+}
+.quiz-option {
+  display: block; width: 100%;
+  text-align: left;
+  border: none; cursor: pointer;
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  margin-bottom: 10px;
+  font-size: .9rem;
+  color: var(--ink);
+  transition: box-shadow .15s;
+}
+.quiz-option:active { box-shadow: var(--shadow-in-sm); }
+.quiz-option.correct { box-shadow: var(--shadow-in-sm); outline: 2px solid var(--good); }
+.quiz-option.wrong { box-shadow: var(--shadow-in-sm); outline: 2px solid var(--warn); }
+.quiz-option:disabled { cursor: default; }
+.quiz-feedback {
+  padding: 12px 16px; border-radius: var(--r-sm);
+  box-shadow: var(--shadow-in-sm);
+  font-size: .88rem;
+  margin: 10px 0;
+}
+
+/* ============== FILTRES ============== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.filter-chip {
+  border: none; cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--ice);
+  box-shadow: var(--shadow-up-sm);
+  color: var(--ink-soft);
+  font-size: .8rem; font-weight: 500;
+}
+.filter-chip[aria-pressed="true"] { box-shadow: var(--shadow-in-sm); color: var(--glacier-d); }
+
+/* ============== TOAST XP ============== */
+.toast {
+  position: fixed;
+  bottom: 84px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink);
+  color: var(--ice);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: .85rem; font-weight: 500;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  z-index: 90;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ============== MODALE (givre autorisé) ============== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 80;
+  background: rgba(20, 30, 45, .35);
+  display: grid; place-items: center;
+  padding: 20px;
+}
+.modal {
+  width: 100%; max-width: 440px;
+  max-height: 85dvh; overflow-y: auto;
+  border-radius: var(--r);
+  padding: 22px;
+  background: var(--ice);              /* fallback opaque */
+  border: 1px solid var(--frost-border);
+  box-shadow: var(--shadow-up);
+}
+@supports (backdrop-filter: blur(14px)) {
+  .modal { background: var(--frost-bg); backdrop-filter: blur(14px); }
+}
+
+/* Le contenu texte long DANS la modale repose sur une plaque opaque
+   (règle : frost jamais sous un texte long) */
+.modal .text-plate {
+  background: var(--ice);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+
+/* ============== MODE SOIGNANT — filtre global ============== */
+body.mode-soignant [data-mode="perso"] { display: none !important; }
+
+/* ============== DISCLAIMER ============== */
+.disclaimer {
+  font-size: .74rem;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 14px 20px 0;
+}
+
+/* ============== ANIMATIONS / REDUCED MOTION ============== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ============== IMPRESSION ============== */
+@media print {
+  body { background: #fff; color: #000; }
+  .header, .tabs, .btn, .btn-round, .btn-row, .fav-btn, .check-del,
+  .photo-del, .toast, .counter button, .disclaimer-hide-print { display: none !important; }
+  .app { max-width: none; padding: 0; }
+  .card, details.acc, .check-item, .event-row {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+  /* le JS ouvre les <details> avant impression, mais au cas où : */
+  details.acc summary::after { display: none; }
+  body.mode-soignant [data-mode="perso"] { display: none !important; }
+}
