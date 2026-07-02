@@ -462,20 +462,47 @@ details.acc .acc-body { padding: 0 16px 14px; }
   z-index: 10;
 }
 
-/* ============== XP / JEUX ============== */
-.xp-bar-wrap {
-  height: 18px; border-radius: 999px;
-  box-shadow: var(--shadow-in-sm);
-  overflow: hidden;
+/* ============== ICÔNES (Lucide inline, trait 2px unifié) ============== */
+.icon {
+  width: 1.05em; height: 1.05em;
+  vertical-align: -0.15em;
+  flex: none;
+}
+h2 > .icon, summary > .icon { color: var(--glacier-d); }
+.fav-btn .icon { width: 1.15em; height: 1.15em; }
+.fav-btn[aria-pressed="true"] .icon { fill: currentColor; }
+.check-del .icon, .photo-del .icon { width: .9em; height: .9em; }
+.garde-banner .icon { vertical-align: -0.18em; }
+
+/* ============== RÉCOMPENSES / JEUX ============== */
+.reward-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.reward-tile {
+  padding: 14px 10px;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-up-sm);
   background: var(--ice);
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  text-align: center;
+  font-size: .74rem;
+  color: var(--ink-soft);
 }
-.xp-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--glacier), var(--cyan));
-  border-radius: 999px;
-  transition: width .5s ease;
-  min-width: 6px;
+.reward-tile .icon {
+  width: 1.9em; height: 1.9em;
+  color: var(--glacier-d);
 }
+.reward-tile strong { font-size: .84rem; color: var(--ink); }
+.reward-tile.locked {
+  box-shadow: var(--shadow-in-sm);
+  opacity: .55;
+}
+.reward-tile.locked .icon { color: var(--ink-faint); }
 .quiz-option {
   display: block; width: 100%;
   text-align: left;

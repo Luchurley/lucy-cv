@@ -40,12 +40,13 @@ window.GARY = {
   },
 
   // ============== DANGERS / SPÉCIFICITÉS (fiche soignant) ==============
+  // icone : nom d'icône de la bibliothèque (Lucide, tracés inline dans app.js)
   dangers: [
-    { icone: '🚫', titre: 'Pas de friandises à poils', detail: 'Aucune friandise contenant des poils (peau avec fourrure, oreilles poilues…). Il n\'aime pas, on n\'en donne pas.' },
-    { icone: '✂️', titre: 'Ne JAMAIS le raser ni le tondre', detail: 'Le double manteau du Samoyède le protège du froid ET de la chaleur/du soleil. Le raser l\'expose. Brossage oui, tonte non.' },
-    { icone: '🌡️', titre: 'Sensible à la chaleur', detail: 'Pas d\'effort aux heures chaudes. Ombre, eau fraîche, sorties tôt le matin / tard le soir en été. Jamais seul dans une voiture.' },
-    { icone: '🐕', titre: 'Mâle non castré', detail: 'Monte vite en excitation avec les autres chiens et peut être très intéressé par les femelles. Rester attentif dans les rencontres, ne pas le laisser s\'emballer.' },
-    { icone: '🍽️', titre: 'Peu gourmand — ne pas forcer', detail: 'S\'il refuse une friandise ou boude sa gamelle une fois, ce n\'est pas alarmant en soi : c\'est son profil. Sa récompense fiable, c\'est le jeu.' },
+    { icone: 'ban', titre: 'Pas de friandises à poils', detail: 'Aucune friandise contenant des poils (peau avec fourrure, oreilles poilues…). Il n\'aime pas, on n\'en donne pas.' },
+    { icone: 'scissors', titre: 'Ne JAMAIS le raser ni le tondre', detail: 'Le double manteau du Samoyède le protège du froid ET de la chaleur/du soleil. Le raser l\'expose. Brossage oui, tonte non.' },
+    { icone: 'thermometer-sun', titre: 'Sensible à la chaleur', detail: 'Pas d\'effort aux heures chaudes. Ombre, eau fraîche, sorties tôt le matin / tard le soir en été. Jamais seul dans une voiture.' },
+    { icone: 'dog', titre: 'Mâle non castré', detail: 'Monte vite en excitation avec les autres chiens et peut être très intéressé par les femelles. Rester attentif dans les rencontres, ne pas le laisser s\'emballer.' },
+    { icone: 'utensils', titre: 'Peu gourmand — ne pas forcer', detail: 'S\'il refuse une friandise ou boude sa gamelle une fois, ce n\'est pas alarmant en soi : c\'est son profil. Sa récompense fiable, c\'est le jeu.' },
   ],
 
   // ============== IDENTITÉ — CHAMPS ÉDITABLES ==============
@@ -365,23 +366,34 @@ window.GARY = {
   // recurrenceJours : proposition par défaut, TOUJOURS modifiable.
   // Les périodicités réelles dépendent du protocole du vétérinaire.
   santeTypes: [
-    { id: 'vaccin', label: 'Vaccin', icone: '💉', recurrenceJours: 365, note: 'Rappel annuel usuel — suivre le carnet de vaccination et le véto.' },
-    { id: 'vermifuge', label: 'Vermifuge', icone: '🪱', recurrenceJours: 90, note: 'Fréquence à valider avec le véto selon le mode de vie.' },
-    { id: 'bravecto', label: 'Bravecto (puces/tiques)', icone: '🕷️', recurrenceJours: 84, note: 'Se référer à la notice du produit (12 semaines) et au véto.' },
-    { id: 'antiparasitaire', label: 'Autre antiparasitaire', icone: '🦟', recurrenceJours: 30, note: 'Selon le produit utilisé — vérifier la notice.' },
-    { id: 'veto', label: 'Visite vétérinaire', icone: '🩺', recurrenceJours: 365, note: 'Bilan annuel usuel, ou selon besoin.' },
-    { id: 'pesee', label: 'Pesée', icone: '⚖️', recurrenceJours: 30, note: 'Alimente la courbe de poids.' },
-    { id: 'autre', label: 'Autre', icone: '📌', recurrenceJours: 0, note: '' },
+    { id: 'vaccin', label: 'Vaccin', icone: 'syringe', recurrenceJours: 365, note: 'Rappel annuel usuel — suivre le carnet de vaccination et le véto.' },
+    { id: 'vermifuge', label: 'Vermifuge', icone: 'pill', recurrenceJours: 90, note: 'Fréquence à valider avec le véto selon le mode de vie.' },
+    { id: 'bravecto', label: 'Bravecto (puces/tiques)', icone: 'bug', recurrenceJours: 84, note: 'Se référer à la notice du produit (12 semaines) et au véto.' },
+    { id: 'antiparasitaire', label: 'Autre antiparasitaire', icone: 'shield-alert', recurrenceJours: 30, note: 'Selon le produit utilisé — vérifier la notice.' },
+    { id: 'veto', label: 'Visite vétérinaire', icone: 'stethoscope', recurrenceJours: 365, note: 'Bilan annuel usuel, ou selon besoin.' },
+    { id: 'pesee', label: 'Pesée', icone: 'weight', recurrenceJours: 30, note: 'Alimente la courbe de poids.' },
+    { id: 'autre', label: 'Autre', icone: 'map-pin', recurrenceJours: 0, note: '' },
   ],
 
-  // ============== XP & NIVEAUX ==============
-  niveaux: [
-    { seuil: 0,   nom: 'Flocon' },
-    { seuil: 60,  nom: 'Boule de neige' },
-    { seuil: 150, nom: 'Congère' },
-    { seuil: 300, nom: 'Blizzard' },
-    { seuil: 500, nom: 'Aurore boréale' },
-    { seuil: 800, nom: 'Légende polaire' },
+  // ============== RÉCOMPENSES À DÉBLOQUER ==============
+  // Pas de barre d'XP ni de niveaux : des récompenses ponctuelles,
+  // débloquées par de vraies actions de soin. Les conditions vivent
+  // dans app.js (BADGE_CHECKS), la présentation ici.
+  badges: [
+    { id: 'premiere-balade', nom: 'Premiers pas', desc: 'Compter une première promenade', icon: 'footprints' },
+    { id: 'promeneur', nom: 'Grand promeneur', desc: '25 promenades comptées', icon: 'medal' },
+    { id: 'grand-air', nom: 'Bol d\'air', desc: '5 heures de balade cumulées', icon: 'timer' },
+    { id: 'jour-parfait', nom: 'Journée parfaite', desc: 'Toute la checklist du jour cochée', icon: 'sun' },
+    { id: 'semaine-reglee', nom: 'Semaine réglée', desc: 'Toute la checklist de la semaine cochée', icon: 'calendar-days' },
+    { id: 'mois-carre', nom: 'Mois carré', desc: 'Toute la checklist du mois cochée', icon: 'star' },
+    { id: 'premiere-pesee', nom: 'Sur la balance', desc: 'Ajouter une pesée à la courbe de poids', icon: 'weight' },
+    { id: 'photographe', nom: 'Paparazzi polaire', desc: '3 photos dans la galerie', icon: 'camera' },
+    { id: 'lecteur-de-gary', nom: 'Traducteur de Gary', desc: 'Un sans-faute au quiz « Que dit Gary ? »', icon: 'paw-print' },
+    { id: 'demystificateur', nom: 'Démystificateur', desc: 'Un sans-faute au quiz « Vrai ou Mythe ? »', icon: 'snowflake' },
+    { id: 'sante-planifiee', nom: 'Santé sous contrôle', desc: 'Vaccin, vermifuge, antipuces et véto planifiés, rien en retard', icon: 'stethoscope' },
+    { id: 'archiviste', nom: 'Archiviste', desc: 'Faire un export JSON de sauvegarde', icon: 'save' },
+    { id: 'fidele', nom: 'Fidèle au poste', desc: 'Ouvrir l\'app 7 jours de suite', icon: 'award' },
+    { id: 'champion', nom: 'Champion des neiges', desc: 'Débloquer toutes les autres récompenses', icon: 'trophy' },
   ],
 
   // ============== DISCLAIMER PERMANENT ==============
