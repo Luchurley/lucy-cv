@@ -128,7 +128,7 @@ img { display: block; max-width: 100%; }
     z-index: 1;
   }
   .stage::after {
-    content: '🐺 ↑↑↓↓←→←→BA · Konami · scroll · click';
+    content: '🐺 ↑↑↓↓←→←→↑↓ · Konami · scroll · click';
     position: fixed;
     bottom: 14px;
     right: 24px;

@@ -560,7 +560,7 @@ window.LUCY = {
       desc: `Banque mobile pour les 12-17 ans. Rendre un produit financier engageant et rassurant pour des ados, sans tomber dans le condescendant.`,
       note: `Concevoir pour des mineurs impose une responsabilité particulière — clarté absolue, zéro dark pattern.`,
       tags: ['UI', 'Fintech', 'DA'],
-      cover: 'assets/projects/teen-bank.png',
+      cover: 'assets/projects/assets-bundle/other/teen-bank.png',
     },
     {
       id: 'mariage',
@@ -569,7 +569,7 @@ window.LUCY = {
       desc: `Site d'invitation + RSVP fonctionnel pour le mariage de ma sœur. Le brief le plus personnel qui soit : zéro droit à l'erreur sur l'émotion.`,
       note: `Cible multigénérationnelle (grands-parents inclus) → simplicité radicale obligatoire.`,
       tags: ['Webflow', 'UI', 'Perso'],
-      cover: 'assets/projects/mariage-save-the-date.jpg',
+      cover: 'assets/projects/assets-bundle/other/mariage-save-the-date.jpg',
       url: 'https://claire-maxime.webflow.io/',
     },
     {
@@ -579,7 +579,7 @@ window.LUCY = {
       desc: `Site vitrine pour Lacopain, une bière artisanale imaginée par 12 amis. Identité visuelle joyeuse et décalée, univers "copain" assumé.`,
       note: `Un brief rare : l'émotion ET le commerce au même endroit. La bière, c'est de l'amitié mise en bouteille.`,
       tags: ['Webflow', 'UI', 'Client'],
-      cover: 'assets/projects/lacopain-site.jpg',
+      cover: 'assets/projects/assets-bundle/other/lacopain-site.jpg',
       url: 'https://lacopain.fr/',
     },
   ],

@@ -619,7 +619,7 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
 }
 
 // ---------- IA PAGE ----------
-const LOGOS_BASE = 'https://raw.githubusercontent.com/Luchurley/lucy-cv/main/project/assets/projects/assets-bundle/logos/';
+const LOGOS_BASE = 'assets/projects/assets-bundle/logos/';
 const TOOL_LOGOS = {
   'Claude': LOGOS_BASE + 'claude-logo.png',
   'ChatGPT / Sora': LOGOS_BASE + 'chatgpt-logo.png',
