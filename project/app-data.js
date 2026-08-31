@@ -10,10 +10,10 @@ window.LUCY = {
     role1: 'CREATIVE',
     role2: 'DIGITAL',
     role3: 'ARCHITECT',
-    location: 'Wavrin (59) · Permis B',
+    location: 'Brunehaut · Belgique',
     nationality: '🇫🇷🇬🇧 Franco-britannique · native',
     availability: '🟢 Open to work',
-    age: '29 ans · Lille',
+    age: '29 ans · Wallonie picarde',
     languages: [
       { flag: '🇫🇷', name: 'Français', level: 'C2 · Natif' },
       { flag: '🇬🇧', name: 'English', level: 'C2 · Natif' },
@@ -30,11 +30,10 @@ window.LUCY = {
 
   manifesto: {
     short: `Pas le profil qu'on case facilement dans une case — et c'est exactement ce qui m'a rendue utile partout où je suis passée.`,
-    full: `Formée, curieuse, obstinée quand il le faut. Je construis des interfaces comme je construis mes projets de vie : avec <strong>méthode, sensibilité et une vraie ligne directrice</strong>. UX/UI, direction artistique, motion, IA, gestion de projet — je conçois des expériences digitales de A à Z.`,
-    closing: `Autodidacte par nature, transversale par instinct, sincère par choix. <strong>Inbox à zéro. Livrables en avance.</strong> Respect du temps des autres.`,
+    full: `Je suis curieuse de ce qui se trouve entre les disciplines, entre les idées et entre les usages. Je cherche à <strong>comprendre avant de concevoir</strong>, à questionner avant de simplifier, et à transformer une intention en expérience concrète. UX/UI, direction artistique, motion, IA, gestion de projet : les outils changent, pas la manière de penser.`,
+    closing: `<strong>Autodidacte par nature, transversale par instinct, curieuse sans modération.</strong> J'apprends, je relie, je donne forme.`,
     signoff: `Un équilibre entre feu et méthode — créativité sans perdre le nord, exécution sans perdre l'âme.`,
   },
-
   // ============== PROJETS ==============
   projects: [
     {
@@ -614,10 +613,22 @@ window.LUCY = {
   // ============== PARCOURS COMPLET ==============
   experiences: [
     {
+      role: 'Head Language Assistant',
+      company: 'Wall Street English · Euralille',
+      period: 'Juil. — Août 2026',
+      type: 'CDD · 2 semaines',
+      color: 'primary',
+      summary: `Remplacement ponctuel en centre de formation en anglais — accueil, coordination et suivi administratif.`,
+      body: `Mission courte de remplacement au sein d'un centre Wall Street English. Accueil des apprenants, renseignements et orientation, gestion administrative des inscriptions et des dossiers, coordination des plannings.
+
+Contexte <strong>100 % bilingue français/anglais</strong>. Une immersion express dans un environnement pédagogique structuré — la preuve, encore, qu'entrer vite dans un système inconnu est devenu un réflexe.`,
+      chips: ['Accueil', 'Coordination', 'Bilingue FR/EN', 'Administratif', 'Pédagogie'],
+    },
+    {
       role: 'Contrôle Qualité & Gestion ERP',
       company: 'Dassault Aviation',
       period: 'Avr. 2025 — Mars 2026',
-      type: 'CDI',
+      type: 'Intérim',
       color: 'secondary',
       summary: `SAP ERP en environnement aéronautique industriel — flux de pièces, qualité, traçabilité, anomalies.`,
       body: `Maîtrise opérationnelle du module SAP ERP : gestion de stock et traçabilité, saisie et suivi des flux de pièces en production. Gestion des anomalies et non-conformités via SAP et OGA. Analyse, traitement des litiges, coordination inter-services.
@@ -657,12 +668,12 @@ Site Webflow construit de A à Z (the-english-coach.webflow.io), design system, 
       period: 'Juin 2021 — Sept. 2022',
       type: 'Freelance',
       color: 'ink',
-      summary: `Produits digitaux end-to-end pour startups et secteur éducatif.`,
-      body: `Benchmarking et analyse concurrentielle, wireframing lo-fi → hi-fi, design thinking, usability testing, product design, motion design, création de contenus éducatifs, UX research.
+      summary: `Statut freelance actif depuis 2021 — projets d'école, missions ponctuelles, et une porte laissée ouverte.`,
+      body: `Le statut est né pendant ma formation : la plupart des projets menés sous ce nom étaient des <strong>travaux d'école</strong> — benchmarking, wireframing lo-fi puis hi-fi, design thinking, usability testing, motion design, UX research. Autant le dire clairement plutôt que de laisser croire à un portefeuille clients fourni.
 
-Clients principaux : secteur éducatif, fintech, expérience immersive, communautés e-sport. Projets variés qui ont musclé l'agilité créative et la capacité à entrer vite dans un sujet.
+Ce que ces projets ont produit est réel malgré tout : secteur éducatif, fintech, expérience immersive, communautés e-sport. Des sujets très différents, entrés vite, livrés en entier. Parmi eux, la <strong>conception d'un jeu grandeur nature</strong> type murder mystery — idéation, gameplay, narration, architecture des règles.
 
-Parmi les projets marquants : <strong>conception et structuration d'un jeu grandeur nature</strong> type murder mystery / escape game — idéation, gameplay, narration et architecture des règles.`,
+Je maintiens ce statut à jour sans forcément avoir de missions en cours. C'est une porte que je garde ouverte : le jour où le freelance pourra me faire vivre, il portera ce nom.`,
       chips: ['Wireframing', 'Design Thinking', 'Usability Testing', 'Product Design', 'Motion Design', 'UX Research'],
     },
     {
@@ -671,10 +682,12 @@ Parmi les projets marquants : <strong>conception et structuration d'un jeu grand
       period: 'Juin 2020 — Juin 2021',
       type: 'Fondatrice',
       color: 'tertiary',
-      summary: `Marque capsule unisexe vegan. Univers visuel cohérent, livraison de bout en bout.`,
-      body: `Marque indépendante créée from scratch pendant le COVID. Direction artistique complète, sourcing matériaux vegan, shootings, lookbooks, identité visuelle radicale.
+      summary: `Marque capsule unisexe vegan. Une preuve à me faire à moi-même — collection sold-out, puis arrêt volontaire.`,
+      body: `Marque indépendante créée from scratch pendant le COVID. Direction artistique complète, sourcing matériaux vegan, shootings, lookbooks, identité visuelle radicale. <strong>Collection sold-out en intégralité.</strong>
 
-Collection sold-out en intégralité. Le projet m'a appris à porter un univers de bout en bout sans intermédiaire — et à assumer une posture créative entière.`,
+L'objectif n'était pas de bâtir une entreprise : c'était de <strong>me prouver que j'en étais capable</strong>, seule, de bout en bout. Une fois la démonstration faite, j'ai choisi de ne pas lui donner plus d'ampleur — il me manquait alors la ressource, la structure et le recul pour la porter sérieusement.
+
+Ces ressources, je les ai aujourd'hui. C'est une décision assumée, pas un projet abandonné.`,
       chips: ['Branding', 'DA complète', 'Mode éthique', 'E-commerce', 'Shooting'],
     },
     {
@@ -693,7 +706,7 @@ Ce passage illustre une motivation profonde : l'UX et le design comme outils de 
       role: 'Responsable de Stand · Premium',
       company: 'North Sails & Scotch&Soda — Galeries Lafayette Nantes',
       period: 'Juin 2019 — Fév. 2020',
-      type: 'CDI / CDD',
+      type: 'CDD',
       color: 'primary',
       summary: `Retail premium bilingue. Recrutée par Scotch&Soda après mes résultats chez North Sails. Sans candidature.`,
       body: `Conseil client bilingue FR/EN (clientèle internationale), merchandising et display visuel, reporting commercial, gestion de stock, maintien image premium.
@@ -702,9 +715,9 @@ Ce passage illustre une motivation profonde : l'UX et le design comme outils de 
       chips: ['Vente premium', 'Bilingue FR/EN', 'Merchandising', 'KPIs', 'International'],
     },
     {
-      role: 'Responsable Merchandising · Tommy Bahama',
+      role: 'Responsable Merchandising & Boutique de Bondi',
       company: 'Tommy Bahama · Sydney 🌊 Australie',
-      period: 'Juin 2018 — Mai 2019',
+      period: 'Juin 2018 — Juin 2019',
       type: 'CDI',
       color: 'tertiary',
       summary: `Thaïlande puis Australie — deux étapes décisives. Merchandising sur plusieurs stores Sydney, responsabilité du store de Bondi.`,
