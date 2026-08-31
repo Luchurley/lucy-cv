@@ -581,15 +581,23 @@ function ContactScreen({ xp, onContactTap, unlockedFacts, onPawTap }) {
 
       {unlockedFacts && unlockedFacts.length > 0 && (
         <>
-          <SectionDivider>FUN FACTS · {unlockedFacts.length}/{L.funFacts.length} DÉBLOQUÉS</SectionDivider>
+          <SectionDivider>
+            FUN FACTS · <span className="ff-count-done">{unlockedFacts.length}</span>
+            <span className="ff-count-rest">/{L.funFacts.length} DÉBLOQUÉS</span>
+          </SectionDivider>
           <div className="funfacts-grid">
-            {unlockedFacts.map(f => (
-              <div key={f.id} className="funfact-card">
-                <span className="funfact-emoji">{f.emoji}</span>
-                <div className="funfact-title">{f.title}</div>
-                <div className="funfact-text">{f.text}</div>
-              </div>
-            ))}
+            {L.funFacts.map(f => {
+              const isUnlocked = unlockedFacts.some(u => u.id === f.id);
+              return (
+                <div key={f.id} className={'funfact-card' + (isUnlocked ? '' : ' is-locked')}>
+                  <span className="funfact-emoji">{isUnlocked ? f.emoji : '🔒'}</span>
+                  <div className="funfact-title">{isUnlocked ? f.title : 'À DÉBLOQUER'}</div>
+                  <div className="funfact-text">
+                    {isUnlocked ? f.text : 'Continue d\u2019explorer le site pour révéler ce fait.'}
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <div className="spacer-md" />
         </>
@@ -690,4 +698,4 @@ function IAScreen({ gainXP, onBack }) {
   );
 }
 
-Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen, IAScreen });
+Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen
