@@ -2624,3 +2624,22 @@ img { display: block; max-width: 100%; }
 .cs-tab-btn.is-active { background: var(--color-ink); color: var(--color-paper-2); }
 .cs-tab-bar-bottom { margin-top: 24px; margin-bottom: 0; }
 
+/* --- Fun facts encore verrouillés --- */
+.funfact-card.is-locked {
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(10,8,6,.18);
+  box-shadow: none;
+  opacity: .55;
+}
+.funfact-card.is-locked .funfact-emoji {
+  filter: grayscale(1);
+  opacity: .45;
+}
+.funfact-card.is-locked .funfact-title,
+.funfact-card.is-locked .funfact-text {
+  color: rgba(10,8,6,.45);
+}
+.ff-count-done { color: var(--color-ink); font-weight: 700; }
+.ff-count-rest { color: rgba(10,8,6,.4); font-weight: 400; }
+
