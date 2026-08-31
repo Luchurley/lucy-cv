@@ -698,4 +698,4 @@ function IAScreen({ gainXP, onBack }) {
   );
 }
 
-Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen
+Object.assign(window, { HomeScreen, ProjetsScreen, SkillsScreen, MoiScreen, ContactScreen, IAScreen });
